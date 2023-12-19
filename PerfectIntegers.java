@@ -1,4 +1,4 @@
-package testing;sdjgjahgerhhgurhgu
+package testing;
 
 public class PerfectIntegers {
 
