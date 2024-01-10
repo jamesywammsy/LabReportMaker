@@ -1,0 +1,93 @@
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.*;
+
+public class Menu extends JFrame{
+
+	public static final int PANEL_WIDTH = 700;
+	public static final int PANEL_HEIGHT = 700;
+	public static final int BUTTON_WIDTH = 600;
+	public static final int BUTTON_HEIGHT = 50;
+	
+	public String[] completed = {"Not Completed","Not Completed","Not Completed","Not Completed","Not Completed","Not Completed","Not Completed"};
+	
+	JButton abstract_;
+	JButton theory_;
+	JButton method_;
+	JButton tables_;
+	JButton analysis_;
+	JButton conclusion_;
+	JButton citations_;
+	
+	public Menu(){
+		this.setTitle("GHHSB Lab Report System - Main Menu");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setResizable(false);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.addKeyListener(this); // start listening for keyboard input
+		this.setBackground(Color.BLACK);
+		this.setVisible(true);
+
+		
+		Container c = getContentPane();
+		c.setLayout(null);
+		
+		abstract_ = new JButton("Section 1: Abstract                                                                           " + completed[0]);
+		abstract_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		abstract_.setLocation(50,50);
+		
+		theory_ = new JButton("Section 2: Theory                                                                           " + completed[1]);
+		theory_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		theory_.setLocation(50,110);
+		
+		method_ = new JButton("Section 3: Method                                                                           " + completed[2]);
+		method_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		method_.setLocation(50,170);
+		
+		tables_ = new JButton("Section 4: Tables                                                                           " + completed[3]);
+		tables_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		tables_.setLocation(50,230);
+		
+		analysis_ = new JButton("Section 5: Analysis                                                                           " + completed[4]);
+		analysis_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		analysis_.setLocation(50,290);
+		
+		conclusion_ = new JButton("Section 6: Conclusion                                                                           " + completed[5]);
+		conclusion_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		conclusion_.setLocation(50,350);
+		
+		citations_ = new JButton("Section 7: Citations                                                                           " + completed[6]);
+		citations_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		citations_.setLocation(50,410);
+		
+		
+		c.add(abstract_);
+		c.add(theory_);
+		c.add(method_);
+		c.add(tables_);
+		c.add(analysis_);
+		c.add(conclusion_);
+		c.add(citations_);
+		
+		
+		repaint();
+	}
+	
+	public void paint(Graphics g) {
+
+		super.paint(g);
+
+	}
+	
+	public static void main(String[] args) {
+		new Menu();
+	}
+	
+	
+
+	
+
+}
