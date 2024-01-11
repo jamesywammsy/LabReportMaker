@@ -9,10 +9,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.*;
 
 public class Menu extends JFrame implements ActionListener {
@@ -20,13 +16,18 @@ public class Menu extends JFrame implements ActionListener {
 	// final variables
 	public static final int PANEL_WIDTH = 700;
 	public static final int PANEL_HEIGHT = 700;
-	public static final int BUTTON_WIDTH = 600;
+	public static final int SECTION_WIDTH = 600;
+	public static final int SECTION_HEIGHT = 50;
+	public static final int BUTTON_WIDTH = 100;
 	public static final int BUTTON_HEIGHT = 50;
 
 	// variables
 	public String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
 			"Not Completed", "Not Completed" };
-
+	
+	//object declarations
+	private Start start;
+	
 	// button variables
 	JButton abstract_;
 	JButton theory_;
@@ -36,16 +37,21 @@ public class Menu extends JFrame implements ActionListener {
 	JButton conclusion_;
 	JButton citations_;
 
-	public Menu() {
+	JButton compile_;
+	JButton return_;
 
+	public Menu(Start start) {
+
+		this.start = start;
+		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
-		this.setVisible(true);
-
+		ShowWindow();
+		
 		Container c = getContentPane();
 		c.setLayout(null);
 
@@ -54,50 +60,60 @@ public class Menu extends JFrame implements ActionListener {
 				"Section 1: Abstract                                                                            "
 						+ completed[0]);
 		abstract_.addActionListener(this);
-		abstract_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		abstract_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		abstract_.setLocation(50, 50);
 
 		theory_ = new JButton(
 				"Section 2: Theory                                                                               "
 						+ completed[1]);
 		theory_.addActionListener(this);
-		theory_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		theory_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		theory_.setLocation(50, 110);
 
 		method_ = new JButton(
 				"Section 3: Method                                                                              "
 						+ completed[2]);
 		method_.addActionListener(this);
-		method_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		method_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		method_.setLocation(50, 170);
 
 		tables_ = new JButton(
 				"Section 4: Tables                                                                               "
 						+ completed[3]);
 		tables_.addActionListener(this);
-		tables_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		tables_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		tables_.setLocation(50, 230);
 
 		analysis_ = new JButton(
 				"Section 5: Analysis                                                                           "
 						+ completed[4]);
 		analysis_.addActionListener(this);
-		analysis_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		analysis_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		analysis_.setLocation(50, 290);
 
 		conclusion_ = new JButton(
 				"Section 6: Conclusion                                                                       "
 						+ completed[5]);
 		conclusion_.addActionListener(this);
-		conclusion_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		conclusion_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		conclusion_.setLocation(50, 350);
 
 		citations_ = new JButton(
 				"Section 7: Citations                                                                         "
 						+ completed[6]);
 		citations_.addActionListener(this);
-		citations_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		citations_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		citations_.setLocation(50, 410);
+
+		compile_ = new JButton("Compile");
+		compile_.addActionListener(this);
+		compile_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		compile_.setLocation(200, 530);
+
+		return_ = new JButton("Return");
+		return_.addActionListener(this);
+		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		return_.setLocation(400, 530);
 
 		// adds button to screen
 		c.add(abstract_);
@@ -107,6 +123,8 @@ public class Menu extends JFrame implements ActionListener {
 		c.add(analysis_);
 		c.add(conclusion_);
 		c.add(citations_);
+		c.add(compile_);
+		c.add(return_);
 
 		repaint();
 	}
@@ -116,42 +134,66 @@ public class Menu extends JFrame implements ActionListener {
 		super.paint(g);
 
 	}
-
-	public static void main(String[] args) {
-		new Menu();
+	
+	public void HideWindow() {
+		setVisible(false);
 	}
+	
+	public void ShowWindow() {
+		setVisible(true);
+	}
+
+	/*
+	 * TESTING PURPOSES ONLY ********************************* 
+	 * public static void main(String[] args) { 
+	 * 
+	 * new Menu(); 
+	 * 
+	 * }
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		//opens each different class
+		// opens each different class
 		if (e.getSource() == abstract_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == theory_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == method_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == tables_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == analysis_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == conclusion_) {
-			
-			setVisible(false);
+
+			HideWindow();
 
 		} else if (e.getSource() == citations_) {
-			
-			setVisible(false);
+
+			HideWindow();
+
+		}
+
+		else if (e.getSource() == compile_) {
+
+			HideWindow();
+
+		} else if (e.getSource() == return_) {
+
+			HideWindow();
+			start.ShowWindow();
 
 		}
 
