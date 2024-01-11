@@ -50,7 +50,7 @@ public class Menu extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
-		ShowWindow();
+		HideWindow();
 		
 		Container c = getContentPane();
 		c.setLayout(null);
