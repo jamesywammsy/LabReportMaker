@@ -11,10 +11,10 @@ import javax.swing.*;
 public class Start extends JFrame implements ActionListener {
 
 	// final variables
-	public static final int PANEL_WIDTH = 700;
-	public static final int PANEL_HEIGHT = 700;
-	public static final int BUTTON_WIDTH = 300;
-	public static final int BUTTON_HEIGHT = 50;
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BUTTON_WIDTH = 300;
+	private static final int BUTTON_HEIGHT = 50;
 
 	// button variables
 	JButton instructions_;
@@ -32,6 +32,7 @@ public class Start extends JFrame implements ActionListener {
 		this.setTitle("GHHSB Lab Report System");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setResizable(true);
+		this.setLocationRelativeTo(null);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
 		ShowWindow();
