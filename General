@@ -1,0 +1,111 @@
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+import java.util.*;
+
+public class General extends JFrame implements ActionListener{
+
+	public static final int PANEL_WIDTH = 700;
+	public static final int PANEL_HEIGHT = 700;
+	public static final int BWIDTH = 160;
+	public static final int BHEIGHT = 50;
+	
+	public String input="EMPTY";
+	public String title;
+	public boolean genDone=false;
+	
+	JButton returnToMenu;
+	JButton save;
+	JButton markAsDone;
+	JTextArea textBox;
+	
+	Menu menu;
+	
+	public General(Menu menu){
+		
+		this.menu=menu;
+		
+		this.setTitle("GHHSB Lab Report System - ");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.getContentPane().setBackground(Color.BLACK);
+		this.setVisible(false);
+		
+		Container c = getContentPane();
+		c.setLayout(null);
+		
+		textBox=new JTextArea("Enter here");
+		textBox.setSize(590, 425);
+		textBox.setLocation(55, 55);
+		
+		JScrollPane scrollV = new JScrollPane (textBox, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		returnToMenu = new JButton("Return to Menu");
+		returnToMenu.addActionListener(this);
+		returnToMenu.setSize(BWIDTH,BHEIGHT);
+		returnToMenu.setLocation(55,585);
+		
+		save=new JButton("Save");
+		save.addActionListener(this);
+		save.setSize(BWIDTH,BHEIGHT);
+		save.setLocation(270, 585);
+		
+		markAsDone=new JButton("Mark as Done");
+		markAsDone.addActionListener(this);
+		markAsDone.setSize(BWIDTH, BHEIGHT);
+		markAsDone.setLocation(485, 585);
+		
+		c.add(textBox);		
+		c.add(scrollV);
+		c.add(returnToMenu);
+		c.add(save);
+		c.add(markAsDone);
+		
+		repaint();
+	}
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+	}
+	
+	//public static void main(String[] args) {
+		//new General();
+	//}
+	
+	public void actionPerformed (ActionEvent evt) {
+		input=textBox.getText();
+		
+		if (evt.getSource()==returnToMenu) {
+			HideWindow();
+			menu.ShowWindow();
+		}
+		else if (evt.getSource()==save) {
+			
+		}
+		else if (evt.getSource()==markAsDone) {
+			genDone=!genDone;
+		}
+
+		repaint();
+	}
+	
+	public void HideWindow() {
+		setVisible(false);
+	}
+	
+	public void ShowWindow() {
+		setVisible(true);
+	}
+	
+	public String getText() {
+		return input;
+	}
+
+}
