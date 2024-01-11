@@ -14,16 +14,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 
 public class Compile extends JFrame implements ActionListener {
 
@@ -97,104 +94,104 @@ public class Compile extends JFrame implements ActionListener {
 	}
 
 	public void CompileTable(XWPFDocument doc, String[][] tableData, int row, int col) {
-		
-		//create table
-	    XWPFTable table = doc.createTable();
-	    
-	    if (row >= 1) {
-	    
-	    	//create first row
-		    XWPFTableRow tableRowOne = table.getRow(0);
-		    tableRowOne.getCell(0).setText(tableData[0][0]);
-		    
-		    for (int i = 1; i < col; i++){
-		    	tableRowOne.addNewTableCell().setText(tableData[0][i]);
-		    }
-	    }
-	    
-	    if (row >= 2) {
-	    	 //create second row
-		    XWPFTableRow tableRowTwo = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowTwo.getCell(i).setText(tableData[1][i]);
-		    }
-	    	
-	    }
-	    
-	    if (row >= 3) {
-	    	//create third row
-		    XWPFTableRow tableRowThree = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowThree.getCell(i).setText(tableData[2][i]);
-		    }
-	    }
-	    
-	    if (row >= 4) {
-	    	//create fourth row
-		    XWPFTableRow tableRowFour = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowFour.getCell(i).setText(tableData[3][i]);
-		    }
-	    }
-	    
-	    if (row >= 5) {
-	    	//create third row
-		    XWPFTableRow tableRowFive = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowFive.getCell(i).setText(tableData[4][i]);
-		    }
-	    }
-	    
-	    if (row >= 6) {
-	    	//create third row
-		    XWPFTableRow tableRowSix = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowSix.getCell(i).setText(tableData[5][i]);
-		    }
-	    }
-	    
-	    if (row >= 7) {
-	    	//create third row
-		    XWPFTableRow tableRowSeven = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowSeven.getCell(i).setText(tableData[6][i]);
-		    }
-	    }
-	    
-	    if (row >= 8) {
-	    	//create third row
-		    XWPFTableRow tableRowEight = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowEight.getCell(i).setText(tableData[7][i]);
-		    }
-	    }
-	    
-	    if (row >= 9) {
-	    	//create third row
-		    XWPFTableRow tableRowNine = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowNine.getCell(i).setText(tableData[8][i]);
-		    }
-	    }
-	    
-	    if (row >= 10) {
-	    	//create third row
-		    XWPFTableRow tableRowTen = table.createRow();
-		    
-		    for (int i = 0; i < col; i++){
-		    	 tableRowTen.getCell(i).setText(tableData[9][i]);
-		    }
-	    }
+
+		// create table
+		XWPFTable table = doc.createTable();
+
+		if (row >= 1) {
+
+			// create first row
+			XWPFTableRow tableRowOne = table.getRow(0);
+			tableRowOne.getCell(0).setText(tableData[0][0]);
+
+			for (int i = 1; i < col; i++) {
+				tableRowOne.addNewTableCell().setText(tableData[0][i]);
+			}
+		}
+
+		if (row >= 2) {
+			// create second row
+			XWPFTableRow tableRowTwo = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowTwo.getCell(i).setText(tableData[1][i]);
+			}
+
+		}
+
+		if (row >= 3) {
+			// create third row
+			XWPFTableRow tableRowThree = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowThree.getCell(i).setText(tableData[2][i]);
+			}
+		}
+
+		if (row >= 4) {
+			// create fourth row
+			XWPFTableRow tableRowFour = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowFour.getCell(i).setText(tableData[3][i]);
+			}
+		}
+
+		if (row >= 5) {
+			// create third row
+			XWPFTableRow tableRowFive = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowFive.getCell(i).setText(tableData[4][i]);
+			}
+		}
+
+		if (row >= 6) {
+			// create third row
+			XWPFTableRow tableRowSix = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowSix.getCell(i).setText(tableData[5][i]);
+			}
+		}
+
+		if (row >= 7) {
+			// create third row
+			XWPFTableRow tableRowSeven = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowSeven.getCell(i).setText(tableData[6][i]);
+			}
+		}
+
+		if (row >= 8) {
+			// create third row
+			XWPFTableRow tableRowEight = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowEight.getCell(i).setText(tableData[7][i]);
+			}
+		}
+
+		if (row >= 9) {
+			// create third row
+			XWPFTableRow tableRowNine = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowNine.getCell(i).setText(tableData[8][i]);
+			}
+		}
+
+		if (row >= 10) {
+			// create third row
+			XWPFTableRow tableRowTen = table.createRow();
+
+			for (int i = 0; i < col; i++) {
+				tableRowTen.getCell(i).setText(tableData[9][i]);
+			}
+		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -237,7 +234,7 @@ public class Compile extends JFrame implements ActionListener {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			
+
 			System.exit(0);
 
 		}
