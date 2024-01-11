@@ -14,19 +14,20 @@ import javax.swing.*;
 public class Menu extends JFrame implements ActionListener {
 
 	// final variables
-	public static final int PANEL_WIDTH = 700;
-	public static final int PANEL_HEIGHT = 700;
-	public static final int SECTION_WIDTH = 600;
-	public static final int SECTION_HEIGHT = 50;
-	public static final int BUTTON_WIDTH = 100;
-	public static final int BUTTON_HEIGHT = 50;
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int SECTION_WIDTH = 600;
+	private static final int SECTION_HEIGHT = 50;
+	private static final int BUTTON_WIDTH = 100;
+	private static final int BUTTON_HEIGHT = 50;
 
 	// variables
-	public String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
+	private String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
 			"Not Completed", "Not Completed" };
 	
 	//object declarations
-	private Start start;
+	Start start;
+	Compile compile;
 	
 	// button variables
 	JButton abstract_;
@@ -36,18 +37,19 @@ public class Menu extends JFrame implements ActionListener {
 	JButton analysis_;
 	JButton conclusion_;
 	JButton citations_;
-
 	JButton compile_;
 	JButton return_;
 
 	public Menu(Start start) {
 
 		this.start = start;
+		compile = new Compile(this);
 		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
 		HideWindow();
@@ -189,7 +191,8 @@ public class Menu extends JFrame implements ActionListener {
 		else if (e.getSource() == compile_) {
 
 			HideWindow();
-
+			compile.ShowWindow();
+			
 		} else if (e.getSource() == return_) {
 
 			HideWindow();
