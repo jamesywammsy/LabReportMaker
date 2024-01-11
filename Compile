@@ -1,0 +1,104 @@
+//Compile.java
+//Compile menu, exports a word document
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 10
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class Compile extends JFrame implements ActionListener {
+
+	// final variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BUTTON_WIDTH = 150;
+	private static final int BUTTON_HEIGHT = 50;
+
+	// button variables
+	JButton return_;
+	JButton save_;
+	JButton download_;
+
+	// object declarations
+	Menu menu;
+
+	public Compile(Menu menu) {
+
+		this.menu = menu;
+
+		// panel sizing
+		this.setTitle("GHHSB Lab Report System - Compile");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.getContentPane().setBackground(Color.WHITE);
+		HideWindow();
+
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		// button instantiations
+		return_ = new JButton("Return");
+		return_.addActionListener(this);
+		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		return_.setLocation(50, 600);
+
+		save_ = new JButton("Save");
+		save_.addActionListener(this);
+		save_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		save_.setLocation(275, 600);
+
+		download_ = new JButton("Download");
+		download_.addActionListener(this);
+		download_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		download_.setLocation(500, 600);
+
+		// adds buttons
+		c.add(return_);
+		c.add(save_);
+		c.add(download_);
+
+		repaint();
+	}
+
+	public void paint(Graphics g) {
+
+		super.paint(g);
+
+	}
+
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		// opens each different class
+		if (e.getSource() == return_) {
+
+			HideWindow();
+			menu.ShowWindow();
+
+		} else if (e.getSource() == save_) {
+
+			HideWindow();
+
+		} else if (e.getSource() == download_) {
+
+			HideWindow();
+
+		}
+	}
+
+}
