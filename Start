@@ -1,0 +1,109 @@
+//Start.java
+//The start menu of the program
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 10
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class Start extends JFrame implements ActionListener {
+
+	// final variables
+	public static final int PANEL_WIDTH = 700;
+	public static final int PANEL_HEIGHT = 700;
+	public static final int BUTTON_WIDTH = 300;
+	public static final int BUTTON_HEIGHT = 50;
+
+	// button variables
+	JButton instructions_;
+	JButton create_;
+	JButton quit_;
+	
+	//object declarations
+	Menu menu;
+
+	public Start() {
+		
+		menu = new Menu(this);
+		
+		// panel sizing
+		this.setTitle("GHHSB Lab Report System");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setResizable(true);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.getContentPane().setBackground(Color.WHITE);
+		ShowWindow();
+
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		// button instantiations
+		instructions_ = new JButton("How to use");
+		instructions_.addActionListener(this);
+		instructions_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		instructions_.setLocation(200, 300);
+
+		create_ = new JButton("Create Document");
+		create_.addActionListener(this);
+		create_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		create_.setLocation(200, 400);
+
+		quit_ = new JButton("Quit");
+		quit_.addActionListener(this);
+		quit_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		quit_.setLocation(200, 500);
+
+		//adds buttons
+		c.add(instructions_);
+		c.add(create_);
+		c.add(quit_);
+
+		repaint();
+	}
+
+	public void paint(Graphics g) {
+
+		super.paint(g);
+
+	}
+	
+	public void HideWindow() {
+		setVisible(false);
+	}
+	
+	public void ShowWindow() {
+		setVisible(true);
+	}
+
+	/* TESTING PURPOSES ONLY ******************************
+	public static void main(String[] args) {
+		new Start();
+	}
+	*/
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		// opens each different class
+		if (e.getSource() == instructions_) {
+
+			HideWindow();
+
+		} else if (e.getSource() == create_) {
+
+			//unhides menu class
+			HideWindow();
+			menu.ShowWindow();
+
+		}
+
+		else if (e.getSource() == quit_) {
+
+			//closes program
+			System.exit(0);
+		}
+	}
+
+}
