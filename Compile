@@ -3,6 +3,7 @@
 //Made by James Zhang and Maggie Pang
 //Last edit: Jan 10
 
+//imports
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -10,6 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 public class Compile extends JFrame implements ActionListener {
 
@@ -97,6 +104,34 @@ public class Compile extends JFrame implements ActionListener {
 		} else if (e.getSource() == download_) {
 
 			HideWindow();
+			
+			try {
+				// Create a new Word document
+				XWPFDocument document = new XWPFDocument();
+
+				// Create a paragraph
+				XWPFParagraph paragraph = document.createParagraph();
+
+				// Create a run within the paragraph
+				XWPFRun run = paragraph.createRun();
+
+				// Add text to the run
+				run.setText("Hello, this is a sample Word document!");
+
+				// Specify the output file path in the Downloads folder
+				String home = System.getProperty("user.home");
+				String filePath = home + "/Downloads/document.docx";
+
+				// Create a FileOutputStream to write the document to a file
+				try (FileOutputStream out = new FileOutputStream(filePath)) {
+					// Write the document to the file
+					document.write(out);
+					System.out.println("Word document exported successfully!");
+				}
+
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 
 		}
 	}
