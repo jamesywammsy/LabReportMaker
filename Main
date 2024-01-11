@@ -1,8 +1,13 @@
+//Main.java
+//Starts the Start.java class
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 10
+
 public class Main {
 	
 	public static void main(String[] args) {
 
-		new Window();
+		new Start();
 
 	}
 }
