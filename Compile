@@ -92,6 +92,18 @@ public class Compile extends JFrame implements ActionListener {
 	public void ShowWindow() {
 		setVisible(true);
 	}
+	
+	public void CompileParagraph(XWPFDocument doc, String paragraph) {
+		
+		// Create a paragraph
+		XWPFParagraph para = doc.createParagraph();
+
+		// Create a run within the paragraph
+		XWPFRun run = para.createRun();
+
+		// Add text to the run
+		run.setText(paragraph);
+	}
 
 	public void CompileTable(XWPFDocument doc, String[][] tableData, int row, int col) {
 
@@ -218,7 +230,9 @@ public class Compile extends JFrame implements ActionListener {
 				XWPFRun run = paragraph.createRun();
 
 				// Add text to the run
-				run.setText("Hello, this is a sample Word document!");
+				run.setText("Hello, this is a sample document!");
+				
+				CompileParagraph(document, "And this is another paragraph!");
 
 				// Specify the output file path in the Downloads folder
 				String home = System.getProperty("user.home");
@@ -228,7 +242,6 @@ public class Compile extends JFrame implements ActionListener {
 				try (FileOutputStream out = new FileOutputStream(filePath)) {
 					// Write the document to the file
 					document.write(out);
-					System.out.println("Exported successfully!");
 				}
 
 			} catch (IOException ex) {
