@@ -1,3 +1,9 @@
+//Compile.java
+//Compile menu, exports a word document
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 11
+
+//TODO: Fix Scroll bar mechanism
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +27,7 @@ public class General extends JFrame implements ActionListener{
 	JButton returnToMenu;
 	JButton save;
 	JButton markAsDone;
+	JButton markAsUndone;
 	JTextArea textBox;
 	
 	Menu menu;
@@ -62,11 +69,18 @@ public class General extends JFrame implements ActionListener{
 		markAsDone.setSize(BWIDTH, BHEIGHT);
 		markAsDone.setLocation(485, 585);
 		
+		markAsUndone=new JButton("Mark Undone");
+		markAsUndone.addActionListener(this);
+		markAsUndone.setSize(BWIDTH, BHEIGHT);
+		markAsUndone.setLocation(485, 585);
+		markAsUndone.setVisible(genDone);
+		
 		c.add(textBox);		
 		c.add(scrollV);
 		c.add(returnToMenu);
 		c.add(save);
 		c.add(markAsDone);
+		c.add(markAsUndone);
 		
 		repaint();
 	}
@@ -91,6 +105,15 @@ public class General extends JFrame implements ActionListener{
 		}
 		else if (evt.getSource()==markAsDone) {
 			genDone=!genDone;
+			System.out.println(genDone);
+			markAsDone.setVisible(!genDone);
+			markAsUndone.setVisible(genDone);
+		}
+		
+		else if (evt.getSource()==markAsUndone) {
+			genDone=!genDone;
+			markAsDone.setVisible(!genDone);
+			markAsUndone.setVisible(genDone);
 		}
 
 		repaint();
