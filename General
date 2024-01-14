@@ -22,7 +22,6 @@ public class General extends JFrame implements ActionListener{
 	public boolean genDone=false;
 	
 	JButton returnToMenu;
-	JButton save;
 	JButton markAsDone;
 	JTextArea textBox;
 	
@@ -53,23 +52,17 @@ public class General extends JFrame implements ActionListener{
 		returnToMenu = new JButton("Return to Menu");
 		returnToMenu.addActionListener(this);
 		returnToMenu.setSize(BWIDTH,BHEIGHT);
-		returnToMenu.setLocation(55,585);
-		
-		save=new JButton("Save");
-		save.addActionListener(this);
-		save.setSize(BWIDTH,BHEIGHT);
-		save.setLocation(270, 585);
+		returnToMenu.setLocation(125,585);
 		
 		markAsDone=new JButton("Mark as Done");
 		markAsDone.addActionListener(this);
 		markAsDone.setSize(BWIDTH, BHEIGHT);
-		markAsDone.setLocation(485, 585);
+		markAsDone.setLocation(415, 585);
 		
 
 		c.add(textBox);		
 		c.add(scrollV);
 		c.add(returnToMenu);
-		c.add(save);
 		c.add(markAsDone);
 		
 		repaint();
@@ -87,14 +80,12 @@ public class General extends JFrame implements ActionListener{
 		input=textBox.getText();
 		
 		if (evt.getSource()==returnToMenu) {
+			
+			input = textBox.getText();
 			HideWindow();
 			menu.ShowWindow();
 		}
-		else if (evt.getSource()==save) {
-			
-			input = textBox.getText();
-			
-		}
+		
 		else if (evt.getSource()==markAsDone) {
 			genDone=!genDone;
 			
