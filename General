@@ -93,7 +93,6 @@ public class General extends JFrame implements ActionListener{
 		else if (evt.getSource()==save) {
 			
 			input = textBox.getText();
-			System.out.println(input);
 			
 		}
 		else if (evt.getSource()==markAsDone) {
