@@ -1,7 +1,7 @@
 //Table.java
 //UI for the tables section of the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 13
+//Last edit: Jan 14
 
 //TODO: 
 
@@ -32,9 +32,9 @@ public class Table extends JFrame implements ActionListener {
 	JButton table6_;
 	JButton table7_;
 	JButton table8_;
-	
-	//textfield variables
-	
+
+	// textfield variables
+
 	JTextField ie1;
 	JTextField ie2;
 	JTextField ie3;
@@ -43,15 +43,24 @@ public class Table extends JFrame implements ActionListener {
 	JTextField ie6;
 	JTextField ie7;
 	JTextField ie8;
-	
+
 	JLabel title;
 	JLabel IEtitle;
 
-	// object declarations	
+	// object declarations
 	Menu menu;
-	
-	public boolean tabDone=false;
-	
+	CreateTable table1;
+	CreateTable table2;
+	CreateTable table3;
+	CreateTable table4;
+	CreateTable table5;
+	CreateTable table6;
+	CreateTable table7;
+	CreateTable table8;
+
+	public boolean tabDone = false;
+	public String[] completed = new String[8];
+
 	private String ie1_;
 	private String ie2_;
 	private String ie3_;
@@ -81,10 +90,10 @@ public class Table extends JFrame implements ActionListener {
 		// button instantiations
 		return_ = new JButton("Return to Menu");
 		return_.addActionListener(this);
-		return_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
-		return_.setLocation(125,585);
-		
-		markAsDone_=new JButton("Mark as Done");
+		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		return_.setLocation(125, 585);
+
+		markAsDone_ = new JButton("Mark as Done");
 		markAsDone_.addActionListener(this);
 		markAsDone_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		markAsDone_.setLocation(415, 585);
@@ -93,87 +102,86 @@ public class Table extends JFrame implements ActionListener {
 		table1_.addActionListener(this);
 		table1_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table1_.setLocation(20, 90);
-		
+
 		table2_ = new JButton("+");
 		table2_.addActionListener(this);
 		table2_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table2_.setLocation(20, 150);
-		
+
 		table3_ = new JButton("+");
 		table3_.addActionListener(this);
 		table3_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table3_.setLocation(20, 210);
-		
+
 		table4_ = new JButton("+");
 		table4_.addActionListener(this);
 		table4_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table4_.setLocation(20, 270);
-		
+
 		table5_ = new JButton("+");
 		table5_.addActionListener(this);
 		table5_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table5_.setLocation(20, 330);
-		
+
 		table6_ = new JButton("+");
 		table6_.addActionListener(this);
 		table6_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table6_.setLocation(20, 390);
-		
+
 		table7_ = new JButton("+");
 		table7_.addActionListener(this);
 		table7_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table7_.setLocation(20, 450);
-		
+
 		table8_ = new JButton("+");
 		table8_.addActionListener(this);
 		table8_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		table8_.setLocation(20, 510);
-		
-		ie1=new JTextField("");
+
+		ie1 = new JTextField("");
 		ie1.setSize(90, 45);
 		ie1.setLocation(585, 90);
-		
-		ie2=new JTextField("");
+
+		ie2 = new JTextField("");
 		ie2.setSize(90, 45);
 		ie2.setLocation(585, 150);
-		
-		ie3=new JTextField("");
+
+		ie3 = new JTextField("");
 		ie3.setSize(90, 45);
 		ie3.setLocation(585, 210);
-		
-		ie4=new JTextField("");
+
+		ie4 = new JTextField("");
 		ie4.setSize(90, 45);
 		ie4.setLocation(585, 270);
-		
-		ie5=new JTextField("");
+
+		ie5 = new JTextField("");
 		ie5.setSize(90, 45);
 		ie5.setLocation(585, 330);
-		
-		ie6=new JTextField("");
+
+		ie6 = new JTextField("");
 		ie6.setSize(90, 45);
 		ie6.setLocation(585, 390);
-		
-		ie7=new JTextField("");
+
+		ie7 = new JTextField("");
 		ie7.setSize(90, 45);
 		ie7.setLocation(585, 450);
-		
-		ie8=new JTextField("");
+
+		ie8 = new JTextField("");
 		ie8.setSize(90, 45);
 		ie8.setLocation(585, 510);
-		
+
 		title = new JLabel("Tables");
-		title.setSize(300,100);
+		title.setSize(300, 100);
 		title.setLocation(50, 0);
 		title.setFont(new Font("Serif", Font.PLAIN, 25));
-		
+
 		IEtitle = new JLabel("IE");
-		IEtitle.setSize(300,100);
+		IEtitle.setSize(300, 100);
 		IEtitle.setLocation(600, 0);
 		IEtitle.setFont(new Font("Serif", Font.PLAIN, 25));
 
-
 		// adds buttons
-		
+
 		c.add(return_);
 		c.add(markAsDone_);
 		c.add(table1_);
@@ -184,7 +192,7 @@ public class Table extends JFrame implements ActionListener {
 		c.add(table6_);
 		c.add(table7_);
 		c.add(table8_);
-		
+
 		c.add(ie1);
 		c.add(ie2);
 		c.add(ie3);
@@ -193,14 +201,13 @@ public class Table extends JFrame implements ActionListener {
 		c.add(ie6);
 		c.add(ie7);
 		c.add(ie8);
-		
+
 		c.add(title);
 		c.add(IEtitle);
 
-
 		repaint();
 	}
-	
+
 	public void HideWindow() {
 		setVisible(false);
 	}
@@ -208,12 +215,56 @@ public class Table extends JFrame implements ActionListener {
 	public void ShowWindow() {
 		setVisible(true);
 	}
-	
+
+	public void RefreshCompleted(int location, boolean complete) {
+
+		if (complete) {
+			completed[location] = "Completed";
+		} else {
+			completed[location] = "Not Completed";
+		}
+
+		if (location == 0) {
+			table1_.setText(
+					"Table 1: " + table1.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 1) {
+			table2_.setText(
+					"Table 2: " +table2.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 2) {
+			table3_.setText(
+					"Table 3: " +table3.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 3) {
+			table4_.setText(
+					"Table 4: " +table4.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 4) {
+			table5_.setText(
+					"Table 5: " +table5.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 5) {
+			table6_.setText(
+					"Table 6: " +table6.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 6) {
+			table7_.setText(
+					"Table 7: " +table7.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 7) {
+			table8_.setText(
+					"Table 8: " +table8.title + "                                                                  "
+							+ completed[location]);
+		}
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-if (e.getSource()==return_) {
-			
+
+		if (e.getSource() == return_) {
+
 			ie1_ = ie1.getText();
 			ie2_ = ie1.getText();
 			ie3_ = ie1.getText();
@@ -222,29 +273,116 @@ if (e.getSource()==return_) {
 			ie6_ = ie1.getText();
 			ie7_ = ie1.getText();
 			ie8_ = ie1.getText();
-			
+
 			HideWindow();
 			menu.ShowWindow();
 		}
-		
-		else if (e.getSource()==markAsDone_) {
-			tabDone=!tabDone;
-			
+
+		else if (e.getSource() == markAsDone_) {
+			tabDone = !tabDone;
+
 			menu.RefreshCompleted(3, tabDone);
-			
+
 			if (tabDone) {
 				markAsDone_.setText("Mark as Undone");
 			}
-			
+
 			else {
 				markAsDone_.setText("Mark as Done");
 			}
 
 		}
 
+		if (e.getSource() == table1_) {
+
+			if (table1 == null) {
+
+				table1 = new CreateTable(this, 0);
+			}
+
+			HideWindow();
+			table1.ShowWindow();
+		}
+
+		else if (e.getSource() == table2_) {
+
+			if (table2 == null) {
+
+				table2 = new CreateTable(this, 1);
+			}
+
+			HideWindow();
+			table2.ShowWindow();
+		}
+
+		else if (e.getSource() == table3_) {
+
+			if (table3 == null) {
+
+				table3 = new CreateTable(this, 2);
+			}
+
+			HideWindow();
+			table3.ShowWindow();
+		}
+
+		else if (e.getSource() == table4_) {
+
+			if (table4 == null) {
+
+				table4 = new CreateTable(this, 3);
+			}
+
+			HideWindow();
+			table4.ShowWindow();
+		}
+
+		else if (e.getSource() == table5_) {
+
+			if (table5 == null) {
+
+				table5 = new CreateTable(this, 4);
+			}
+
+			HideWindow();
+			table5.ShowWindow();
+		}
+
+		else if (e.getSource() == table6_) {
+
+			if (table6 == null) {
+
+				table6 = new CreateTable(this, 5);
+			}
+
+			HideWindow();
+			table6.ShowWindow();
+		}
+
+		else if (e.getSource() == table7_) {
+
+			if (table7 == null) {
+
+				table7 = new CreateTable(this, 6);
+			}
+
+			HideWindow();
+			table7.ShowWindow();
+		}
+
+		else if (e.getSource() == table8_) {
+
+			if (table8 == null) {
+
+				table8 = new CreateTable(this, 7);
+			}
+
+			HideWindow();
+			table8.ShowWindow();
+		}
+
 		repaint();
-		
+
 	}
-	
 
 }
