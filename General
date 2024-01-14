@@ -1,17 +1,14 @@
-//Compile.java
-//Compile menu, exports a word document
+//General.java
+//Skeleton class for most of the sections in the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 11
+//Last edit: Jan 13
 
 //TODO: Fix Scroll bar mechanism
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
-import java.util.*;
 
 public class General extends JFrame implements ActionListener{
 
@@ -27,7 +24,6 @@ public class General extends JFrame implements ActionListener{
 	JButton returnToMenu;
 	JButton save;
 	JButton markAsDone;
-	JButton markAsUndone;
 	JTextArea textBox;
 	
 	Menu menu;
@@ -42,7 +38,7 @@ public class General extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
-		this.getContentPane().setBackground(Color.BLACK);
+		this.getContentPane().setBackground(Color.WHITE);
 		this.setVisible(false);
 		
 		Container c = getContentPane();
@@ -69,18 +65,12 @@ public class General extends JFrame implements ActionListener{
 		markAsDone.setSize(BWIDTH, BHEIGHT);
 		markAsDone.setLocation(485, 585);
 		
-		markAsUndone=new JButton("Mark Undone");
-		markAsUndone.addActionListener(this);
-		markAsUndone.setSize(BWIDTH, BHEIGHT);
-		markAsUndone.setLocation(485, 585);
-		markAsUndone.setVisible(genDone);
-		
+
 		c.add(textBox);		
 		c.add(scrollV);
 		c.add(returnToMenu);
 		c.add(save);
 		c.add(markAsDone);
-		c.add(markAsUndone);
 		
 		repaint();
 	}
@@ -102,18 +92,21 @@ public class General extends JFrame implements ActionListener{
 		}
 		else if (evt.getSource()==save) {
 			
+			input = textBox.getText();
+			System.out.println(input);
+			
 		}
 		else if (evt.getSource()==markAsDone) {
 			genDone=!genDone;
-			System.out.println(genDone);
-			markAsDone.setVisible(!genDone);
-			markAsUndone.setVisible(genDone);
-		}
-		
-		else if (evt.getSource()==markAsUndone) {
-			genDone=!genDone;
-			markAsDone.setVisible(!genDone);
-			markAsUndone.setVisible(genDone);
+			
+			if (genDone) {
+				markAsDone.setText("Mark as Undone");
+			}
+			
+			else {
+				markAsDone.setText("Mark as Done");
+			}
+
 		}
 
 		repaint();
