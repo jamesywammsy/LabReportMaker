@@ -1,0 +1,174 @@
+//CreateTable.java
+//Creates a table with data
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 14
+
+//imports
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class CreateTable extends JFrame implements ActionListener {
+
+	// final variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BUTTON_WIDTH = 150;
+	private static final int BUTTON_HEIGHT = 50;
+
+	Table table;
+	public int index;
+	public String title;
+	public boolean tabDone = false;
+
+	// button variables
+	JButton return_;
+	JButton markAsDone_;
+	JButton delete_;
+
+	JLabel titleLabel;
+
+	JTextField title_;
+
+	public CreateTable(Table table, int index) {
+
+		this.table = table;
+		this.index = index;
+
+		this.setTitle("GHHSB Lab Report System - Table " + (index + 1));
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setVisible(false);
+
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		return_ = new JButton("Return to Menu");
+		return_.addActionListener(this);
+		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		return_.setLocation(55, 585);
+
+		delete_ = new JButton("Delete");
+		delete_.addActionListener(this);
+		delete_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		delete_.setLocation(270, 585);
+
+		markAsDone_ = new JButton("Mark as Done");
+		markAsDone_.addActionListener(this);
+		markAsDone_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		markAsDone_.setLocation(485, 585);
+
+		titleLabel = new JLabel("Title:");
+		titleLabel.setSize(300, 100);
+		titleLabel.setLocation(200, 0);
+		titleLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+
+		title_ = new JTextField();
+		title_.setSize(150, 25);
+		title_.setLocation(250, 40);
+
+		c.add(return_);
+		c.add(markAsDone_);
+		c.add(delete_);
+
+		c.add(titleLabel);
+
+		c.add(title_);
+
+		repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		title = title_.getText();
+
+		if (title_.getText().equals("")) {
+			title = "Unnamed Table";
+		}
+		table.RefreshCompleted(index, tabDone);
+
+		if (e.getSource() == return_) {
+
+			HideWindow();
+			table.ShowWindow();
+		}
+
+		else if (e.getSource() == markAsDone_) {
+
+			tabDone = !tabDone;
+
+			if (tabDone) {
+				markAsDone_.setText("Mark as Undone");
+			}
+
+			else {
+				markAsDone_.setText("Mark as Done");
+			}
+
+		}
+
+		else if (e.getSource() == delete_) {
+
+			HideWindow();
+
+			if (index == 0) {
+				table.table1 = null;
+				table.table1_.setText("+");
+			}
+
+			else if (index == 1) {
+				table.table2 = null;
+				table.table2_.setText("+");
+			}
+
+			else if (index == 2) {
+				table.table3 = null;
+				table.table3_.setText("+");
+			}
+
+			else if (index == 3) {
+				table.table4 = null;
+				table.table4_.setText("+");
+			}
+
+			else if (index == 4) {
+				table.table5 = null;
+				table.table5_.setText("+");
+			}
+
+			else if (index == 5) {
+				table.table6 = null;
+				table.table6_.setText("+");
+			}
+
+			else if (index == 6) {
+				table.table7 = null;
+				table.table7_.setText("+");
+			}
+
+			else if (index == 7) {
+				table.table8 = null;
+				table.table8_.setText("+");
+			}
+
+			table.ShowWindow();
+
+		}
+
+		repaint();
+	}
+
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+}
