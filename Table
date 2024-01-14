@@ -1,0 +1,250 @@
+//Table.java
+//UI for the tables section of the program
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 13
+
+//TODO: 
+
+//imports
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class Table extends JFrame implements ActionListener {
+
+	// final variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int SECTION_WIDTH = 550;
+	private static final int SECTION_HEIGHT = 50;
+	private static final int BUTTON_WIDTH = 150;
+	private static final int BUTTON_HEIGHT = 50;
+
+	// button variables
+	JButton return_;
+	JButton markAsDone_;
+	JButton table1_;
+	JButton table2_;
+	JButton table3_;
+	JButton table4_;
+	JButton table5_;
+	JButton table6_;
+	JButton table7_;
+	JButton table8_;
+	
+	//textfield variables
+	
+	JTextField ie1;
+	JTextField ie2;
+	JTextField ie3;
+	JTextField ie4;
+	JTextField ie5;
+	JTextField ie6;
+	JTextField ie7;
+	JTextField ie8;
+	
+	JLabel title;
+	JLabel IEtitle;
+
+	// object declarations	
+	Menu menu;
+	
+	public boolean tabDone=false;
+	
+	private String ie1_;
+	private String ie2_;
+	private String ie3_;
+	private String ie4_;
+	private String ie5_;
+	private String ie6_;
+	private String ie7_;
+	private String ie8_;
+
+	public Table(Menu menu) {
+
+		this.menu = menu;
+
+		// panel sizing
+		this.setTitle("GHHSB Lab Report System - Tables");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.getContentPane().setBackground(Color.WHITE);
+		HideWindow();
+
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		// button instantiations
+		return_ = new JButton("Return to Menu");
+		return_.addActionListener(this);
+		return_.setSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+		return_.setLocation(125,585);
+		
+		markAsDone_=new JButton("Mark as Done");
+		markAsDone_.addActionListener(this);
+		markAsDone_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		markAsDone_.setLocation(415, 585);
+
+		table1_ = new JButton("+");
+		table1_.addActionListener(this);
+		table1_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table1_.setLocation(20, 90);
+		
+		table2_ = new JButton("+");
+		table2_.addActionListener(this);
+		table2_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table2_.setLocation(20, 150);
+		
+		table3_ = new JButton("+");
+		table3_.addActionListener(this);
+		table3_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table3_.setLocation(20, 210);
+		
+		table4_ = new JButton("+");
+		table4_.addActionListener(this);
+		table4_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table4_.setLocation(20, 270);
+		
+		table5_ = new JButton("+");
+		table5_.addActionListener(this);
+		table5_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table5_.setLocation(20, 330);
+		
+		table6_ = new JButton("+");
+		table6_.addActionListener(this);
+		table6_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table6_.setLocation(20, 390);
+		
+		table7_ = new JButton("+");
+		table7_.addActionListener(this);
+		table7_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table7_.setLocation(20, 450);
+		
+		table8_ = new JButton("+");
+		table8_.addActionListener(this);
+		table8_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		table8_.setLocation(20, 510);
+		
+		ie1=new JTextField("");
+		ie1.setSize(90, 45);
+		ie1.setLocation(585, 90);
+		
+		ie2=new JTextField("");
+		ie2.setSize(90, 45);
+		ie2.setLocation(585, 150);
+		
+		ie3=new JTextField("");
+		ie3.setSize(90, 45);
+		ie3.setLocation(585, 210);
+		
+		ie4=new JTextField("");
+		ie4.setSize(90, 45);
+		ie4.setLocation(585, 270);
+		
+		ie5=new JTextField("");
+		ie5.setSize(90, 45);
+		ie5.setLocation(585, 330);
+		
+		ie6=new JTextField("");
+		ie6.setSize(90, 45);
+		ie6.setLocation(585, 390);
+		
+		ie7=new JTextField("");
+		ie7.setSize(90, 45);
+		ie7.setLocation(585, 450);
+		
+		ie8=new JTextField("");
+		ie8.setSize(90, 45);
+		ie8.setLocation(585, 510);
+		
+		title = new JLabel("Tables");
+		title.setSize(300,100);
+		title.setLocation(50, 0);
+		title.setFont(new Font("Serif", Font.PLAIN, 25));
+		
+		IEtitle = new JLabel("IE");
+		IEtitle.setSize(300,100);
+		IEtitle.setLocation(600, 0);
+		IEtitle.setFont(new Font("Serif", Font.PLAIN, 25));
+
+
+		// adds buttons
+		
+		c.add(return_);
+		c.add(markAsDone_);
+		c.add(table1_);
+		c.add(table2_);
+		c.add(table3_);
+		c.add(table4_);
+		c.add(table5_);
+		c.add(table6_);
+		c.add(table7_);
+		c.add(table8_);
+		
+		c.add(ie1);
+		c.add(ie2);
+		c.add(ie3);
+		c.add(ie4);
+		c.add(ie5);
+		c.add(ie6);
+		c.add(ie7);
+		c.add(ie8);
+		
+		c.add(title);
+		c.add(IEtitle);
+
+
+		repaint();
+	}
+	
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+if (e.getSource()==return_) {
+			
+			ie1_ = ie1.getText();
+			ie2_ = ie1.getText();
+			ie3_ = ie1.getText();
+			ie4_ = ie1.getText();
+			ie5_ = ie1.getText();
+			ie6_ = ie1.getText();
+			ie7_ = ie1.getText();
+			ie8_ = ie1.getText();
+			
+			HideWindow();
+			menu.ShowWindow();
+		}
+		
+		else if (e.getSource()==markAsDone_) {
+			tabDone=!tabDone;
+			
+			menu.RefreshCompleted(3, tabDone);
+			
+			if (tabDone) {
+				markAsDone_.setText("Mark as Undone");
+			}
+			
+			else {
+				markAsDone_.setText("Mark as Done");
+			}
+
+		}
+
+		repaint();
+		
+	}
+	
+
+}
