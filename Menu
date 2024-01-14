@@ -1,7 +1,7 @@
 //Menu.java
 //Runs the Main Menu GUI of the GHHSB Lab Report System
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 10
+//Last edit: Jan 13
 
 //TODO: wait until all classes are completed and link each class to this class
 
@@ -22,12 +22,14 @@ public class Menu extends JFrame implements ActionListener {
 	private static final int BUTTON_HEIGHT = 50;
 
 	// variables
-	private String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
+	public String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
 			"Not Completed", "Not Completed" };
 	
 	//object declarations
 	Start start;
 	Compile compile;
+	General general;
+	Table table;
 	
 	// button variables
 	JButton abstract_;
@@ -43,7 +45,10 @@ public class Menu extends JFrame implements ActionListener {
 	public Menu(Start start) {
 
 		this.start = start;
-		compile = new Compile(this);
+		general = new General(this);
+		table = new Table(this);
+		
+		compile = new Compile(this, general);
 		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
@@ -51,6 +56,7 @@ public class Menu extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setFocusable(true); // make everything in this class appear on the screen
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.WHITE);
 		HideWindow();
 		
@@ -137,6 +143,46 @@ public class Menu extends JFrame implements ActionListener {
 
 	}
 	
+	public void RefreshCompleted(int location, boolean complete) {
+		
+		if (complete) {
+			completed[location] = "Completed";
+		}
+		else {
+			completed[location] = "Not Completed";
+		}
+		
+		if (location == 0) {
+			abstract_.setText("Section 1: Abstract                                                                            "
+					+completed[location]);
+		}
+		else if(location == 1) {
+			theory_.setText("Section 2: Theory                                                                               "
+					+completed[location]);
+		}
+		else if(location == 2) {
+			method_.setText("Section 3: Method                                                                              "
+					+ completed[location]);
+		}
+		else if(location == 3) {
+			tables_.setText("Section 4: Tables                                                                               "
+					+ completed[location]);
+		}
+		else if(location == 4) {
+			analysis_.setText("Section 5: Analysis                                                                           "
+					+ completed[location]);
+		}
+		else if(location == 5) {
+			conclusion_.setText("Section 6: Conclusion                                                                       "
+					+ completed[location]);
+		}
+		else if(location == 6) {
+			citations_.setText("Section 7: Citations                                                                         "
+					+ completed[location]);
+		}
+		
+	}
+	
 	public void HideWindow() {
 		setVisible(false);
 	}
@@ -160,6 +206,7 @@ public class Menu extends JFrame implements ActionListener {
 		// opens each different class
 		if (e.getSource() == abstract_) {
 
+			general.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == theory_) {
@@ -172,6 +219,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == tables_) {
 
+			table.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == analysis_) {
