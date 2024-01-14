@@ -77,7 +77,6 @@ public class General extends JFrame implements ActionListener{
 	//}
 	
 	public void actionPerformed (ActionEvent evt) {
-		input=textBox.getText();
 		
 		if (evt.getSource()==returnToMenu) {
 			
@@ -87,7 +86,9 @@ public class General extends JFrame implements ActionListener{
 		}
 		
 		else if (evt.getSource()==markAsDone) {
+			
 			genDone=!genDone;
+			menu.RefreshCompleted(0, genDone); //Change the int number to the number of the section
 			
 			if (genDone) {
 				markAsDone.setText("Mark as Undone");
