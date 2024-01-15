@@ -1,7 +1,7 @@
 //Start.java
 //The start menu of the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 10
+//Last edit: Jan 14
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +21,8 @@ public class Start extends JFrame implements ActionListener {
 	JButton create_;
 	JButton quit_;
 	
+	JLabel title;
+	
 	//object declarations
 	Menu menu;
 
@@ -31,9 +33,10 @@ public class Start extends JFrame implements ActionListener {
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setFocusable(true); // make everything in this class appear on the screen
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.WHITE);
 		ShowWindow();
 
@@ -55,11 +58,18 @@ public class Start extends JFrame implements ActionListener {
 		quit_.addActionListener(this);
 		quit_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		quit_.setLocation(200, 500);
+		
+		title = new JLabel("GHHSB Lab Report System");
+		title.setSize(300,100);
+		title.setLocation(210, 100);
+		title.setFont(new Font("Serif", Font.PLAIN, 25));
 
 		//adds buttons
 		c.add(instructions_);
 		c.add(create_);
 		c.add(quit_);
+		
+		c.add(title);
 
 		repaint();
 	}
