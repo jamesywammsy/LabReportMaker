@@ -1,7 +1,7 @@
 //CreateTable.java
 //Creates a table with data
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 14
+//Last edit: Jan 15
 
 //imports
 import java.awt.*;
@@ -16,11 +16,16 @@ public class CreateTable extends JFrame implements ActionListener {
 	private static final int PANEL_HEIGHT = 700;
 	private static final int BUTTON_WIDTH = 150;
 	private static final int BUTTON_HEIGHT = 50;
+	private static final int INDEX_WIDTH = 60;
+	private static final int INDEX_HEIGHT = 30;
 
 	Table table;
 	public int index;
 	public String title;
 	public boolean tabDone = false;
+	public String[][] data = new String[10][8];
+	public String row;
+	public String col;
 
 	// button variables
 	JButton return_;
@@ -30,6 +35,116 @@ public class CreateTable extends JFrame implements ActionListener {
 	JLabel titleLabel;
 
 	JTextField title_;
+	JTextField row_;
+	JTextField col_;
+	
+	JTextField useFU1;
+	JTextField useFU2;
+	JTextField useFU3;
+	JTextField useFU4;
+	JTextField useFU5;
+	JTextField useFU6;
+	JTextField useFU7;
+	JTextField useFU8;
+	
+	JTextField name1;
+	JTextField name2;
+	JTextField name3;
+	JTextField name4;
+	JTextField name5;
+	JTextField name6;
+	JTextField name7;
+	JTextField name8;
+	
+	JTextField r1c1;
+	JTextField r1c2;
+	JTextField r1c3;
+	JTextField r1c4;
+	JTextField r1c5;
+	JTextField r1c6;
+	JTextField r1c7;
+	JTextField r1c8;
+	
+	JTextField r2c1;
+	JTextField r2c2;
+	JTextField r2c3;
+	JTextField r2c4;
+	JTextField r2c5;
+	JTextField r2c6;
+	JTextField r2c7;
+	JTextField r2c8;
+	
+	JTextField r3c1;
+	JTextField r3c2;
+	JTextField r3c3;
+	JTextField r3c4;
+	JTextField r3c5;
+	JTextField r3c6;
+	JTextField r3c7;
+	JTextField r3c8;
+	
+	JTextField r4c1;
+	JTextField r4c2;
+	JTextField r4c3;
+	JTextField r4c4;
+	JTextField r4c5;
+	JTextField r4c6;
+	JTextField r4c7;
+	JTextField r4c8;
+	
+	JTextField r5c1;
+	JTextField r5c2;
+	JTextField r5c3;
+	JTextField r5c4;
+	JTextField r5c5;
+	JTextField r5c6;
+	JTextField r5c7;
+	JTextField r5c8;
+	
+	JTextField r6c1;
+	JTextField r6c2;
+	JTextField r6c3;
+	JTextField r6c4;
+	JTextField r6c5;
+	JTextField r6c6;
+	JTextField r6c7;
+	JTextField r6c8;
+	
+	JTextField r7c1;
+	JTextField r7c2;
+	JTextField r7c3;
+	JTextField r7c4;
+	JTextField r7c5;
+	JTextField r7c6;
+	JTextField r7c7;
+	JTextField r7c8;
+	
+	JTextField r8c1;
+	JTextField r8c2;
+	JTextField r8c3;
+	JTextField r8c4;
+	JTextField r8c5;
+	JTextField r8c6;
+	JTextField r8c7;
+	JTextField r8c8;
+	
+	JTextField r9c1;
+	JTextField r9c2;
+	JTextField r9c3;
+	JTextField r9c4;
+	JTextField r9c5;
+	JTextField r9c6;
+	JTextField r9c7;
+	JTextField r9c8;
+	
+	JTextField r10c1;
+	JTextField r10c2;
+	JTextField r10c3;
+	JTextField r10c4;
+	JTextField r10c5;
+	JTextField r10c6;
+	JTextField r10c7;
+	JTextField r10c8;
 
 	public CreateTable(Table table, int index) {
 
@@ -51,34 +166,535 @@ public class CreateTable extends JFrame implements ActionListener {
 		return_ = new JButton("Return to Menu");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		return_.setLocation(55, 585);
+		return_.setLocation(55, 610);
 
 		delete_ = new JButton("Delete");
 		delete_.addActionListener(this);
 		delete_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		delete_.setLocation(270, 585);
+		delete_.setLocation(270, 610);
 
 		markAsDone_ = new JButton("Mark as Done");
 		markAsDone_.addActionListener(this);
 		markAsDone_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		markAsDone_.setLocation(485, 585);
+		markAsDone_.setLocation(485, 610);
 
 		titleLabel = new JLabel("Title:");
 		titleLabel.setSize(300, 100);
 		titleLabel.setLocation(200, 0);
 		titleLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-
+		
+		row_ = new JTextField();
+		row_.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		row_.setLocation(495, 10);
+		
+		col_ = new JTextField();
+		col_.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		col_.setLocation(495, 50);
+		
 		title_ = new JTextField();
 		title_.setSize(150, 25);
 		title_.setLocation(250, 40);
+		
+		useFU1 = new JTextField();
+		useFU1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU1.setLocation(75, 90);
+		
+		useFU2 = new JTextField();
+		useFU2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU2.setLocation(145, 90);
+		
+		useFU3 = new JTextField();
+		useFU3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU3.setLocation(215, 90);
+		
+		useFU4 = new JTextField();
+		useFU4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU4.setLocation(285, 90);
+		
+		useFU5 = new JTextField();
+		useFU5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU5.setLocation(355, 90);
+		
+		useFU6 = new JTextField();
+		useFU6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU6.setLocation(425, 90);
+		
+		useFU7 = new JTextField();
+		useFU7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU7.setLocation(495, 90);
+		
+		useFU8 = new JTextField();
+		useFU8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		useFU8.setLocation(565, 90);
+		
+		name1 = new JTextField();
+		name1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name1.setLocation(75, 130);
+		
+		name2 = new JTextField();
+		name2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name2.setLocation(145, 130);
+		
+		name3 = new JTextField();
+		name3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name3.setLocation(215, 130);
+		
+		name4 = new JTextField();
+		name4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name4.setLocation(285, 130);
+		
+		name5 = new JTextField();
+		name5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name5.setLocation(355, 130);
+		
+		name6 = new JTextField();
+		name6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name6.setLocation(425, 130);
+		
+		name7 = new JTextField();
+		name7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name7.setLocation(495, 130);
+		
+		name8 = new JTextField();
+		name8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		name8.setLocation(565, 130);
+		
+		r1c1 = new JTextField();
+		r1c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c1.setLocation(75, 200);
+		
+		r1c2 = new JTextField();
+		r1c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c2.setLocation(145, 200);
+		
+		r1c3 = new JTextField();
+		r1c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c3.setLocation(215, 200);
+		
+		r1c4 = new JTextField();
+		r1c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c4.setLocation(285, 200);
+		
+		r1c5 = new JTextField();
+		r1c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c5.setLocation(355, 200);
+		
+		r1c6 = new JTextField();
+		r1c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c6.setLocation(425, 200);
+		
+		r1c7 = new JTextField();
+		r1c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c7.setLocation(495, 200);
+		
+		r1c8 = new JTextField();
+		r1c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r1c8.setLocation(565, 200);
 
+		r2c1 = new JTextField();
+		r2c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c1.setLocation(75, 240);
+		
+		r2c2 = new JTextField();
+		r2c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c2.setLocation(145, 240);
+		
+		r2c3 = new JTextField();
+		r2c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c3.setLocation(215, 240);
+		
+		r2c4 = new JTextField();
+		r2c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c4.setLocation(285, 240);
+		
+		r2c5 = new JTextField();
+		r2c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c5.setLocation(355, 240);
+		
+		r2c6 = new JTextField();
+		r2c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c6.setLocation(425, 240);
+		
+		r2c7 = new JTextField();
+		r2c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c7.setLocation(495, 240);
+	
+		r2c8 = new JTextField();
+		r2c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r2c8.setLocation(565, 240);
+		
+		r3c1 = new JTextField();
+		r3c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c1.setLocation(75, 280);
+
+		r3c2 = new JTextField();
+		r3c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c2.setLocation(145, 280);
+
+		r3c3 = new JTextField();
+		r3c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c3.setLocation(215, 280);
+
+		r3c4 = new JTextField();
+		r3c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c4.setLocation(285, 280);
+
+		r3c5 = new JTextField();
+		r3c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c5.setLocation(355, 280);
+
+		r3c6 = new JTextField();
+		r3c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c6.setLocation(425, 280);
+
+		r3c7 = new JTextField();
+		r3c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c7.setLocation(495, 280);
+
+		r3c8 = new JTextField();
+		r3c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r3c8.setLocation(565, 280);
+		
+		r4c1 = new JTextField();
+		r4c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c1.setLocation(75, 320);
+
+		r4c2 = new JTextField();
+		r4c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c2.setLocation(145, 320);
+
+		r4c3 = new JTextField();
+		r4c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c3.setLocation(215, 320);
+
+		r4c4 = new JTextField();
+		r4c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c4.setLocation(285, 320);
+
+		r4c5 = new JTextField();
+		r4c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c5.setLocation(355, 320);
+
+		r4c6 = new JTextField();
+		r4c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c6.setLocation(425, 320);
+
+		r4c7 = new JTextField();
+		r4c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c7.setLocation(495, 320);
+
+		r4c8 = new JTextField();
+		r4c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r4c8.setLocation(565, 320);
+		
+		r5c1 = new JTextField();
+		r5c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c1.setLocation(75, 360);
+		
+		r5c2 = new JTextField();
+		r5c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c2.setLocation(145, 360);
+		
+		r5c3 = new JTextField();
+		r5c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c3.setLocation(215, 360);
+		
+		r5c4 = new JTextField();
+		r5c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c4.setLocation(285, 360);
+		
+		r5c5 = new JTextField();
+		r5c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c5.setLocation(355, 360);
+		
+		r5c6 = new JTextField();
+		r5c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c6.setLocation(425, 360);
+		
+		r5c7 = new JTextField();
+		r5c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c7.setLocation(495, 360);
+	
+		r5c8 = new JTextField();
+		r5c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r5c8.setLocation(565, 360);
+		
+		r6c1 = new JTextField();
+		r6c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c1.setLocation(75, 400);
+		
+		r6c2 = new JTextField();
+		r6c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c2.setLocation(145, 400);
+		
+		r6c3 = new JTextField();
+		r6c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c3.setLocation(215, 400);
+		
+		r6c4 = new JTextField();
+		r6c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c4.setLocation(285, 400);
+		
+		r6c5 = new JTextField();
+		r6c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c5.setLocation(355, 400);
+		
+		r6c6 = new JTextField();
+		r6c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c6.setLocation(425, 400);
+		
+		r6c7 = new JTextField();
+		r6c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c7.setLocation(495, 400);
+	
+		r6c8 = new JTextField();
+		r6c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r6c8.setLocation(565, 400);
+		
+		r7c1 = new JTextField();
+		r7c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c1.setLocation(75, 440);
+		
+		r7c2 = new JTextField();
+		r7c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c2.setLocation(145, 440);
+		
+		r7c3 = new JTextField();
+		r7c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c3.setLocation(215, 440);
+		
+		r7c4 = new JTextField();
+		r7c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c4.setLocation(285, 440);
+		
+		r7c5 = new JTextField();
+		r7c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c5.setLocation(355, 440);
+		
+		r7c6 = new JTextField();
+		r7c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c6.setLocation(425, 440);
+		
+		r7c7 = new JTextField();
+		r7c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c7.setLocation(495, 440);
+	
+		r7c8 = new JTextField();
+		r7c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r7c8.setLocation(565, 440);
+		
+		r8c1 = new JTextField();
+		r8c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c1.setLocation(75, 480);
+		
+		r8c2 = new JTextField();
+		r8c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c2.setLocation(145, 480);
+		
+		r8c3 = new JTextField();
+		r8c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c3.setLocation(215, 480);
+		
+		r8c4 = new JTextField();
+		r8c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c4.setLocation(285, 480);
+		
+		r8c5 = new JTextField();
+		r8c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c5.setLocation(355, 480);
+		
+		r8c6 = new JTextField();
+		r8c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c6.setLocation(425, 480);
+		
+		r8c7 = new JTextField();
+		r8c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c7.setLocation(495, 480);
+	
+		r8c8 = new JTextField();
+		r8c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r8c8.setLocation(565, 480);
+		
+		r9c1 = new JTextField();
+		r9c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c1.setLocation(75, 520);
+		
+		r9c2 = new JTextField();
+		r9c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c2.setLocation(145, 520);
+		
+		r9c3 = new JTextField();
+		r9c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c3.setLocation(215, 520);
+		
+		r9c4 = new JTextField();
+		r9c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c4.setLocation(285, 520);
+		
+		r9c5 = new JTextField();
+		r9c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c5.setLocation(355, 520);
+		
+		r9c6 = new JTextField();
+		r9c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c6.setLocation(425, 520);
+		
+		r9c7 = new JTextField();
+		r9c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c7.setLocation(495, 520);
+	
+		r9c8 = new JTextField();
+		r9c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r9c8.setLocation(565, 520);
+		
+		r10c1 = new JTextField();
+		r10c1.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c1.setLocation(75, 560);
+
+		r10c2 = new JTextField();
+		r10c2.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c2.setLocation(145, 560);
+
+		r10c3 = new JTextField();
+		r10c3.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c3.setLocation(215, 560);
+
+		r10c4 = new JTextField();
+		r10c4.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c4.setLocation(285, 560);
+
+		r10c5 = new JTextField();
+		r10c5.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c5.setLocation(355, 560);
+
+		r10c6 = new JTextField();
+		r10c6.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c6.setLocation(425, 560);
+
+		r10c7 = new JTextField();
+		r10c7.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c7.setLocation(495, 560);
+
+		r10c8 = new JTextField();
+		r10c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
+		r10c8.setLocation(565, 560);
+		
 		c.add(return_);
 		c.add(markAsDone_);
 		c.add(delete_);
 
 		c.add(titleLabel);
+		c.add(row_);
+		c.add(col_);
 
 		c.add(title_);
+		c.add(useFU1);
+		c.add(useFU2);
+		c.add(useFU3);
+		c.add(useFU4);
+		c.add(useFU5);
+		c.add(useFU6);
+		c.add(useFU7);
+		c.add(useFU8);
+		
+		c.add(name1);
+		c.add(name2);
+		c.add(name3);
+		c.add(name4);
+		c.add(name5);
+		c.add(name6);
+		c.add(name7);
+		c.add(name8);
+		
+		c.add(r1c1);
+		c.add(r1c2);
+		c.add(r1c3);
+		c.add(r1c4);
+		c.add(r1c5);
+		c.add(r1c6);
+		c.add(r1c7);
+		c.add(r1c8);
+		
+		c.add(r2c1);
+		c.add(r2c2);
+		c.add(r2c3);
+		c.add(r2c4);
+		c.add(r2c5);
+		c.add(r2c6);
+		c.add(r2c7);
+		c.add(r2c8);
+		
+		c.add(r3c1);
+		c.add(r3c2);
+		c.add(r3c3);
+		c.add(r3c4);
+		c.add(r3c5);
+		c.add(r3c6);
+		c.add(r3c7);
+		c.add(r3c8);
+		
+		c.add(r4c1);
+		c.add(r4c2);
+		c.add(r4c3);
+		c.add(r4c4);
+		c.add(r4c5);
+		c.add(r4c6);
+		c.add(r4c7);
+		c.add(r4c8);
+		
+		c.add(r5c1);
+		c.add(r5c2);
+		c.add(r5c3);
+		c.add(r5c4);
+		c.add(r5c5);
+		c.add(r5c6);
+		c.add(r5c7);
+		c.add(r5c8);
+		
+		c.add(r6c1);
+		c.add(r6c2);
+		c.add(r6c3);
+		c.add(r6c4);
+		c.add(r6c5);
+		c.add(r6c6);
+		c.add(r6c7);
+		c.add(r6c8);
+		
+		c.add(r7c1);
+		c.add(r7c2);
+		c.add(r7c3);
+		c.add(r7c4);
+		c.add(r7c5);
+		c.add(r7c6);
+		c.add(r7c7);
+		c.add(r7c8);
+		
+		c.add(r8c1);
+		c.add(r8c2);
+		c.add(r8c3);
+		c.add(r8c4);
+		c.add(r8c5);
+		c.add(r8c6);
+		c.add(r8c7);
+		c.add(r8c8);
+
+		c.add(r9c1);
+		c.add(r9c2);
+		c.add(r9c3);
+		c.add(r9c4);
+		c.add(r9c5);
+		c.add(r9c6);
+		c.add(r9c7);
+		c.add(r9c8);
+		
+		c.add(r10c1);
+		c.add(r10c2);
+		c.add(r10c3);
+		c.add(r10c4);
+		c.add(r10c5);
+		c.add(r10c6);
+		c.add(r10c7);
+		c.add(r10c8);
 
 		repaint();
 	}
@@ -97,6 +713,100 @@ public class CreateTable extends JFrame implements ActionListener {
 
 			HideWindow();
 			table.ShowWindow();
+			
+			row = row_.getText();
+			col = col_.getText();
+			
+			data[0][0] = r1c1.getText();
+			data[0][1] = r1c2.getText();
+			data[0][2] = r1c3.getText();
+			data[0][3] = r1c4.getText();
+			data[0][4] = r1c5.getText();
+			data[0][5] = r1c6.getText();
+			data[0][6] = r1c7.getText();
+			data[0][7] = r1c8.getText();
+
+			data[1][0] = r2c1.getText();
+			data[1][1] = r2c2.getText();
+			data[1][2] = r2c3.getText();
+			data[1][3] = r2c4.getText();
+			data[1][4] = r2c5.getText();
+			data[1][5] = r2c6.getText();
+			data[1][6] = r2c7.getText();
+			data[1][7] = r2c8.getText();
+
+			data[2][0] = r3c1.getText();
+			data[2][1] = r3c2.getText();
+			data[2][2] = r3c3.getText();
+			data[2][3] = r3c4.getText();
+			data[2][4] = r3c5.getText();
+			data[2][5] = r3c6.getText();
+			data[2][6] = r3c7.getText();
+			data[2][7] = r3c8.getText();
+
+			data[3][0] = r4c1.getText();
+			data[3][1] = r4c2.getText();
+			data[3][2] = r4c3.getText();
+			data[3][3] = r4c4.getText();
+			data[3][4] = r4c5.getText();
+			data[3][5] = r4c6.getText();
+			data[3][6] = r4c7.getText();
+			data[3][7] = r4c8.getText();
+
+			data[4][0] = r5c1.getText();
+			data[4][1] = r5c2.getText();
+			data[4][2] = r5c3.getText();
+			data[4][3] = r5c4.getText();
+			data[4][4] = r5c5.getText();
+			data[4][5] = r5c6.getText();
+			data[4][6] = r5c7.getText();
+			data[4][7] = r5c8.getText();
+
+			data[5][0] = r6c1.getText();
+			data[5][1] = r6c2.getText();
+			data[5][2] = r6c3.getText();
+			data[5][3] = r6c4.getText();
+			data[5][4] = r6c5.getText();
+			data[5][5] = r6c6.getText();
+			data[5][6] = r6c7.getText();
+			data[5][7] = r6c8.getText();
+
+			data[6][0] = r7c1.getText();
+			data[6][1] = r7c2.getText();
+			data[6][2] = r7c3.getText();
+			data[6][3] = r7c4.getText();
+			data[6][4] = r7c5.getText();
+			data[6][5] = r7c6.getText();
+			data[6][6] = r7c7.getText();
+			data[6][7] = r7c8.getText();
+
+			data[7][0] = r8c1.getText();
+			data[7][1] = r8c2.getText();
+			data[7][2] = r8c3.getText();
+			data[7][3] = r8c4.getText();
+			data[7][4] = r8c5.getText();
+			data[7][5] = r8c6.getText();
+			data[7][6] = r8c7.getText();
+			data[7][7] = r8c8.getText();
+
+			data[8][0] = r9c1.getText();
+			data[8][1] = r9c2.getText();
+			data[8][2] = r9c3.getText();
+			data[8][3] = r9c4.getText();
+			data[8][4] = r9c5.getText();
+			data[8][5] = r9c6.getText();
+			data[8][6] = r9c7.getText();
+			data[8][7] = r9c8.getText();
+
+			data[9][0] = r10c1.getText();
+			data[9][1] = r10c2.getText();
+			data[9][2] = r10c3.getText();
+			data[9][3] = r10c4.getText();
+			data[9][4] = r10c5.getText();
+			data[9][5] = r10c6.getText();
+			data[9][6] = r10c7.getText();
+			data[9][7] = r10c8.getText();
+
 		}
 
 		else if (e.getSource() == markAsDone_) {
