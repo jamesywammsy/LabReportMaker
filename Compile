@@ -1,7 +1,7 @@
 //Compile.java
 //Compile menu, exports a word document
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 11
+//Last edit: Jan 15
 
 //TODO: Finish the rest of the buttons; Add in the ordering feature; Add in preview feature
 
@@ -37,10 +37,32 @@ public class Compile extends JFrame implements ActionListener {
 
 	// object declarations
 	Menu menu;
+	General general;
+	CreateTable table1;
+	CreateTable table2;
+	CreateTable table3;
+	CreateTable table4;
+	CreateTable table5;
+	CreateTable table6;
+	CreateTable table7;
+	CreateTable table8;
 
-	public Compile(Menu menu) {
+	private int r;
+	private int c;
+
+	public Compile(Menu menu, General general, CreateTable table1, CreateTable table2, CreateTable table3,
+			CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7, CreateTable table8) {
 
 		this.menu = menu;
+		this.general = general;
+		this.table1 = table1;
+		this.table2 = table2;
+		this.table3 = table3;
+		this.table4 = table4;
+		this.table5 = table5;
+		this.table6 = table6;
+		this.table7 = table7;
+		this.table8 = table8;
 
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Compile");
@@ -92,13 +114,13 @@ public class Compile extends JFrame implements ActionListener {
 	public void ShowWindow() {
 		setVisible(true);
 	}
-	
+
 	public void CompileParagraph(XWPFDocument doc, String paragraph) {
-		
+
 		// Create a paragraph
 		XWPFParagraph para = doc.createParagraph();
 
-		// Create a run within the paragraph
+		// Create a run within the paragraph 
 		XWPFRun run = para.createRun();
 
 		// Add text to the run
@@ -121,7 +143,7 @@ public class Compile extends JFrame implements ActionListener {
 			}
 		}
 
-		if (row >= 2) {
+		if (row >= 92) {
 			// create second row
 			XWPFTableRow tableRowTwo = table.createRow();
 
@@ -203,6 +225,173 @@ public class Compile extends JFrame implements ActionListener {
 			}
 		}
 	}
+	
+	public void CompileTable1(XWPFDocument document) {
+		if (table1 != null) {
+
+			if (table1.row.equals("")) {
+				r = 0;
+			} else {
+				r = Integer.parseInt(table1.row);
+			}
+
+			if (table1.col.equals("")) {
+				c = 0;
+			}
+
+			else {
+				c = Integer.parseInt(table1.col);
+			}
+
+			CompileTable(document, table1.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable2(XWPFDocument document) {
+		if (table2 != null) {
+
+			if (table2.row.equals("")) {
+				r = 0;
+			} else {
+				r = Integer.parseInt(table2.row);
+			}
+
+			if (table2.col.equals("")) {
+				c = 0;
+			}
+
+			else {
+				c = Integer.parseInt(table2.col);
+			}
+
+			CompileTable(document, table2.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable3(XWPFDocument document) {
+		if (table3 != null) {
+
+		    if (table3.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table3.row);
+		    }
+
+		    if (table3.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table3.col);
+		    }
+
+		    CompileTable(document, table3.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable4(XWPFDocument document) {
+		if (table4 != null) {
+
+		    if (table4.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table4.row);
+		    }
+
+		    if (table4.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table4.col);
+		    }
+
+		    CompileTable(document, table4.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable5(XWPFDocument document) {
+		if (table5 != null) {
+
+		    if (table5.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table5.row);
+		    }
+
+		    if (table5.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table5.col);
+		    }
+
+		    CompileTable(document, table5.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable6(XWPFDocument document) {
+
+		if (table6 != null) {
+
+		    if (table6.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table6.row);
+		    }
+
+		    if (table6.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table6.col);
+		    }
+
+		    CompileTable(document, table6.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable7(XWPFDocument document) {
+
+		if (table7 != null) {
+
+		    if (table7.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table7.row);
+		    }
+
+		    if (table7.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table7.col);
+		    }
+
+		    CompileTable(document, table7.data, r, c);
+
+		}
+	}
+	
+	public void CompileTable8(XWPFDocument document) {
+		
+		if (table8 != null) {
+
+		    if (table8.row.equals("")) {
+		        r = 0;
+		    } else {
+		        r = Integer.parseInt(table8.row);
+		    }
+
+		    if (table8.col.equals("")) {
+		        c = 0;
+		    } else {
+		        c = Integer.parseInt(table8.col);
+		    }
+
+		    CompileTable(document, table8.data, r, c);
+
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -231,8 +420,17 @@ public class Compile extends JFrame implements ActionListener {
 
 				// Add text to the run
 				run.setText("Hello, this is a sample document!");
+
+				CompileParagraph(document, general.input);
 				
-				CompileParagraph(document, "And this is another paragraph!");
+				CompileTable1(document);
+				CompileTable2(document);
+				CompileTable3(document);
+				CompileTable4(document);
+				CompileTable5(document);
+				CompileTable6(document);
+				CompileTable7(document);
+				CompileTable8(document);
 
 				// Specify the output file path in the Downloads folder
 				String home = System.getProperty("user.home");
