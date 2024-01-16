@@ -225,10 +225,11 @@ public class Compile extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
+
 	public void CompileTable1(XWPFDocument document) {
 		if (table1 != null) {
 
+			// sets row and col length parameters
 			r = table1.row;
 			c = table1.col;
 
@@ -236,10 +237,11 @@ public class Compile extends JFrame implements ActionListener {
 
 		}
 	}
-	
+
 	public void CompileTable2(XWPFDocument document) {
 		if (table2 != null) {
 
+			// sets row and col length parameters
 			r = table2.row;
 			c = table2.col;
 
@@ -247,72 +249,78 @@ public class Compile extends JFrame implements ActionListener {
 
 		}
 	}
-	
+
 	public void CompileTable3(XWPFDocument document) {
 		if (table3 != null) {
 
+			// sets row and col length parameters
 			r = table3.row;
 			c = table3.col;
 
-		    CompileTable(document, table3.data, r, c);
+			CompileTable(document, table3.data, r, c);
 
 		}
 	}
-	
+
 	public void CompileTable4(XWPFDocument document) {
 		if (table4 != null) {
 
+			// sets row and col length parameters
 			r = table4.row;
 			c = table4.col;
 
-		    CompileTable(document, table4.data, r, c);
+			CompileTable(document, table4.data, r, c);
 
 		}
 	}
-	
+
 	public void CompileTable5(XWPFDocument document) {
 		if (table5 != null) {
 
+			// sets row and col length parameters
 			r = table5.row;
 			c = table5.col;
-			
-		    CompileTable(document, table5.data, r, c);
+
+			CompileTable(document, table5.data, r, c);
 
 		}
 	}
-	
+
 	public void CompileTable6(XWPFDocument document) {
 
 		if (table6 != null) {
 
+			// sets row and col length parameters
 			r = table6.row;
 			c = table6.col;
 
-		    CompileTable(document, table6.data, r, c);
+			CompileTable(document, table6.data, r, c);
 
 		}
 	}
-	
+
 	public void CompileTable7(XWPFDocument document) {
 
 		if (table7 != null) {
 
+			// sets row and col length parameters
 			r = table7.row;
 			c = table7.col;
 
-		    CompileTable(document, table7.data, r, c);
+			CompileTable(document, table7.data, r, c);
 
 		}
 	}
-	
+
 	public void CompileTable8(XWPFDocument document) {
-		
+
 		if (table8 != null) {
 
+			// sets row and col length parameters
 			r = table8.row;
 			c = table8.col;
 
-		    CompileTable(document, table8.data, r, c);
+			CompileTable(document, table8.data, r, c);
 
 		}
 	}
@@ -320,7 +328,7 @@ public class Compile extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// opens each different class
+		// returns to main menu
 		if (e.getSource() == return_) {
 
 			HideWindow();
@@ -346,7 +354,7 @@ public class Compile extends JFrame implements ActionListener {
 				run.setText("Hello, this is a sample document!");
 
 				CompileParagraph(document, general.input);
-				
+
 				CompileTable1(document);
 				CompileTable2(document);
 				CompileTable3(document);
@@ -362,6 +370,7 @@ public class Compile extends JFrame implements ActionListener {
 
 				// Create a FileOutputStream to write the document to a file
 				try (FileOutputStream out = new FileOutputStream(filePath)) {
+
 					// Write the document to the file
 					document.write(out);
 				}
@@ -370,6 +379,7 @@ public class Compile extends JFrame implements ActionListener {
 				ex.printStackTrace();
 			}
 
+			//ends program
 			System.exit(0);
 
 		}
