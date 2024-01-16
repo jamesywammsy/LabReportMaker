@@ -1,7 +1,7 @@
 //Menu.java
 //Runs the Main Menu GUI of the GHHSB Lab Report System
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 15
+//Last edit: Jan 16
 
 //TODO: wait until all classes are completed and link each class to this class
 
@@ -30,6 +30,7 @@ public class Menu extends JFrame implements ActionListener {
 	Compile compile;
 	General general;
 	Table table;
+	Analysis analysis;
 	
 	// button variables
 	JButton abstract_;
@@ -47,6 +48,7 @@ public class Menu extends JFrame implements ActionListener {
 		this.start = start;
 		general = new General(this);
 		table = new Table(this);
+		analysis = new Analysis(this);
 		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
@@ -143,6 +145,7 @@ public class Menu extends JFrame implements ActionListener {
 	
 	public void RefreshCompleted(int location, boolean complete) {
 		
+		//refreshes the completion status of each section
 		if (complete) {
 			completed[location] = "Completed";
 		}
@@ -181,22 +184,15 @@ public class Menu extends JFrame implements ActionListener {
 		
 	}
 	
+	//hides window
 	public void HideWindow() {
 		setVisible(false);
 	}
 	
+	//shows window
 	public void ShowWindow() {
 		setVisible(true);
 	}
-
-	/*
-	 * TESTING PURPOSES ONLY ********************************* 
-	 * public static void main(String[] args) { 
-	 * 
-	 * new Menu(); 
-	 * 
-	 * }
-	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -223,6 +219,7 @@ public class Menu extends JFrame implements ActionListener {
 		} else if (e.getSource() == analysis_) {
 
 			HideWindow();
+			analysis.ShowWindow();
 
 		} else if (e.getSource() == conclusion_) {
 
