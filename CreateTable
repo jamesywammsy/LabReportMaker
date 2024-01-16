@@ -19,6 +19,7 @@ public class CreateTable extends JFrame implements ActionListener {
 	private static final int INDEX_WIDTH = 60;
 	private static final int INDEX_HEIGHT = 30;
 
+	//class variables
 	Table table;
 	public int index;
 	public String title;
@@ -32,6 +33,7 @@ public class CreateTable extends JFrame implements ActionListener {
 	JButton markAsDone_;
 	JButton delete_;
 
+	//JLabel variables
 	JLabel titleLabel;
 	JLabel rowLength;
 	JLabel colLength;
@@ -59,6 +61,7 @@ public class CreateTable extends JFrame implements ActionListener {
 	JLabel useFU;
 	JLabel name;
 
+	//JTextField variables
 	JTextField title_;
 	JTextField row_;
 	JTextField col_;
@@ -173,21 +176,24 @@ public class CreateTable extends JFrame implements ActionListener {
 
 	public CreateTable(Table table, int index) {
 
+		//sets objects
 		this.table = table;
 		this.index = index;
 
+		//sets the window parameters
 		this.setTitle("GHHSB Lab Report System - Table " + (index + 1));
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setFocusable(true); // make everything in this class appear on the screen
+		this.setFocusable(true); 
 		this.getContentPane().setBackground(Color.WHITE);
 		this.setVisible(false);
-
+		
 		Container c = getContentPane();
 		c.setLayout(null);
 
+		//create buttons, Jlabels, and JTextFields
 		return_ = new JButton("Return to Menu");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -714,6 +720,7 @@ public class CreateTable extends JFrame implements ActionListener {
 		r10c8.setSize(INDEX_WIDTH, INDEX_HEIGHT);
 		r10c8.setLocation(565, 560);
 
+		//adds buttons, Jlabels, JTextfields
 		c.add(return_);
 		c.add(markAsDone_);
 		c.add(delete_);
@@ -863,18 +870,24 @@ public class CreateTable extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		//sets title
 		title = title_.getText();
 
 		if (title_.getText().equals("")) {
 			title = "Unnamed Table";
 		}
+		
+		//refreshes CreateTable status
 		table.RefreshCompleted(index, tabDone);
 
+		//returns to table window
 		if (e.getSource() == return_) {
 
+			//hides current window, opens table window
 			HideWindow();
 			table.ShowWindow();
 
+			//sets row and col length parameters
 			if (row_.getText().equals("") || col_.getText().equals("")) {
 				row = 1;
 				col = 1;
@@ -885,6 +898,7 @@ public class CreateTable extends JFrame implements ActionListener {
 				col = Integer.parseInt(col_.getText()) + 1;
 			}
 
+			//sets data
 			data[0][0] = "Index";
 			data[0][1] = name1.getText();
 			data[0][2] = name2.getText();
@@ -997,6 +1011,7 @@ public class CreateTable extends JFrame implements ActionListener {
 
 		}
 
+		//changes status of CreateTable
 		else if (e.getSource() == markAsDone_) {
 
 			tabDone = !tabDone;
@@ -1011,10 +1026,12 @@ public class CreateTable extends JFrame implements ActionListener {
 
 		}
 
+		//Deletes object
 		else if (e.getSource() == delete_) {
 
 			HideWindow();
-
+			
+			//resets the title
 			if (index == 0) {
 				table.table1 = null;
 				table.table1_.setText("+");
@@ -1062,10 +1079,12 @@ public class CreateTable extends JFrame implements ActionListener {
 		repaint();
 	}
 
+	//hides current window
 	public void HideWindow() {
 		setVisible(false);
 	}
 
+	//shows current window
 	public void ShowWindow() {
 		setVisible(true);
 	}
