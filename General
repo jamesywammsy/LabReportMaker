@@ -1,118 +1,158 @@
+package summative;
+
 //General.java
-//Skeleton class for most of the sections in the program
+//Used for abstract, method, analysis, and conclusion sections. Allows user to input paragraphs.
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 13
+//Last edit: Jan 16
 
-//TODO: Fix Scroll bar mechanism
-
+//imports
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.util.*;
 
-public class General extends JFrame implements ActionListener{
-
-	public static final int PANEL_WIDTH = 700;
-	public static final int PANEL_HEIGHT = 700;
-	public static final int BWIDTH = 160;
-	public static final int BHEIGHT = 50;
+public class General extends JFrame implements ActionListener {
 	
-	public String input="EMPTY";
+	//private variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BWIDTH = 160;
+	private static final int BHEIGHT = 50;
+	
+	//variables
+	public String input = "EMPTY";
 	public String title;
-	public boolean genDone=false;
+	public boolean genDone = false;
 	
+	//JComponents
 	JButton returnToMenu;
+	JButton save;
 	JButton markAsDone;
-	JTextArea textBox;
+	JTextArea textBox, textArea;
+	JPanel panel1, panel2;
+	JScrollPane scrollableTextArea;
 	
+	//object declaration
 	Menu menu;
-	
-	public General(Menu menu){
+
+	public Testfile() {
+
+		//this.menu=menu;
 		
-		this.menu=menu;
-		
-		this.setTitle("GHHSB Lab Report System - ");
+		//window sizing and attributes
+		this.setTitle("GHHSB Lab Report System - "+title);
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
-		this.getContentPane().setBackground(Color.WHITE);
-		this.setVisible(false);
+		this.getContentPane().setBackground(Color.BLACK);
+		this.setVisible(true);
 		
-		Container c = getContentPane();
-		c.setLayout(null);
+		//main panel
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
+		c.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		
-		textBox=new JTextArea("Enter here");
-		textBox.setSize(590, 425);
-		textBox.setLocation(55, 55);
+		//top panel 
+		panel1 = new JPanel();
+		panel1.setLayout(new GridBagLayout());
+		panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel1.setPreferredSize(new Dimension(PANEL_WIDTH, 540));
+		panel1.setBackground(Color.BLACK);
 		
-		JScrollPane scrollV = new JScrollPane (textBox, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//bottom panel
+		panel2 = new JPanel();
+		panel2.setLayout(null);
+		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 160));
+		panel2.setBackground(Color.BLACK);
 		
+		//user inputs in text box with scroll bar
+		textBox = new JTextArea("Enter here");
+		textBox.setLineWrap(true);
+		textBox.setWrapStyleWord(true);
+
+		scrollableTextArea = new JScrollPane(textBox);
+		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollableTextArea.setPreferredSize(new Dimension(590, 430));
+		
+		//buttons
 		returnToMenu = new JButton("Return to Menu");
 		returnToMenu.addActionListener(this);
-		returnToMenu.setSize(BWIDTH,BHEIGHT);
-		returnToMenu.setLocation(125,585);
-		
-		markAsDone=new JButton("Mark as Done");
+		returnToMenu.setSize(BWIDTH, BHEIGHT);
+		returnToMenu.setLocation(55, 55);
+
+		save = new JButton("Save");
+		save.addActionListener(this);
+		save.setSize(BWIDTH, BHEIGHT);
+		save.setLocation(270, 55);
+
+		markAsDone = new JButton("Mark as Done");
 		markAsDone.addActionListener(this);
 		markAsDone.setSize(BWIDTH, BHEIGHT);
-		markAsDone.setLocation(415, 585);
+		markAsDone.setLocation(485, 55);
 		
+		//add components
+		this.getContentPane().add(c);
 
-		c.add(textBox);		
-		c.add(scrollV);
-		c.add(returnToMenu);
-		c.add(markAsDone);
+		panel1.add(scrollableTextArea);
+
+		panel2.add(returnToMenu);
+		panel2.add(save);
+		panel2.add(markAsDone);
+		
+		c.add(panel1);
+		c.add(panel2);
 		
 		repaint();
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
 	}
-	
-	//public static void main(String[] args) {
-		//new General();
-	//}
-	
-	public void actionPerformed (ActionEvent evt) {
-		
-		if (evt.getSource()==returnToMenu) {
-			
-			input = textBox.getText();
-			HideWindow();
-			menu.ShowWindow();
-		}
-		
-		else if (evt.getSource()==markAsDone) {
-			
-			genDone=!genDone;
-			menu.RefreshCompleted(0, genDone); //Change the int number to the number of the section
-			
-			if (genDone) {
-				markAsDone.setText("Mark as Undone");
-			}
-			
-			else {
-				markAsDone.setText("Mark as Done");
-			}
 
+	// public static void main(String[] args) {
+	// new Testfile();
+	// }
+
+	public void actionPerformed(ActionEvent evt) {
+		input = textBox.getText();
+
+		if (evt.getSource() == returnToMenu) {
+			HideWindow();
+			// menu.ShowWindow();
+		} else if (evt.getSource() == save) {
+
+		} else if (evt.getSource() == markAsDone) {
+			genDone = !genDone;
 		}
 
 		repaint();
 	}
-	
+
 	public void HideWindow() {
 		setVisible(false);
 	}
-	
+
 	public void ShowWindow() {
 		setVisible(true);
 	}
-	
+
 	public String getText() {
 		return input;
 	}
+	
+	public void setTitle(String t) {
+		title=t;
+	}
 
+	public static void main() {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+			public void run() {
+				new General();
+			}
+		});
+	}
 }
