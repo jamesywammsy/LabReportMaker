@@ -1,7 +1,7 @@
 //Compile.java
 //Compile menu, exports a word document
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 15
+//Last edit: Jan 16
 
 //TODO: Finish the rest of the buttons; Add in the ordering feature; Add in preview feature
 
@@ -143,7 +143,7 @@ public class Compile extends JFrame implements ActionListener {
 			}
 		}
 
-		if (row >= 92) {
+		if (row >= 2) {
 			// create second row
 			XWPFTableRow tableRowTwo = table.createRow();
 
@@ -229,19 +229,8 @@ public class Compile extends JFrame implements ActionListener {
 	public void CompileTable1(XWPFDocument document) {
 		if (table1 != null) {
 
-			if (table1.row.equals("")) {
-				r = 0;
-			} else {
-				r = Integer.parseInt(table1.row);
-			}
-
-			if (table1.col.equals("")) {
-				c = 0;
-			}
-
-			else {
-				c = Integer.parseInt(table1.col);
-			}
+			r = table1.row;
+			c = table1.col;
 
 			CompileTable(document, table1.data, r, c);
 
@@ -251,19 +240,8 @@ public class Compile extends JFrame implements ActionListener {
 	public void CompileTable2(XWPFDocument document) {
 		if (table2 != null) {
 
-			if (table2.row.equals("")) {
-				r = 0;
-			} else {
-				r = Integer.parseInt(table2.row);
-			}
-
-			if (table2.col.equals("")) {
-				c = 0;
-			}
-
-			else {
-				c = Integer.parseInt(table2.col);
-			}
+			r = table2.row;
+			c = table2.col;
 
 			CompileTable(document, table2.data, r, c);
 
@@ -273,17 +251,8 @@ public class Compile extends JFrame implements ActionListener {
 	public void CompileTable3(XWPFDocument document) {
 		if (table3 != null) {
 
-		    if (table3.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table3.row);
-		    }
-
-		    if (table3.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table3.col);
-		    }
+			r = table3.row;
+			c = table3.col;
 
 		    CompileTable(document, table3.data, r, c);
 
@@ -293,17 +262,8 @@ public class Compile extends JFrame implements ActionListener {
 	public void CompileTable4(XWPFDocument document) {
 		if (table4 != null) {
 
-		    if (table4.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table4.row);
-		    }
-
-		    if (table4.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table4.col);
-		    }
+			r = table4.row;
+			c = table4.col;
 
 		    CompileTable(document, table4.data, r, c);
 
@@ -313,18 +273,9 @@ public class Compile extends JFrame implements ActionListener {
 	public void CompileTable5(XWPFDocument document) {
 		if (table5 != null) {
 
-		    if (table5.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table5.row);
-		    }
-
-		    if (table5.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table5.col);
-		    }
-
+			r = table5.row;
+			c = table5.col;
+			
 		    CompileTable(document, table5.data, r, c);
 
 		}
@@ -334,17 +285,8 @@ public class Compile extends JFrame implements ActionListener {
 
 		if (table6 != null) {
 
-		    if (table6.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table6.row);
-		    }
-
-		    if (table6.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table6.col);
-		    }
+			r = table6.row;
+			c = table6.col;
 
 		    CompileTable(document, table6.data, r, c);
 
@@ -355,17 +297,8 @@ public class Compile extends JFrame implements ActionListener {
 
 		if (table7 != null) {
 
-		    if (table7.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table7.row);
-		    }
-
-		    if (table7.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table7.col);
-		    }
+			r = table7.row;
+			c = table7.col;
 
 		    CompileTable(document, table7.data, r, c);
 
@@ -376,17 +309,8 @@ public class Compile extends JFrame implements ActionListener {
 		
 		if (table8 != null) {
 
-		    if (table8.row.equals("")) {
-		        r = 0;
-		    } else {
-		        r = Integer.parseInt(table8.row);
-		    }
-
-		    if (table8.col.equals("")) {
-		        c = 0;
-		    } else {
-		        c = Integer.parseInt(table8.col);
-		    }
+			r = table8.row;
+			c = table8.col;
 
 		    CompileTable(document, table8.data, r, c);
 
