@@ -1,7 +1,7 @@
 //Table.java
 //UI for the tables section of the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 14
+//Last edit: Jan 16
 
 //TODO: 
 
@@ -58,6 +58,7 @@ public class Table extends JFrame implements ActionListener {
 	CreateTable table7;
 	CreateTable table8;
 
+	//class variables
 	public boolean tabDone = false;
 	public String[] completed = new String[8];
 
@@ -72,6 +73,7 @@ public class Table extends JFrame implements ActionListener {
 
 	public Table(Menu menu) {
 
+		//sets objects
 		this.menu = menu;
 
 		// panel sizing
@@ -83,7 +85,6 @@ public class Table extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.WHITE);
 		HideWindow();
-
 		Container c = getContentPane();
 		c.setLayout(null);
 
@@ -181,7 +182,6 @@ public class Table extends JFrame implements ActionListener {
 		IEtitle.setFont(new Font("Serif", Font.PLAIN, 25));
 
 		// adds buttons
-
 		c.add(return_);
 		c.add(markAsDone_);
 		c.add(table1_);
@@ -208,22 +208,26 @@ public class Table extends JFrame implements ActionListener {
 		repaint();
 	}
 
+	//hides current window
 	public void HideWindow() {
 		setVisible(false);
 	}
 
+	//shows current window
 	public void ShowWindow() {
 		setVisible(true);
 	}
 
 	public void RefreshCompleted(int location, boolean complete) {
 
+		//sets completion status
 		if (complete) {
 			completed[location] = "Completed";
 		} else {
 			completed[location] = "Not Completed";
 		}
 
+		//sets table names
 		if (location == 0) {
 			table1_.setText(
 					"Table 1: " + table1.title + "                                                                  "
@@ -263,8 +267,10 @@ public class Table extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		//returns to main menu
 		if (e.getSource() == return_) {
 
+			//sets instrumental error
 			ie1_ = ie1.getText();
 			ie2_ = ie1.getText();
 			ie3_ = ie1.getText();
@@ -278,6 +284,7 @@ public class Table extends JFrame implements ActionListener {
 			menu.ShowWindow();
 		}
 
+		//sets table status
 		else if (e.getSource() == markAsDone_) {
 			tabDone = !tabDone;
 
@@ -293,6 +300,7 @@ public class Table extends JFrame implements ActionListener {
 
 		}
 
+		//opens a create table object
 		if (e.getSource() == table1_) {
 
 			if (table1 == null) {
