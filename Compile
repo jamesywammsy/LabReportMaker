@@ -1,7 +1,7 @@
 //Compile.java
-//Compile menu, exports a word document
+//Compile menu, exports a docx document
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 16
+//Last edit: Jan 17
 
 //TODO: Finish the rest of the buttons; Add in the ordering feature; Add in preview feature
 
@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -30,6 +32,9 @@ public class Compile extends JFrame implements ActionListener {
 	private static final int BUTTON_WIDTH = 150;
 	private static final int BUTTON_HEIGHT = 50;
 
+	public String title;
+	public String contributors;
+
 	// button variables
 	JButton return_;
 	JButton save_;
@@ -37,7 +42,8 @@ public class Compile extends JFrame implements ActionListener {
 
 	// object declarations
 	Menu menu;
-	General general;
+	Abstract abstract_;
+	Method method;
 	CreateTable table1;
 	CreateTable table2;
 	CreateTable table3;
@@ -47,14 +53,28 @@ public class Compile extends JFrame implements ActionListener {
 	CreateTable table7;
 	CreateTable table8;
 
+	CreatePara para1;
+	CreatePara para2;
+	CreatePara para3;
+	CreatePara para4;
+	CreatePara para5;
+	CreatePara para6;
+	CreatePara para7;
+	CreatePara para8;
+
+	Conclusion conclusion;
+
 	private int r;
 	private int c;
 
-	public Compile(Menu menu, General general, CreateTable table1, CreateTable table2, CreateTable table3,
-			CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7, CreateTable table8) {
+	public Compile(Menu menu, Abstract abstract_, Method method, CreateTable table1, CreateTable table2,
+			CreateTable table3, CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7,
+			CreateTable table8, CreatePara para1, CreatePara para2, CreatePara para3, CreatePara para4,
+			CreatePara para5, CreatePara para6, CreatePara para7, CreatePara para8, Conclusion conclusion) {
 
 		this.menu = menu;
-		this.general = general;
+		this.abstract_ = abstract_;
+		this.method = method;
 		this.table1 = table1;
 		this.table2 = table2;
 		this.table3 = table3;
@@ -64,7 +84,20 @@ public class Compile extends JFrame implements ActionListener {
 		this.table7 = table7;
 		this.table8 = table8;
 
-		// panel sizing
+		this.para1 = para1;
+		this.para2 = para2;
+		this.para3 = para3;
+		this.para4 = para4;
+		this.para5 = para5;
+		this.para6 = para6;
+		this.para7 = para7;
+		this.para8 = para8;
+		this.conclusion = conclusion;
+
+		title = menu.title;
+		contributors = menu.contributors;
+
+		// window sizing
 		this.setTitle("GHHSB Lab Report System - Compile");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setResizable(false);
@@ -113,6 +146,58 @@ public class Compile extends JFrame implements ActionListener {
 
 	public void ShowWindow() {
 		setVisible(true);
+	}
+
+	public void CompileTitlePage(XWPFDocument doc) {
+
+		// Create a paragraph
+		XWPFParagraph para = doc.createParagraph();
+
+		// Create a run within the paragraph 
+		XWPFRun run = para.createRun();
+
+		run.setFontSize(24);
+		para.setAlignment(ParagraphAlignment.CENTER);
+
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.addBreak();
+		run.setFontFamily("Times New Roman");
+
+		// Add text to the run
+		run.setText(title);
+	}
+
+	public void CompileContributors(XWPFDocument doc) {
+
+		String[] contributors_ = contributors.split(", ");
+
+		// Create a paragraph
+		XWPFParagraph para = doc.createParagraph();
+
+		// Create a run within the paragraph 
+		XWPFRun run = para.createRun();
+
+		run.setFontSize(12);
+		para.setAlignment(ParagraphAlignment.RIGHT);
+
+		for (int i = 0; i < 19; i++) {
+			run.addBreak();
+		}
+		
+		run.setFontFamily("Times New Roman");
+
+		for (int i = 0; i < contributors_.length; i++) {
+
+			run.setText(contributors_[i]);
+			run.addBreak();
+		}
 	}
 
 	public void CompileParagraph(XWPFDocument doc, String paragraph) {
@@ -344,17 +429,37 @@ public class Compile extends JFrame implements ActionListener {
 				// Create a new Word document
 				XWPFDocument document = new XWPFDocument();
 
+				CompileTitlePage(document);
+				CompileContributors(document);
+
+				document.createParagraph().createRun().addBreak();
+				
 				// Create a paragraph
-				XWPFParagraph paragraph = document.createParagraph();
+				XWPFParagraph para = document.createParagraph();
 
-				// Create a run within the paragraph
-				XWPFRun run = paragraph.createRun();
+				// Create a run within the paragraph 
+				XWPFRun run = para.createRun();
+				
+				run.setFontSize(12);
+				run.setText("I. Abstract");
+				run.addBreak();
+				
+				CompileParagraph(document, abstract_.input);
+				
+				run.addBreak();
+				
+				// Create a paragraph
+				XWPFParagraph para1 = document.createParagraph();
 
-				// Add text to the run
-				run.setText("Hello, this is a sample document!");
-
-				CompileParagraph(document, general.input);
-
+				// Create a run within the paragraph 
+				XWPFRun run1 = para1.createRun();
+				
+				run1.setFontSize(12);
+				run1.setText("III. Method");
+				run1.addBreak();
+				
+				CompileParagraph(document, method.input);
+				
 				CompileTable1(document);
 				CompileTable2(document);
 				CompileTable3(document);
@@ -379,7 +484,7 @@ public class Compile extends JFrame implements ActionListener {
 				ex.printStackTrace();
 			}
 
-			//ends program
+			// ends program
 			System.exit(0);
 
 		}
