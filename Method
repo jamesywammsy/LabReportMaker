@@ -1,7 +1,7 @@
 //Method.java
 //Child of General.java, UI for Method section of program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 16
+//Last edit: Jan 17
 
 import java.awt.event.ActionEvent;
 
