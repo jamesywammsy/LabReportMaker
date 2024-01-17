@@ -1,7 +1,7 @@
 //Menu.java
 //Runs the Main Menu GUI of the GHHSB Lab Report System
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 16
+//Last edit: Jan 17
 
 //TODO: wait until all classes are completed and link each class to this class
 
@@ -24,15 +24,24 @@ public class Menu extends JFrame implements ActionListener {
 	// variables
 	public String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
 			"Not Completed", "Not Completed" };
-	
-	//object declarations
+	public String title;
+	public String contributors;
+
+	// object declarations
 	Start start;
 	Compile compile;
 	Abstract abstractC;
 	Table table;
 	Analysis analysis;
 	Method method;
-	
+	Conclusion conclusion;
+
+	JTextField title_;
+	JTextField contributors_;
+
+	JLabel titleLabel;
+	JLabel contributorsLabel;
+
 	// button variables
 	JButton abstract_;
 	JButton theory_;
@@ -51,7 +60,8 @@ public class Menu extends JFrame implements ActionListener {
 		table = new Table(this);
 		analysis = new Analysis(this);
 		method = new Method(this);
-		
+		conclusion = new Conclusion(this);
+
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
@@ -61,9 +71,30 @@ public class Menu extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(Color.WHITE);
 		HideWindow();
-		
+
 		Container c = getContentPane();
 		c.setLayout(null);
+
+		// text field instantiations
+		title_ = new JTextField();
+		title_.setSize(400, 35);
+		title_.setLocation(150, 40);
+
+		contributors_ = new JTextField();
+		contributors_.setSize(400, 35);
+		contributors_.setLocation(150, 120);
+
+		// jlabel instatniaons
+
+		titleLabel = new JLabel("Title:");
+		titleLabel.setSize(300, 20);
+		titleLabel.setLocation(325, 20);
+		titleLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+
+		contributorsLabel = new JLabel("Contributors:");
+		contributorsLabel.setSize(300, 20);
+		contributorsLabel.setLocation(300, 100);
+		contributorsLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		// button instantiations
 		abstract_ = new JButton(
@@ -71,59 +102,59 @@ public class Menu extends JFrame implements ActionListener {
 						+ completed[0]);
 		abstract_.addActionListener(this);
 		abstract_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		abstract_.setLocation(50, 50);
+		abstract_.setLocation(50, 170);
 
 		theory_ = new JButton(
 				"Section 2: Theory                                                                               "
 						+ completed[1]);
 		theory_.addActionListener(this);
 		theory_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		theory_.setLocation(50, 110);
+		theory_.setLocation(50, 230);
 
 		method_ = new JButton(
 				"Section 3: Method                                                                              "
 						+ completed[2]);
 		method_.addActionListener(this);
 		method_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		method_.setLocation(50, 170);
+		method_.setLocation(50, 290);
 
 		tables_ = new JButton(
 				"Section 4: Tables                                                                               "
 						+ completed[3]);
 		tables_.addActionListener(this);
 		tables_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		tables_.setLocation(50, 230);
+		tables_.setLocation(50, 350);
 
 		analysis_ = new JButton(
 				"Section 5: Analysis                                                                           "
 						+ completed[4]);
 		analysis_.addActionListener(this);
 		analysis_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		analysis_.setLocation(50, 290);
+		analysis_.setLocation(50, 410);
 
 		conclusion_ = new JButton(
 				"Section 6: Conclusion                                                                       "
 						+ completed[5]);
 		conclusion_.addActionListener(this);
 		conclusion_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		conclusion_.setLocation(50, 350);
+		conclusion_.setLocation(50, 470);
 
 		citations_ = new JButton(
 				"Section 7: Citations                                                                         "
 						+ completed[6]);
 		citations_.addActionListener(this);
 		citations_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		citations_.setLocation(50, 410);
+		citations_.setLocation(50, 530);
 
 		compile_ = new JButton("Compile");
 		compile_.addActionListener(this);
 		compile_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		compile_.setLocation(200, 530);
+		compile_.setLocation(200, 600);
 
 		return_ = new JButton("Return");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		return_.setLocation(400, 530);
+		return_.setLocation(400, 600);
 
 		// adds button to screen
 		c.add(abstract_);
@@ -136,6 +167,11 @@ public class Menu extends JFrame implements ActionListener {
 		c.add(compile_);
 		c.add(return_);
 
+		c.add(titleLabel);
+		c.add(title_);
+		c.add(contributorsLabel);
+		c.add(contributors_);
+
 		repaint();
 	}
 
@@ -144,60 +180,63 @@ public class Menu extends JFrame implements ActionListener {
 		super.paint(g);
 
 	}
-	
+
 	public void RefreshCompleted(int location, boolean complete) {
-		
-		//refreshes the completion status of each section
+
+		// refreshes the completion status of each section
 		if (complete) {
 			completed[location] = "Completed";
-		}
-		else {
+		} else {
 			completed[location] = "Not Completed";
 		}
-		
+
 		if (location == 0) {
-			abstract_.setText("Section 1: Abstract                                                                            "
-					+completed[location]);
+			abstract_.setText(
+					"Section 1: Abstract                                                                            "
+							+ completed[location]);
+		} else if (location == 1) {
+			theory_.setText(
+					"Section 2: Theory                                                                               "
+							+ completed[location]);
+		} else if (location == 2) {
+			method_.setText(
+					"Section 3: Method                                                                              "
+							+ completed[location]);
+		} else if (location == 3) {
+			tables_.setText(
+					"Section 4: Tables                                                                               "
+							+ completed[location]);
+		} else if (location == 4) {
+			analysis_.setText(
+					"Section 5: Analysis                                                                           "
+							+ completed[location]);
+		} else if (location == 5) {
+			conclusion_.setText(
+					"Section 6: Conclusion                                                                       "
+							+ completed[location]);
+		} else if (location == 6) {
+			citations_.setText(
+					"Section 7: Citations                                                                         "
+							+ completed[location]);
 		}
-		else if(location == 1) {
-			theory_.setText("Section 2: Theory                                                                               "
-					+completed[location]);
-		}
-		else if(location == 2) {
-			method_.setText("Section 3: Method                                                                              "
-					+ completed[location]);
-		}
-		else if(location == 3) {
-			tables_.setText("Section 4: Tables                                                                               "
-					+ completed[location]);
-		}
-		else if(location == 4) {
-			analysis_.setText("Section 5: Analysis                                                                           "
-					+ completed[location]);
-		}
-		else if(location == 5) {
-			conclusion_.setText("Section 6: Conclusion                                                                       "
-					+ completed[location]);
-		}
-		else if(location == 6) {
-			citations_.setText("Section 7: Citations                                                                         "
-					+ completed[location]);
-		}
-		
+
 	}
-	
-	//hides window
+
+	// hides window
 	public void HideWindow() {
 		setVisible(false);
 	}
-	
-	//shows window
+
+	// shows window
 	public void ShowWindow() {
 		setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		title = title_.getText();
+		contributors = contributors_.getText();
 
 		// opens each different class
 		if (e.getSource() == abstract_) {
@@ -228,6 +267,8 @@ public class Menu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == conclusion_) {
 
+			conclusion.setTitle("Conclusion");
+			conclusion.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == citations_) {
@@ -237,12 +278,15 @@ public class Menu extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == compile_) {
-			
-			compile = new Compile(this, abstractC, table.table1, table.table2, table.table3, table.table4, table.table5, table.table6, table.table7, table.table8);
+
+			compile = new Compile(this, abstractC, method, table.table1, table.table2, table.table3, table.table4,
+					table.table5, table.table6, table.table7, table.table8, analysis.para1, analysis.para2,
+					analysis.para3, analysis.para4, analysis.para5, analysis.para6, analysis.para7, analysis.para8,
+					conclusion);
 
 			HideWindow();
 			compile.ShowWindow();
-			
+
 		} else if (e.getSource() == return_) {
 
 			HideWindow();
