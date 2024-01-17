@@ -1,0 +1,15 @@
+//Method.java
+//Child of General.java, UI for Method section of program
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 16
+
+public class Method extends General{
+
+    public Method(Menu menu) {
+    	
+        // Call the constructor of the parent class (General) using super
+        super(menu);
+        
+        repaint();
+    }
+}
