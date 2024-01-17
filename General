@@ -1,5 +1,3 @@
-package summative;
-
 //General.java
 //Used for abstract, method, analysis, and conclusion sections. Allows user to input paragraphs.
 //Made by James Zhang and Maggie Pang
@@ -27,7 +25,6 @@ public class General extends JFrame implements ActionListener {
 	
 	//JComponents
 	JButton returnToMenu;
-	JButton save;
 	JButton markAsDone;
 	JTextArea textBox, textArea;
 	JPanel panel1, panel2;
@@ -36,19 +33,19 @@ public class General extends JFrame implements ActionListener {
 	//object declaration
 	Menu menu;
 
-	public Testfile() {
+	public General(Menu menu) {
 
-		//this.menu=menu;
+		this.menu=menu;
 		
 		//window sizing and attributes
-		this.setTitle("GHHSB Lab Report System - "+title);
+		this.setTitle("GHHSB Lab Report System - ");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.BLACK);
-		this.setVisible(true);
+		this.setVisible(false);
 		
 		//main panel
 		JPanel c = new JPanel();
@@ -81,17 +78,12 @@ public class General extends JFrame implements ActionListener {
 		returnToMenu = new JButton("Return to Menu");
 		returnToMenu.addActionListener(this);
 		returnToMenu.setSize(BWIDTH, BHEIGHT);
-		returnToMenu.setLocation(55, 55);
-
-		save = new JButton("Save");
-		save.addActionListener(this);
-		save.setSize(BWIDTH, BHEIGHT);
-		save.setLocation(270, 55);
+		returnToMenu.setLocation(125, 25);
 
 		markAsDone = new JButton("Mark as Done");
 		markAsDone.addActionListener(this);
 		markAsDone.setSize(BWIDTH, BHEIGHT);
-		markAsDone.setLocation(485, 55);
+		markAsDone.setLocation(415, 25);
 		
 		//add components
 		this.getContentPane().add(c);
@@ -99,7 +91,6 @@ public class General extends JFrame implements ActionListener {
 		panel1.add(scrollableTextArea);
 
 		panel2.add(returnToMenu);
-		panel2.add(save);
 		panel2.add(markAsDone);
 		
 		c.add(panel1);
@@ -112,19 +103,15 @@ public class General extends JFrame implements ActionListener {
 		super.paint(g);
 	}
 
-	// public static void main(String[] args) {
-	// new Testfile();
-	// }
 
 	public void actionPerformed(ActionEvent evt) {
 		input = textBox.getText();
 
 		if (evt.getSource() == returnToMenu) {
 			HideWindow();
-			// menu.ShowWindow();
-		} else if (evt.getSource() == save) {
-
-		} else if (evt.getSource() == markAsDone) {
+			menu.ShowWindow();
+		}
+		else if (evt.getSource() == markAsDone) {
 			genDone = !genDone;
 		}
 
@@ -145,13 +132,15 @@ public class General extends JFrame implements ActionListener {
 	
 	public void setTitle(String t) {
 		title=t;
+		super.setTitle("GHHSB Lab Report System - " + title);
+		repaint();
 	}
 
-	public static void main() {
+	public static void main(Menu menu) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-
+			
 			public void run() {
-				new General();
+				new General(menu);
 			}
 		});
 	}
