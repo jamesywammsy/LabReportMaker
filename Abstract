@@ -3,13 +3,37 @@
 //Made by James Zhang and Maggie Pang
 //Last edit: Jan 16
 
-public class Abstract extends General{
+import java.awt.event.ActionEvent;
 
-    public Abstract(Menu menu) {
-    	
-        // Call the constructor of the parent class (General) using super
-        super(menu);
-        
-        repaint();
-    }
+public class Abstract extends General {
+
+	public Abstract(Menu menu) {
+
+		// Call the constructor of the parent class (General) using super
+		super(menu);
+
+		repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+
+		super.actionPerformed(evt);
+		
+		if (evt.getSource() == markAsDone) {
+			
+			menu.RefreshCompleted(0, genDone);
+
+			if (genDone) {
+				markAsDone.setText("Mark as Undone");
+			}
+
+			else {
+				markAsDone.setText("Mark as Done");
+			}
+		}
+
+		repaint();
+
+	}
 }
