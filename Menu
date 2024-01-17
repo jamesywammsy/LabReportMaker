@@ -28,9 +28,10 @@ public class Menu extends JFrame implements ActionListener {
 	//object declarations
 	Start start;
 	Compile compile;
-	General general;
+	Abstract abstractC;
 	Table table;
 	Analysis analysis;
+	Method method;
 	
 	// button variables
 	JButton abstract_;
@@ -46,9 +47,10 @@ public class Menu extends JFrame implements ActionListener {
 	public Menu(Start start) {
 
 		this.start = start;
-		general = new General(this);
+		abstractC = new Abstract(this);
 		table = new Table(this);
 		analysis = new Analysis(this);
+		method = new Method(this);
 		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
@@ -200,7 +202,8 @@ public class Menu extends JFrame implements ActionListener {
 		// opens each different class
 		if (e.getSource() == abstract_) {
 
-			general.ShowWindow();
+			abstractC.setTitle("Abstract");
+			abstractC.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == theory_) {
@@ -209,6 +212,8 @@ public class Menu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == method_) {
 
+			method.setTitle("Method");
+			method.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == tables_) {
@@ -233,7 +238,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		else if (e.getSource() == compile_) {
 			
-			compile = new Compile(this, general, table.table1, table.table2, table.table3, table.table4, table.table5, table.table6, table.table7, table.table8);
+			compile = new Compile(this, abstractC, table.table1, table.table2, table.table3, table.table4, table.table5, table.table6, table.table7, table.table8);
 
 			HideWindow();
 			compile.ShowWindow();
