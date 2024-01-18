@@ -23,7 +23,7 @@ public class Menu extends JFrame implements ActionListener {
 
 	// variables
 	public String[] completed = { "Not Completed", "Not Completed", "Not Completed", "Not Completed", "Not Completed",
-			"Not Completed", "Not Completed" };
+			"Not Completed", "Not Completed", "Not Completed" };
 	public String title;
 	public String contributors;
 
@@ -33,8 +33,10 @@ public class Menu extends JFrame implements ActionListener {
 	Abstract abstractC;
 	Table table;
 	Analysis analysis;
+	SourcesOfError sourcesoferror;
 	Method method;
 	Conclusion conclusion;
+	Citations citations;
 
 	JTextField title_;
 	JTextField contributors_;
@@ -49,6 +51,7 @@ public class Menu extends JFrame implements ActionListener {
 	JButton tables_;
 	JButton analysis_;
 	JButton conclusion_;
+	JButton sourcesoferror_;
 	JButton citations_;
 	JButton compile_;
 	JButton return_;
@@ -61,6 +64,8 @@ public class Menu extends JFrame implements ActionListener {
 		analysis = new Analysis(this);
 		method = new Method(this);
 		conclusion = new Conclusion(this);
+		sourcesoferror = new SourcesOfError(this);
+		citations = new Citations(this);
 
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
@@ -78,22 +83,22 @@ public class Menu extends JFrame implements ActionListener {
 		// text field instantiations
 		title_ = new JTextField();
 		title_.setSize(400, 35);
-		title_.setLocation(150, 40);
+		title_.setLocation(30, 40);
 
 		contributors_ = new JTextField();
 		contributors_.setSize(400, 35);
-		contributors_.setLocation(150, 120);
+		contributors_.setLocation(30, 120);
 
 		// jlabel instatniaons
 
 		titleLabel = new JLabel("Title:");
 		titleLabel.setSize(300, 20);
-		titleLabel.setLocation(325, 20);
+		titleLabel.setLocation(205, 20);
 		titleLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		contributorsLabel = new JLabel("Contributors:");
 		contributorsLabel.setSize(300, 20);
-		contributorsLabel.setLocation(300, 100);
+		contributorsLabel.setLocation(180, 100);
 		contributorsLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		// button instantiations
@@ -131,30 +136,38 @@ public class Menu extends JFrame implements ActionListener {
 		analysis_.addActionListener(this);
 		analysis_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		analysis_.setLocation(50, 410);
+		
+		sourcesoferror_ = new JButton(
+				"Section 6: Sources of Error                                                                 "
+						+ completed[5]);
+		sourcesoferror_.addActionListener(this);
+		sourcesoferror_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		sourcesoferror_.setLocation(50, 470);
+
 
 		conclusion_ = new JButton(
-				"Section 6: Conclusion                                                                       "
-						+ completed[5]);
+				"Section 7: Conclusion                                                                       "
+						+ completed[6]);
 		conclusion_.addActionListener(this);
 		conclusion_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		conclusion_.setLocation(50, 470);
+		conclusion_.setLocation(50, 530);
 
 		citations_ = new JButton(
-				"Section 7: Citations                                                                         "
-						+ completed[6]);
+				"Section 8: Citations                                                                         "
+						+ completed[7]);
 		citations_.addActionListener(this);
 		citations_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
-		citations_.setLocation(50, 530);
+		citations_.setLocation(50, 590);
 
 		compile_ = new JButton("Compile");
 		compile_.addActionListener(this);
 		compile_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		compile_.setLocation(200, 600);
+		compile_.setLocation(525, 30);
 
 		return_ = new JButton("Return");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		return_.setLocation(400, 600);
+		return_.setLocation(525, 90);
 
 		// adds button to screen
 		c.add(abstract_);
@@ -162,6 +175,7 @@ public class Menu extends JFrame implements ActionListener {
 		c.add(method_);
 		c.add(tables_);
 		c.add(analysis_);
+		c.add(sourcesoferror_);
 		c.add(conclusion_);
 		c.add(citations_);
 		c.add(compile_);
@@ -211,12 +225,16 @@ public class Menu extends JFrame implements ActionListener {
 					"Section 5: Analysis                                                                           "
 							+ completed[location]);
 		} else if (location == 5) {
-			conclusion_.setText(
-					"Section 6: Conclusion                                                                       "
+			sourcesoferror_.setText(
+					"Section 6: Sources of Error                                                                 "
 							+ completed[location]);
 		} else if (location == 6) {
+			conclusion_.setText(
+					"Section 7: Conclusion                                                                       "
+							+ completed[location]);
+		} else if (location == 7) {
 			citations_.setText(
-					"Section 7: Citations                                                                         "
+					"Section 8: Citations                                                                         "
 							+ completed[location]);
 		}
 
@@ -265,6 +283,13 @@ public class Menu extends JFrame implements ActionListener {
 			HideWindow();
 			analysis.ShowWindow();
 
+		} else if (e.getSource() == sourcesoferror_) {
+			
+			sourcesoferror.setTitle("Sources of Error");
+			sourcesoferror.ShowWindow();
+			HideWindow();
+			
+
 		} else if (e.getSource() == conclusion_) {
 
 			conclusion.setTitle("Conclusion");
@@ -273,6 +298,8 @@ public class Menu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == citations_) {
 
+			citations.setTitle("Citations");
+			citations.ShowWindow();
 			HideWindow();
 
 		}
@@ -281,8 +308,8 @@ public class Menu extends JFrame implements ActionListener {
 
 			compile = new Compile(this, abstractC, method, table.table1, table.table2, table.table3, table.table4,
 					table.table5, table.table6, table.table7, table.table8, analysis.para1, analysis.para2,
-					analysis.para3, analysis.para4, analysis.para5, analysis.para6, analysis.para7, analysis.para8,
-					conclusion);
+					analysis.para3, analysis.para4, analysis.para5, analysis.para6, analysis.para7, analysis.para8, sourcesoferror,
+					conclusion, citations);
 
 			HideWindow();
 			compile.ShowWindow();
