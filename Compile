@@ -62,7 +62,9 @@ public class Compile extends JFrame implements ActionListener {
 	CreatePara para7;
 	CreatePara para8;
 
+	SourcesOfError sourcesoferror;
 	Conclusion conclusion;
+	Citations citations;
 
 	private int r;
 	private int c;
@@ -70,7 +72,8 @@ public class Compile extends JFrame implements ActionListener {
 	public Compile(Menu menu, Abstract abstract_, Method method, CreateTable table1, CreateTable table2,
 			CreateTable table3, CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7,
 			CreateTable table8, CreatePara para1, CreatePara para2, CreatePara para3, CreatePara para4,
-			CreatePara para5, CreatePara para6, CreatePara para7, CreatePara para8, Conclusion conclusion) {
+			CreatePara para5, CreatePara para6, CreatePara para7, CreatePara para8, SourcesOfError sourcesoferror,
+			Conclusion conclusion, Citations citations) {
 
 		this.menu = menu;
 		this.abstract_ = abstract_;
@@ -92,7 +95,10 @@ public class Compile extends JFrame implements ActionListener {
 		this.para6 = para6;
 		this.para7 = para7;
 		this.para8 = para8;
+
+		this.sourcesoferror = sourcesoferror;
 		this.conclusion = conclusion;
+		this.citations = citations;
 
 		title = menu.title;
 		contributors = menu.contributors;
@@ -190,7 +196,7 @@ public class Compile extends JFrame implements ActionListener {
 		for (int i = 0; i < 19; i++) {
 			run.addBreak();
 		}
-		
+
 		run.setFontFamily("Times New Roman");
 
 		for (int i = 0; i < contributors_.length; i++) {
@@ -202,14 +208,25 @@ public class Compile extends JFrame implements ActionListener {
 
 	public void CompileParagraph(XWPFDocument doc, String paragraph) {
 
-		// Create a paragraph
-		XWPFParagraph para = doc.createParagraph();
+		// Split the input string into paragraphs
+		String[] paragraphs = paragraph.split("\n\n");
 
-		// Create a run within the paragraph 
-		XWPFRun run = para.createRun();
+		for (int i = 0; i < paragraphs.length; i++) {
 
-		// Add text to the run
-		run.setText(paragraph);
+			// Create a new paragraph for each segment
+			XWPFParagraph para = doc.createParagraph();
+
+			// Create a run within the paragraph
+			XWPFRun run = para.createRun();
+			run.setFontFamily("Times New Roman");
+
+			// Add text to the run
+			run.setText(paragraphs[i]);
+
+			run.addBreak();
+
+		}
+
 	}
 
 	public void CompileTable(XWPFDocument doc, String[][] tableData, int row, int col) {
@@ -410,6 +427,45 @@ public class Compile extends JFrame implements ActionListener {
 		}
 	}
 
+	public void CreateHeading(XWPFDocument document, String name) {
+
+		// Create a paragraph
+		XWPFParagraph para = document.createParagraph();
+
+		// Create a run within the paragraph 
+		XWPFRun run = para.createRun();
+		run.setFontFamily("Times New Roman");
+
+		run.setFontSize(12);
+		run.setText(name);
+		run.addBreak();
+
+	}
+
+	public void CompileCitations(XWPFDocument document) {
+
+		// Split the input string into paragraphs
+		String[] citations_ = citations.input.split("\n\n");
+
+		for (int i = 0; i < citations_.length; i++) {
+
+			// Create a new paragraph for each segment
+			XWPFParagraph para = document.createParagraph();
+
+			// Create a run within the paragraph
+			XWPFRun run = para.createRun();
+			run.setFontFamily("Times New Roman");
+			run.setItalic(true);
+
+			// Add text to the run
+			run.setText(citations_[i]);
+
+			run.addBreak();
+
+		}
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -433,33 +489,33 @@ public class Compile extends JFrame implements ActionListener {
 				CompileContributors(document);
 
 				document.createParagraph().createRun().addBreak();
-				
-				// Create a paragraph
-				XWPFParagraph para = document.createParagraph();
 
-				// Create a run within the paragraph 
-				XWPFRun run = para.createRun();
-				
-				run.setFontSize(12);
-				run.setText("I. Abstract");
-				run.addBreak();
-				
+				CreateHeading(document, "I. Abstract");
+
 				CompileParagraph(document, abstract_.input);
-				
-				run.addBreak();
-				
-				// Create a paragraph
-				XWPFParagraph para1 = document.createParagraph();
 
-				// Create a run within the paragraph 
-				XWPFRun run1 = para1.createRun();
-				
-				run1.setFontSize(12);
-				run1.setText("III. Method");
-				run1.addBreak();
-				
+				CreateHeading(document, "II. Theory");
+
+				CreateHeading(document, "III. Method");
+
 				CompileParagraph(document, method.input);
-				
+
+				CreateHeading(document, "IV. Data");
+
+				CreateHeading(document, "V. Analysis");
+
+				CreateHeading(document, "VI. Sources of Error");
+
+				CompileParagraph(document, sourcesoferror.input);
+
+				CreateHeading(document, "VII. Conclusion");
+
+				CompileParagraph(document, conclusion.input);
+
+				CreateHeading(document, "VIII. Sources");
+
+				CompileCitations(document);
+
 				CompileTable1(document);
 				CompileTable2(document);
 				CompileTable3(document);
