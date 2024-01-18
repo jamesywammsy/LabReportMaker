@@ -1,0 +1,320 @@
+//Analysis.java
+//UI for the Analysis section of the program
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 17
+
+//imports
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class Analysis extends JFrame implements ActionListener {
+
+	// final variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int SECTION_WIDTH = 600;
+	private static final int SECTION_HEIGHT = 50;
+	private static final int BUTTON_WIDTH = 150;
+	private static final int BUTTON_HEIGHT = 50;
+
+	// button variables
+	JButton return_;
+	JButton markAsDone_;
+	JButton para1_;
+	JButton para2_;
+	JButton para3_;
+	JButton para4_;
+	JButton para5_;
+	JButton para6_;
+	JButton para7_;
+	JButton para8_;
+	
+	CreatePara para1;
+	CreatePara para2;
+	CreatePara para3;
+	CreatePara para4;
+	CreatePara para5;
+	CreatePara para6;
+	CreatePara para7;
+	CreatePara para8;
+	
+	JLabel title;
+
+	Menu menu;
+	
+	public boolean anaDone = false;
+	public String[] completed = new String[8];
+
+	public Analysis(Menu menu) {
+
+		this.menu = menu;
+
+		// panel sizing
+		this.setTitle("GHHSB Lab Report System - Analysis");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.getContentPane().setBackground(Color.WHITE);
+		HideWindow();
+
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		// button instantiations
+		return_ = new JButton("Return to Menu");
+		return_.addActionListener(this);
+		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		return_.setLocation(125, 585);
+
+		markAsDone_ = new JButton("Mark as Done");
+		markAsDone_.addActionListener(this);
+		markAsDone_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		markAsDone_.setLocation(415, 585);
+
+		para1_ = new JButton("+");
+		para1_.addActionListener(this);
+		para1_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para1_.setLocation(50, 90);
+
+		para2_ = new JButton("+");
+		para2_.addActionListener(this);
+		para2_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para2_.setLocation(50, 150);
+
+		para3_ = new JButton("+");
+		para3_.addActionListener(this);
+		para3_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para3_.setLocation(50, 210);
+
+		para4_ = new JButton("+");
+		para4_.addActionListener(this);
+		para4_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para4_.setLocation(50, 270);
+
+		para5_ = new JButton("+");
+		para5_.addActionListener(this);
+		para5_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para5_.setLocation(50, 330);
+
+		para6_ = new JButton("+");
+		para6_.addActionListener(this);
+		para6_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para6_.setLocation(50, 390);
+
+		para7_ = new JButton("+");
+		para7_.addActionListener(this);
+		para7_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para7_.setLocation(50, 450);
+
+		para8_ = new JButton("+");
+		para8_.addActionListener(this);
+		para8_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
+		para8_.setLocation(50, 510);
+		
+		title = new JLabel("Analysis");
+		title.setSize(300, 100);
+		title.setLocation(300, 0);
+		title.setFont(new Font("Serif", Font.PLAIN, 25));
+
+		// adds buttons
+
+		c.add(return_);
+		c.add(markAsDone_);
+		c.add(para1_);
+		c.add(para2_);
+		c.add(para3_);
+		c.add(para4_);
+		c.add(para5_);
+		c.add(para6_);
+		c.add(para7_);
+		c.add(para8_);
+		
+		c.add(title);
+		
+		repaint();
+
+	}
+
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+	
+	public void RefreshCompleted(int location, boolean complete) {
+
+		//sets completion status
+		if (complete) {
+			completed[location] = "Completed";
+		} else {
+			completed[location] = "Not Completed";
+		}
+
+		//sets table names
+		if (location == 0) {
+			para1_.setText(
+					"Paragraph 1: " + para1.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 1) {
+			para2_.setText(
+					"Paragraph 2: " +para2.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 2) {
+			para3_.setText(
+					"Paragraph 3: " +para3.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 3) {
+			para4_.setText(
+					"Paragraph 4: " +para4.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 4) {
+			para5_.setText(
+					"Paragraph 5: " +para5.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 5) {
+			para6_.setText(
+					"Paragraph 6: " +para6.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 6) {
+			para7_.setText(
+					"Paragraph 7: " +para7.title + "                                                                  "
+							+ completed[location]);
+		} else if (location == 7) {
+			para8_.setText(
+					"Paragraph 8: " +para8.title + "                                                                  "
+							+ completed[location]);
+		}
+
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == return_) {
+
+			HideWindow();
+			menu.ShowWindow();
+		}
+
+		else if (e.getSource() == markAsDone_) {
+			anaDone = !anaDone;
+
+			menu.RefreshCompleted(4, anaDone);
+
+			if (anaDone) {
+				markAsDone_.setText("Mark as Undone");
+			}
+
+			else {
+				markAsDone_.setText("Mark as Done");
+			}
+
+		}
+		
+
+		if (e.getSource() == para1_) {
+
+			if (para1 == null) {
+
+				para1 = new CreatePara(this, 0);
+				para1.setTitle("Paragraph 1");
+			}
+
+			HideWindow();
+			para1.ShowWindow();
+		}
+
+		else if (e.getSource() == para2_) {
+
+			if (para2 == null) {
+
+				para2 = new CreatePara(this, 1);
+				para2.setTitle("Paragraph 2");
+			}
+
+			HideWindow();
+			para2.ShowWindow();
+		}
+
+		else if (e.getSource() == para3_) {
+
+			if (para3 == null) {
+
+				para3 = new CreatePara(this, 2);
+				para3.setTitle("Paragraph 3");
+			}
+
+			HideWindow();
+			para3.ShowWindow();
+		}
+
+		else if (e.getSource() == para4_) {
+
+			if (para4 == null) {
+
+				para4 = new CreatePara(this, 3);
+				para4.setTitle("Paragraph 4");
+			}
+
+			HideWindow();
+			para4.ShowWindow();
+		}
+
+		else if (e.getSource() == para5_) {
+
+			if (para5 == null) {
+
+				para5 = new CreatePara(this, 4);
+				para5.setTitle("Paragraph 5");
+			}
+
+			HideWindow();
+			para5.ShowWindow();
+		}
+
+		else if (e.getSource() == para6_) {
+
+			if (para6 == null) {
+
+				para6 = new CreatePara(this, 5);
+				para6.setTitle("Paragraph 6");
+			}
+
+			HideWindow();
+			para6.ShowWindow();
+		}
+
+		else if (e.getSource() == para7_) {
+
+			if (para7 == null) {
+
+				para7 = new CreatePara(this, 6);
+				para7.setTitle("Paragraph 7");
+			}
+
+			HideWindow();
+			para7.ShowWindow();
+		}
+
+		else if (e.getSource() == para8_) {
+
+			if (para8 == null) {
+
+				para8 = new CreatePara(this, 7);
+				para8.setTitle("Paragraph 8");
+			}
+
+			HideWindow();
+			para8.ShowWindow();
+		}
+
+		repaint();
+	}
+}
