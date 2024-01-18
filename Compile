@@ -1,13 +1,14 @@
 //Compile.java
 //Compile menu, exports a docx document
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 18
 
 //TODO: Finish the rest of the buttons; Add in the ordering feature; Add in preview feature
 
 //imports
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,11 +35,33 @@ public class Compile extends JFrame implements ActionListener {
 
 	public String title;
 	public String contributors;
+	
+	Dimension u1 = new Dimension(60,60);
 
 	// button variables
 	JButton return_;
-	JButton save_;
 	JButton download_;
+
+	JButton data;
+	JButton analysis;
+
+	JButton table1_;
+	JButton table2_;
+	JButton table3_;
+	JButton table4_;
+	JButton table5_;
+	JButton table6_;
+	JButton table7_;
+	JButton table8_;
+
+	JButton para1_;
+	JButton para2_;
+	JButton para3_;
+	JButton para4_;
+	JButton para5_;
+	JButton para6_;
+	JButton para7_;
+	JButton para8_;
 
 	// object declarations
 	Menu menu;
@@ -120,23 +143,145 @@ public class Compile extends JFrame implements ActionListener {
 		return_ = new JButton("Return");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		return_.setLocation(50, 600);
-
-		save_ = new JButton("Save");
-		save_.addActionListener(this);
-		save_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		save_.setLocation(275, 600);
+		return_.setLocation(125, 600);
 
 		download_ = new JButton("Download");
 		download_.addActionListener(this);
 		download_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		download_.setLocation(500, 600);
+		download_.setLocation(415, 600);
+
+		if (this.table1 != null) {
+			table1_ = new JButton("Table 1");
+			table1_.addActionListener(this);
+			table1_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table1_.setLocation(20, 60);
+			c.add(table1_);
+		}
+
+		if (this.table2 != null) {
+			table2_ = new JButton("Table 2");
+			table2_.addActionListener(this);
+			table2_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table2_.setLocation(20, 150);
+			c.add(table2_);
+		}
+
+		if (this.table3 != null) {
+			table3_ = new JButton("Table 3");
+			table3_.addActionListener(this);
+			table3_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table3_.setLocation(20, 210);
+			c.add(table3_);
+		}
+
+		if (this.table4 != null) {
+			table4_ = new JButton("Table 4");
+			table4_.addActionListener(this);
+			table4_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table4_.setLocation(20, 270);
+			c.add(table4_);
+		}
+
+		if (this.table5 != null) {
+			table5_ = new JButton("Table 5");
+			table5_.addActionListener(this);
+			table5_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table5_.setLocation(20, 330);
+			c.add(table5_);
+		}
+
+		if (this.table6 != null) {
+			table6_ = new JButton("Table 6");
+			table6_.addActionListener(this);
+			table6_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table6_.setLocation(20, 390);
+			c.add(table6_);
+		}
+
+		if (this.table7 != null) {
+			table7_ = new JButton("Table 7");
+			table7_.addActionListener(this);
+			table7_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table7_.setLocation(20, 450);
+			c.add(table7_);
+		}
+
+		if (this.table8 != null) {
+			table8_ = new JButton("Table 8");
+			table8_.addActionListener(this);
+			table8_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			table8_.setLocation(20, 510);
+			c.add(table8_);
+		}
+
+		if (this.para1 != null) {
+			para1_ = new JButton("Para 1");
+			para1_.addActionListener(this);
+			para1_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para1_.setLocation(60, 60);
+			c.add(para1_);
+		}
+
+		if (this.para2 != null) {
+			para2_ = new JButton("Para 2");
+			para2_.addActionListener(this);
+			para2_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para2_.setLocation(60, 150);
+			c.add(para2_);
+		}
+
+		if (this.para3 != null) {
+			para3_ = new JButton("Para 3");
+			para3_.addActionListener(this);
+			para3_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para3_.setLocation(60, 210);
+			c.add(para3_);
+		}
+
+		if (this.para4 != null) {
+			para4_ = new JButton("Para 4");
+			para4_.addActionListener(this);
+			para4_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para4_.setLocation(60, 270);
+			c.add(para4_);
+		}
+
+		if (this.para5 != null) {
+			para5_ = new JButton("Para 5");
+			para5_.addActionListener(this);
+			para5_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para5_.setLocation(60, 330);
+			c.add(para5_);
+		}
+
+		if (this.para6 != null) {
+			para6_ = new JButton("Para 6");
+			para6_.addActionListener(this);
+			para6_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para6_.setLocation(60, 390);
+			c.add(para6_);
+		}
+
+		if (this.para7 != null) {
+			para7_ = new JButton("Para 7");
+			para7_.addActionListener(this);
+			para7_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para7_.setLocation(60, 450);
+			c.add(para7_);
+		}
+
+		if (this.para8 != null) {
+			para8_ = new JButton("Para 8");
+			para8_.addActionListener(this);
+			para8_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			para8_.setLocation(60, 510);
+			c.add(para8_);
+		}
 
 		// adds buttons
 		c.add(return_);
-		c.add(save_);
 		c.add(download_);
-
+		
 		repaint();
 	}
 
@@ -182,6 +327,8 @@ public class Compile extends JFrame implements ActionListener {
 
 	public void CompileContributors(XWPFDocument doc) {
 
+		
+		int runTime = 24;
 		String[] contributors_ = contributors.split(", ");
 
 		// Create a paragraph
@@ -193,7 +340,11 @@ public class Compile extends JFrame implements ActionListener {
 		run.setFontSize(12);
 		para.setAlignment(ParagraphAlignment.RIGHT);
 
-		for (int i = 0; i < 19; i++) {
+		for (int a = 0; a < contributors_.length; a++) {
+			runTime--;
+		}
+		
+		for (int i = 0; i < runTime; i++) {
 			run.addBreak();
 		}
 
@@ -328,101 +479,14 @@ public class Compile extends JFrame implements ActionListener {
 		}
 	}
 
-	public void CompileTable1(XWPFDocument document) {
-		if (table1 != null) {
+	public void CompileTable(XWPFDocument document, CreateTable table) {
+		if (table != null) {
 
 			// sets row and col length parameters
-			r = table1.row;
-			c = table1.col;
+			r = table.row;
+			c = table.col;
 
-			CompileTable(document, table1.data, r, c);
-
-		}
-	}
-
-	public void CompileTable2(XWPFDocument document) {
-		if (table2 != null) {
-
-			// sets row and col length parameters
-			r = table2.row;
-			c = table2.col;
-
-			CompileTable(document, table2.data, r, c);
-
-		}
-	}
-
-	public void CompileTable3(XWPFDocument document) {
-		if (table3 != null) {
-
-			// sets row and col length parameters
-			r = table3.row;
-			c = table3.col;
-
-			CompileTable(document, table3.data, r, c);
-
-		}
-	}
-
-	public void CompileTable4(XWPFDocument document) {
-		if (table4 != null) {
-
-			// sets row and col length parameters
-			r = table4.row;
-			c = table4.col;
-
-			CompileTable(document, table4.data, r, c);
-
-		}
-	}
-
-	public void CompileTable5(XWPFDocument document) {
-		if (table5 != null) {
-
-			// sets row and col length parameters
-			r = table5.row;
-			c = table5.col;
-
-			CompileTable(document, table5.data, r, c);
-
-		}
-	}
-
-	public void CompileTable6(XWPFDocument document) {
-
-		if (table6 != null) {
-
-			// sets row and col length parameters
-			r = table6.row;
-			c = table6.col;
-
-			CompileTable(document, table6.data, r, c);
-
-		}
-	}
-
-	public void CompileTable7(XWPFDocument document) {
-
-		if (table7 != null) {
-
-			// sets row and col length parameters
-			r = table7.row;
-			c = table7.col;
-
-			CompileTable(document, table7.data, r, c);
-
-		}
-	}
-
-	public void CompileTable8(XWPFDocument document) {
-
-		if (table8 != null) {
-
-			// sets row and col length parameters
-			r = table8.row;
-			c = table8.col;
-
-			CompileTable(document, table8.data, r, c);
+			CompileTable(document, table.data, r, c);
 
 		}
 	}
@@ -435,6 +499,7 @@ public class Compile extends JFrame implements ActionListener {
 		// Create a run within the paragraph 
 		XWPFRun run = para.createRun();
 		run.setFontFamily("Times New Roman");
+		run.setBold(true);
 
 		run.setFontSize(12);
 		run.setText(name);
@@ -475,10 +540,6 @@ public class Compile extends JFrame implements ActionListener {
 			HideWindow();
 			menu.ShowWindow();
 
-		} else if (e.getSource() == save_) {
-
-			HideWindow();
-
 		} else if (e.getSource() == download_) {
 
 			try {
@@ -516,14 +577,14 @@ public class Compile extends JFrame implements ActionListener {
 
 				CompileCitations(document);
 
-				CompileTable1(document);
-				CompileTable2(document);
-				CompileTable3(document);
-				CompileTable4(document);
-				CompileTable5(document);
-				CompileTable6(document);
-				CompileTable7(document);
-				CompileTable8(document);
+				CompileTable(document, table1);
+				CompileTable(document, table2);
+				CompileTable(document, table3);
+				CompileTable(document, table4);
+				CompileTable(document, table5);
+				CompileTable(document, table6);
+				CompileTable(document, table7);
+				CompileTable(document, table8);
 
 				// Specify the output file path in the Downloads folder
 				String home = System.getProperty("user.home");
