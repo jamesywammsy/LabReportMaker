@@ -1,0 +1,282 @@
+
+//Theory.java
+//Allows user to select formulas with option to create custom formula 
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 17
+
+//TO DO: add checkboxes for when formulas are clicked, add array for clicked formulas and associated variables to add to document as well, connect variables to formulas
+
+//imports
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXIcon;
+
+import java.awt.image.BufferedImage;
+
+public class Theory extends JFrame implements ActionListener {
+
+	// private variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BWIDTH = 160;
+	private static final int BWIDTH2=140;
+	private static final int BHEIGHT = 50;
+
+	// variables
+	public boolean genDone = false;
+	public int checkboxNum=0;
+
+	// JComponents
+	JButton[] kin1 = new JButton[4];
+	JButton[] kin2 = new JButton[4];
+	JButton[] dyn = new JButton[4];
+	JButton[] we1 = new JButton[4];
+	JButton[] we2 = new JButton[4];
+	JButton[] power = new JButton[4];
+	JButton[] em1 = new JButton[4];
+	JButton[] em2 = new JButton[4];
+	JButton[] series = new JButton[4];
+	JButton[] parallel = new JButton[4];
+	public JButton[] checkboxes=new JButton[33];
+	JButton returnToMenu;
+	JButton save;
+	JButton markAsDone;
+	JButton addNew;
+	JPanel panel1, panel2, panel3, panel4;
+	JScrollPane scroll1, scroll2;
+
+	// object declaration
+	Menu menu;
+
+	public Theory(Menu menu) {
+
+		this.menu=menu;
+
+		// window sizing and attributes
+		this.setTitle("GHHSB Lab Report System - Theory");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setFocusable(true); // make everything in this class appear on the screen
+		this.getContentPane().setBackground(Color.BLACK);
+		this.setVisible(true);
+
+		// main panel
+		JPanel c = new JPanel();
+		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
+		c.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+
+		// top panel
+		panel1 = new JPanel();
+		panel1.setLayout(null);
+		panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel1.setPreferredSize(new Dimension(PANEL_WIDTH, 900));
+		panel1.setBackground(Color.BLACK);
+		
+		//add new formula panel for title
+		panel2=new JPanel();
+		panel2.setLayout(null);
+		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 45));
+		panel2.setBackground(Color.BLACK);
+		
+		//add new formula panel
+		panel3 = new JPanel();
+		panel3.setLayout(null);
+		panel3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 400));
+		panel3.setBackground(Color.BLACK);
+		
+		// bottom panel
+		panel4 = new JPanel();
+		panel4.setLayout(null);
+		panel4.setPreferredSize(new Dimension(PANEL_WIDTH, 160));
+		panel4.setBackground(Color.BLACK);
+		
+		//latex formulas
+		String[] kin1latex={"\\bar{s}=\\frac{d}{\\delta t}", "\\bar{v}=\\frac{\\delta x}{\\delta t}", "\\bar{a}=\\frac{\\delta v}{\\delta t}", "v=v_0+at"};
+		String[] kin2latex= {"\\delta x=\\frac{(v+v_0)t}{2}", "\\delta x=v_0t+\\frac{1}{2}at^2", "\\delta x=vt-\\frac{1}{2}at^2", "v^2=v_0^2+2a\\delta x"};
+		String[] dynlatex= {"\\Sigma F=ma", "F_f=\\mu F_n", "F_g=\\frac{Gm_1m_2}{r^2}"};
+		String[] we1latex= {"W_F=Fscos\\theta", "U_g=mgh", "KE=\\frac{1}{2}mv^2", "F_s=k\\delta x"};
+		String[] we2latex= {"W_c+W_{nc}=\\delta KE", "W_nc=0 if E_0=E_f", "\\frac{1}{2}mv_0^2+mgh_0=\\frac{1}{2}mv_f^2+mgh_f"};
+		String[] powerlatex= {"P=\\frac{W}{\\delta t}", "\\mu=\\frac{W_{out}}{W_{in}}\\cdot 100%", "P=mV", "J=\\sum F\\cdot\\delta t"};
+		String[] em1latex= {"I=\\frac{q}{t}", "q=Ne", "\\delta V=\\frac{\\delta EPE}{q}", "R=\\frac{\\delta V}{I}"};
+		String[] em2latex= { "R=\\frac{\\rho L}{A}"};
+		String[] serieslatex= {"I_T=I_i", "V_T=\\sum V_i", "R_T=\\sum R_i"};
+		String[] parallellatex= {"I_T=\\sum I_i", "V_T=V_i", "\\frac{1}{R_T}=\\sum\\frac{1}{R_i}"};
+		 
+		 //formula categories
+		 JLabel[] category= {new JLabel("Kinematics"),new JLabel("Dynamics"),new JLabel("Work and Energy"),new JLabel("Power"),new JLabel("Electricty and Magnetism"),new JLabel("Series Circuits"),new JLabel("Parallel Circuits")};
+		 
+		 //add category titles	 
+		 category[0].setLocation(55, 35);
+		 category[1].setLocation(55, 195); 
+		 category[2].setLocation(55, 295);
+		 category[3].setLocation(55, 455);
+		 category[4].setLocation(55, 555);
+		 category[5].setLocation(55, 715);
+		 category[6].setLocation(55, 815);
+		 
+		 for (int i=0; i<7; i++) {
+			 category[i].setFont(new Font("Sans Serif", Font.PLAIN, 24));
+			 category[i].setForeground(Color.WHITE);
+			 category[i].setSize(category[i].getPreferredSize());
+			 panel1.add(category[i]);
+		 }
+
+		//buttons
+		buttonRow(kin1, kin1latex, 4, 75);
+		buttonRow(kin2, kin2latex, 4, 135);
+		buttonRow(dyn, dynlatex, 3, 235);
+		buttonRow(we1, we1latex, 4, 335);
+		buttonRow(we2, we2latex, 3, 395);
+		buttonRow(power, powerlatex, 4, 495);
+		buttonRow(em1, em1latex, 4, 595);
+		buttonRow(em2, em2latex, 1, 655);
+		buttonRow(series, serieslatex, 3, 755);
+		buttonRow(parallel, parallellatex, 3, 855);
+		 
+		 //makes top panel scrollable
+		 scroll1=new JScrollPane(panel1);
+		scroll1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//scroll1.setPreferredSize(new Dimension(PANEL_WIDTH, 435));
+		scroll1.getViewport().setPreferredSize(new Dimension(PANEL_WIDTH, 435));
+		
+		//add title over add formula panel
+		JLabel formulaTitle=new JLabel("Add a formula:");
+		formulaTitle.setFont(new Font("Sans Serif", Font.PLAIN, 24));
+		formulaTitle.setForeground(Color.WHITE);
+		formulaTitle.setSize(formulaTitle.getPreferredSize());
+		
+		//makes add formula panel scrollable
+		scroll2=new JScrollPane(panel3);
+		scroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll2.getViewport().setPreferredSize(new Dimension(PANEL_WIDTH, 105));
+
+		// buttons at the bottom
+		returnToMenu = new JButton("Return to Menu");
+		returnToMenu.addActionListener(this);
+		returnToMenu.setSize(BWIDTH, BHEIGHT);
+		returnToMenu.setLocation(55, 55);
+
+		save = new JButton("Save");
+		save.addActionListener(this);
+		save.setSize(BWIDTH, BHEIGHT);
+		save.setLocation(270, 55);
+
+		markAsDone = new JButton("Mark as Done");
+		markAsDone.addActionListener(this);
+		markAsDone.setSize(BWIDTH, BHEIGHT);
+		markAsDone.setLocation(485, 55);
+
+		// add components
+		this.getContentPane().add(c);
+		
+		//change size of this one button that is too small
+		we2[2].setSize(200, BHEIGHT);
+
+		panel3.add(returnToMenu);
+		panel3.add(save);
+		panel3.add(markAsDone);
+
+		c.add(scroll1);
+		//c.add(panel2);
+		c.add(panel3);
+		c.add(panel4);
+
+		repaint();
+	}
+
+	public void paint(Graphics g) {
+		super.paint(g);
+	}
+
+	// public static void main(String[] args) {
+	// new Testfile();
+	// }
+
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+	
+	//creates checkbox for each button
+	public void makeCheckbox(JButton b, int x, int y) {
+		
+	}
+	
+	//creates button with formula
+	public void makeButton(JButton b, String latex, int x, int y) {
+		b.addActionListener(this);
+		b.setSize(BWIDTH2, BHEIGHT);
+		b.setLocation(x, y);
+		b.setIcon(new ImageIcon(render(latex)));
+		panel1.add(b);
+	}
+	
+	//creates row of buttons with corresponding checkboxes
+	public void buttonRow(JButton[] b, String[] latex, int n, int y) {
+		for (int i=0; i<n; i++) {
+			//checkboxes[checkboxNum]=new JButton();
+			//not done, will be included in final submission
+			
+			b[i]=new JButton();
+			makeButton(b[i], latex[i], 55+150*i, y);
+			
+		}
+	}
+	
+	//renders the latex into an image
+	public BufferedImage render(String latex) {
+		// create a formula
+		TeXFormula formula = new TeXFormula(latex);
+
+		// render the formula to an icon
+		TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 13);
+		
+		
+		//create image
+		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+		JLabel jl = new JLabel();
+		jl.setForeground(new Color(0, 0, 0));
+		icon.paintIcon(jl, g2, 0, 0);
+
+		return image;
+	}
+	
+
+	public static void main() {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+			public void run() {
+				new Testfile();
+			}
+		});
+	}
+	
+	public void actionPerformed(ActionEvent evt) {
+
+		if (evt.getSource() == returnToMenu) {
+			HideWindow();
+			// menu.ShowWindow();
+		} else if (evt.getSource() == save) {
+
+		} else if (evt.getSource() == markAsDone) {
+			genDone = !genDone;
+		}
+		repaint();
+	}
+
+}
