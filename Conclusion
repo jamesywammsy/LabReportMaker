@@ -22,7 +22,7 @@ public class Conclusion extends General{
 		
 		if (evt.getSource() == markAsDone) {
 			
-			menu.RefreshCompleted(5, genDone);
+			menu.RefreshCompleted(6, genDone);
 
 			if (genDone) {
 				markAsDone.setText("Mark as Undone");
