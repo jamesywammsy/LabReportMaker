@@ -1,7 +1,7 @@
 //Menu.java
 //Runs the Main Menu GUI of the GHHSB Lab Report System
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 18
 
 //TODO: wait until all classes are completed and link each class to this class
 
@@ -35,6 +35,7 @@ public class Menu extends JFrame implements ActionListener {
 	Analysis analysis;
 	SourcesOfError sourcesoferror;
 	Method method;
+	Theory theory;
 	Conclusion conclusion;
 	Citations citations;
 
@@ -66,6 +67,7 @@ public class Menu extends JFrame implements ActionListener {
 		conclusion = new Conclusion(this);
 		sourcesoferror = new SourcesOfError(this);
 		citations = new Citations(this);
+		theory = new Theory(this);
 
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System - Main Menu");
@@ -265,6 +267,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == theory_) {
 
+			theory.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == method_) {
