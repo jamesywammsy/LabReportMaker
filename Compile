@@ -1,20 +1,23 @@
 //Compile.java
 //Compile menu, exports a docx document
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 18
-
-//TODO: Finish the rest of the buttons; Add in the ordering feature; Add in preview feature
+//Last edit: Jan 21
 
 //imports
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import java.awt.*;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -35,8 +38,35 @@ public class Compile extends JFrame implements ActionListener {
 
 	public String title;
 	public String contributors;
-	
-	Dimension u1 = new Dimension(60,60);
+	public boolean[] selected = new boolean[16];
+	public boolean dataSelect = false;
+	public boolean analysisSelect = false;
+	public boolean unorderedSelect = false;
+
+	Point[] u = new Point[] { new Point(370, 120), new Point(530, 120), new Point(370, 180), new Point(530, 180),
+			new Point(370, 240), new Point(530, 240), new Point(370, 300), new Point(530, 300), new Point(370, 360),
+			new Point(530, 360), new Point(370, 420), new Point(530, 420), new Point(370, 480), new Point(530, 480),
+			new Point(370, 540), new Point(530, 540), new Point(370, 600), new Point(530, 600) };
+
+	Point[] d = new Point[] { new Point(20, 120), new Point(20, 180), new Point(20, 240), new Point(20, 300),
+			new Point(20, 360), new Point(20, 420), new Point(20, 480), new Point(20, 540), new Point(20, 600),
+			new Point(20, 660), new Point(20, 720), new Point(20, 780), new Point(20, 840), new Point(20, 900),
+			new Point(20, 960), new Point(20, 1020) };
+
+	Point[] a = new Point[] { new Point(180, 120), new Point(180, 180), new Point(180, 240), new Point(180, 300),
+			new Point(180, 360), new Point(180, 420), new Point(180, 480), new Point(180, 540), new Point(180, 600),
+			new Point(180, 660), new Point(180, 720), new Point(180, 780), new Point(180, 840), new Point(180, 900),
+			new Point(180, 960), new Point(180, 1020) };
+
+	String[] uSection = new String[16];
+	String[] dSection = new String[16];
+	String[] aSection = new String[16];
+
+	JTextField title_;
+	JLabel titleLabel;
+	JButton data_;
+	JButton analysis_;
+	JButton unordered_;
 
 	// button variables
 	JButton return_;
@@ -62,6 +92,8 @@ public class Compile extends JFrame implements ActionListener {
 	JButton para6_;
 	JButton para7_;
 	JButton para8_;
+
+	JScrollPane scroll;
 
 	// object declarations
 	Menu menu;
@@ -136,25 +168,58 @@ public class Compile extends JFrame implements ActionListener {
 		this.getContentPane().setBackground(Color.WHITE);
 		HideWindow();
 
-		Container c = getContentPane();
+		JPanel c = new JPanel();
 		c.setLayout(null);
+		c.setPreferredSize(new Dimension(PANEL_WIDTH, (int) (PANEL_HEIGHT * 1.6)));
+
+		scroll = new JScrollPane(c);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.getViewport().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT - 200));
+
+		// text field instantiations
+		title_ = new JTextField();
+		title_.setEditable(false);
+		title_.setSize(300, 35);
+		title_.setLocation(240, 10);
+
+		// jlabel instantiations
+		titleLabel = new JLabel("Title:");
+		titleLabel.setSize(400, 20);
+		titleLabel.setLocation(165, 20);
+		titleLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+
+		data_ = new JButton("Data:");
+		data_.addActionListener(this);
+		data_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		data_.setLocation(20, 60);
+
+		analysis_ = new JButton("Analysis:");
+		analysis_.addActionListener(this);
+		analysis_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		analysis_.setLocation(180, 60);
+
+		unordered_ = new JButton("Unordered:");
+		unordered_.addActionListener(this);
+		unordered_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		unordered_.setLocation(450, 60);
 
 		// button instantiations
 		return_ = new JButton("Return");
 		return_.addActionListener(this);
 		return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		return_.setLocation(125, 600);
+		return_.setLocation(450, 600);
 
 		download_ = new JButton("Download");
 		download_.addActionListener(this);
 		download_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		download_.setLocation(415, 600);
+		download_.setLocation(450, 660);
 
 		if (this.table1 != null) {
 			table1_ = new JButton("Table 1");
 			table1_.addActionListener(this);
 			table1_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table1_.setLocation(20, 60);
+			table1_.setLocation(u[0]);
 			c.add(table1_);
 		}
 
@@ -162,7 +227,7 @@ public class Compile extends JFrame implements ActionListener {
 			table2_ = new JButton("Table 2");
 			table2_.addActionListener(this);
 			table2_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table2_.setLocation(20, 150);
+			table2_.setLocation(u[1]);
 			c.add(table2_);
 		}
 
@@ -170,7 +235,7 @@ public class Compile extends JFrame implements ActionListener {
 			table3_ = new JButton("Table 3");
 			table3_.addActionListener(this);
 			table3_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table3_.setLocation(20, 210);
+			table3_.setLocation(u[2]);
 			c.add(table3_);
 		}
 
@@ -178,7 +243,7 @@ public class Compile extends JFrame implements ActionListener {
 			table4_ = new JButton("Table 4");
 			table4_.addActionListener(this);
 			table4_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table4_.setLocation(20, 270);
+			table4_.setLocation(u[3]);
 			c.add(table4_);
 		}
 
@@ -186,7 +251,7 @@ public class Compile extends JFrame implements ActionListener {
 			table5_ = new JButton("Table 5");
 			table5_.addActionListener(this);
 			table5_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table5_.setLocation(20, 330);
+			table5_.setLocation(u[4]);
 			c.add(table5_);
 		}
 
@@ -194,7 +259,7 @@ public class Compile extends JFrame implements ActionListener {
 			table6_ = new JButton("Table 6");
 			table6_.addActionListener(this);
 			table6_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table6_.setLocation(20, 390);
+			table6_.setLocation(u[5]);
 			c.add(table6_);
 		}
 
@@ -202,7 +267,7 @@ public class Compile extends JFrame implements ActionListener {
 			table7_ = new JButton("Table 7");
 			table7_.addActionListener(this);
 			table7_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table7_.setLocation(20, 450);
+			table7_.setLocation(u[6]);
 			c.add(table7_);
 		}
 
@@ -210,7 +275,7 @@ public class Compile extends JFrame implements ActionListener {
 			table8_ = new JButton("Table 8");
 			table8_.addActionListener(this);
 			table8_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			table8_.setLocation(20, 510);
+			table8_.setLocation(u[7]);
 			c.add(table8_);
 		}
 
@@ -218,7 +283,7 @@ public class Compile extends JFrame implements ActionListener {
 			para1_ = new JButton("Para 1");
 			para1_.addActionListener(this);
 			para1_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para1_.setLocation(60, 60);
+			para1_.setLocation(u[8]);
 			c.add(para1_);
 		}
 
@@ -226,7 +291,7 @@ public class Compile extends JFrame implements ActionListener {
 			para2_ = new JButton("Para 2");
 			para2_.addActionListener(this);
 			para2_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para2_.setLocation(60, 150);
+			para2_.setLocation(u[9]);
 			c.add(para2_);
 		}
 
@@ -234,7 +299,7 @@ public class Compile extends JFrame implements ActionListener {
 			para3_ = new JButton("Para 3");
 			para3_.addActionListener(this);
 			para3_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para3_.setLocation(60, 210);
+			para3_.setLocation(u[10]);
 			c.add(para3_);
 		}
 
@@ -242,7 +307,7 @@ public class Compile extends JFrame implements ActionListener {
 			para4_ = new JButton("Para 4");
 			para4_.addActionListener(this);
 			para4_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para4_.setLocation(60, 270);
+			para4_.setLocation(u[11]);
 			c.add(para4_);
 		}
 
@@ -250,7 +315,7 @@ public class Compile extends JFrame implements ActionListener {
 			para5_ = new JButton("Para 5");
 			para5_.addActionListener(this);
 			para5_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para5_.setLocation(60, 330);
+			para5_.setLocation(u[12]);
 			c.add(para5_);
 		}
 
@@ -258,7 +323,7 @@ public class Compile extends JFrame implements ActionListener {
 			para6_ = new JButton("Para 6");
 			para6_.addActionListener(this);
 			para6_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para6_.setLocation(60, 390);
+			para6_.setLocation(u[13]);
 			c.add(para6_);
 		}
 
@@ -266,7 +331,7 @@ public class Compile extends JFrame implements ActionListener {
 			para7_ = new JButton("Para 7");
 			para7_.addActionListener(this);
 			para7_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para7_.setLocation(60, 450);
+			para7_.setLocation(u[14]);
 			c.add(para7_);
 		}
 
@@ -274,14 +339,21 @@ public class Compile extends JFrame implements ActionListener {
 			para8_ = new JButton("Para 8");
 			para8_.addActionListener(this);
 			para8_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-			para8_.setLocation(60, 510);
+			para8_.setLocation(u[15]);
 			c.add(para8_);
 		}
 
 		// adds buttons
 		c.add(return_);
 		c.add(download_);
-		
+		c.add(titleLabel);
+		c.add(title_);
+
+		c.add(analysis_);
+		c.add(data_);
+		c.add(unordered_);
+
+		this.getContentPane().add(scroll);
 		repaint();
 	}
 
@@ -297,6 +369,14 @@ public class Compile extends JFrame implements ActionListener {
 
 	public void ShowWindow() {
 		setVisible(true);
+	}
+
+	public void DisplayTableTitle(CreateTable table) {
+		title_.setText(table.title);
+	}
+
+	public void DisplayParaTitle(CreatePara para) {
+		title_.setText(para.title);
 	}
 
 	public void CompileTitlePage(XWPFDocument doc) {
@@ -327,7 +407,6 @@ public class Compile extends JFrame implements ActionListener {
 
 	public void CompileContributors(XWPFDocument doc) {
 
-		
 		int runTime = 24;
 		String[] contributors_ = contributors.split(", ");
 
@@ -343,7 +422,7 @@ public class Compile extends JFrame implements ActionListener {
 		for (int a = 0; a < contributors_.length; a++) {
 			runTime--;
 		}
-		
+
 		for (int i = 0; i < runTime; i++) {
 			run.addBreak();
 		}
@@ -480,6 +559,7 @@ public class Compile extends JFrame implements ActionListener {
 	}
 
 	public void CompileTable(XWPFDocument document, CreateTable table) {
+
 		if (table != null) {
 
 			// sets row and col length parameters
@@ -489,6 +569,11 @@ public class Compile extends JFrame implements ActionListener {
 			CompileTable(document, table.data, r, c);
 
 		}
+
+		// Used to create one new line underneath each table for formatting
+		@SuppressWarnings("unused")
+		XWPFParagraph para = document.createParagraph();
+
 	}
 
 	public void CreateHeading(XWPFDocument document, String name) {
@@ -531,6 +616,14 @@ public class Compile extends JFrame implements ActionListener {
 
 	}
 
+	public void ResetSelected() {
+
+		for (int i = 0; i < selected.length; i++) {
+			selected[i] = false;
+		}
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -540,7 +633,122 @@ public class Compile extends JFrame implements ActionListener {
 			HideWindow();
 			menu.ShowWindow();
 
-		} else if (e.getSource() == download_) {
+		} else if (e.getSource() == data_) {
+			ResetSelected();
+			dataSelect = true;
+			analysisSelect = false;
+			unorderedSelect = false;
+
+		} else if (e.getSource() == analysis_) {
+			ResetSelected();
+			dataSelect = false;
+			analysisSelect = true;
+			unorderedSelect = false;
+
+		} else if (e.getSource() == unordered_) {
+			ResetSelected();
+			dataSelect = false;
+			analysisSelect = false;
+			unorderedSelect = true;
+		}
+
+		else if (e.getSource() == table1_) {
+			ResetSelected();
+			selected[0] = true;
+			title_.setText(table1.title);
+		}
+
+		else if (e.getSource() == table2_) {
+			ResetSelected();
+			selected[1] = true;
+			title_.setText(table2.title);
+		}
+
+		else if (e.getSource() == table3_) {
+			ResetSelected();
+			selected[2] = true;
+			title_.setText(table3.title);
+		}
+
+		else if (e.getSource() == table4_) {
+			ResetSelected();
+			selected[3] = true;
+			title_.setText(table4.title);
+		}
+
+		else if (e.getSource() == table5_) {
+			ResetSelected();
+			selected[4] = true;
+			title_.setText(table5.title);
+		}
+
+		else if (e.getSource() == table6_) {
+			ResetSelected();
+			selected[5] = true;
+			title_.setText(table6.title);
+		}
+
+		else if (e.getSource() == table7_) {
+			ResetSelected();
+			selected[6] = true;
+			title_.setText(table7.title);
+		}
+
+		else if (e.getSource() == table8_) {
+			ResetSelected();
+			selected[7] = true;
+			title_.setText(table8.title);
+		}
+
+		else if (e.getSource() == para1_) {
+			ResetSelected();
+			selected[8] = true;
+			title_.setText(para1.title);
+		}
+
+		else if (e.getSource() == para2_) {
+			ResetSelected();
+			selected[9] = true;
+			title_.setText(para2.title);
+		}
+
+		else if (e.getSource() == para3_) {
+			ResetSelected();
+			selected[10] = true;
+			title_.setText(para3.title);
+		}
+
+		else if (e.getSource() == para4_) {
+			ResetSelected();
+			selected[11] = true;
+			title_.setText(para4.title);
+		}
+
+		else if (e.getSource() == para5_) {
+			ResetSelected();
+			selected[12] = true;
+			title_.setText(para5.title);
+		}
+
+		else if (e.getSource() == para6_) {
+			ResetSelected();
+			selected[13] = true;
+			title_.setText(para6.title);
+		}
+
+		else if (e.getSource() == para7_) {
+			ResetSelected();
+			selected[14] = true;
+			title_.setText(para7.title);
+		}
+
+		else if (e.getSource() == para8_) {
+			ResetSelected();
+			selected[15] = true;
+			title_.setText(para8.title);
+		}
+
+		else if (e.getSource() == download_) {
 
 			try {
 				// Create a new Word document
@@ -563,7 +771,11 @@ public class Compile extends JFrame implements ActionListener {
 
 				CreateHeading(document, "IV. Data");
 
+				OrderCompile(document, dSection);
+
 				CreateHeading(document, "V. Analysis");
+
+				OrderCompile(document, aSection);
 
 				CreateHeading(document, "VI. Sources of Error");
 
@@ -576,15 +788,6 @@ public class Compile extends JFrame implements ActionListener {
 				CreateHeading(document, "VIII. Sources");
 
 				CompileCitations(document);
-
-				CompileTable(document, table1);
-				CompileTable(document, table2);
-				CompileTable(document, table3);
-				CompileTable(document, table4);
-				CompileTable(document, table5);
-				CompileTable(document, table6);
-				CompileTable(document, table7);
-				CompileTable(document, table8);
 
 				// Specify the output file path in the Downloads folder
 				String home = System.getProperty("user.home");
@@ -605,6 +808,151 @@ public class Compile extends JFrame implements ActionListener {
 			System.exit(0);
 
 		}
+
+		if (dataSelect == true) {
+			data_.setBackground(Color.cyan);
+		} else {
+			data_.setBackground(Color.white);
+		}
+
+		if (analysisSelect == true) {
+			analysis_.setBackground(Color.cyan);
+		} else {
+			analysis_.setBackground(Color.white);
+		}
+
+		CheckSelected(table1_, 0);
+		CheckSelected(table2_, 1);
+		CheckSelected(table3_, 2);
+		CheckSelected(table4_, 3);
+		CheckSelected(table5_, 4);
+		CheckSelected(table6_, 5);
+		CheckSelected(table7_, 6);
+		CheckSelected(table8_, 7);
+
+		CheckSelected(para1_, 8);
+		CheckSelected(para2_, 9);
+		CheckSelected(para3_, 10);
+		CheckSelected(para4_, 11);
+		CheckSelected(para5_, 12);
+		CheckSelected(para6_, 13);
+		CheckSelected(para7_, 14);
+		CheckSelected(para8_, 15);
+	}
+
+	public void OrderCompile(XWPFDocument document, String[] array) {
+
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == "Table 1") {
+				CompileTable(document, table1);
+			} else if (array[i] == "Table 2") {
+				CompileTable(document, table2);
+			} else if (array[i] == "Table 3") {
+				CompileTable(document, table3);
+			} else if (array[i] == "Table 4") {
+				CompileTable(document, table4);
+			} else if (array[i] == "Table 5") {
+				CompileTable(document, table5);
+			} else if (array[i] == "Table 6") {
+				CompileTable(document, table6);
+			} else if (array[i] == "Table 7") {
+				CompileTable(document, table7);
+			} else if (array[i] == "Table 8") {
+				CompileTable(document, table8);
+			} else if (array[i] == "Para 1") {
+				CompileParagraph(document, para1.input);
+			} else if (array[i] == "Para 2") {
+				CompileParagraph(document, para2.input);
+			} else if (array[i] == "Para 3") {
+				CompileParagraph(document, para3.input);
+			} else if (array[i] == "Para 4") {
+				CompileParagraph(document, para4.input);
+			} else if (array[i] == "Para 5") {
+				CompileParagraph(document, para5.input);
+			} else if (array[i] == "Para 6") {
+				CompileParagraph(document, para6.input);
+			} else if (array[i] == "Para 7") {
+				CompileParagraph(document, para7.input);
+			} else if (array[i] == "Para 8") {
+				CompileParagraph(document, para8.input);
+			}
+
+		}
+
+	}
+
+	public boolean AlrInSection(String[] array, JButton button) {
+
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == button.getText()) {
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
+	public void CheckSelected(JButton button, int index) {
+
+		int indexTwo = 0;
+
+		if (dataSelect && selected[index] && !AlrInSection(dSection, button)) {
+
+			for (int i = 0; i < dSection.length; i++) {
+				if (dSection[i] == null) {
+					indexTwo = i;
+					break;
+				}
+			}
+
+			for (int i = 0; i < aSection.length; i++) {
+				if (aSection[i] == button.getText()) {
+					aSection[i] = null;
+				}
+			}
+
+			button.setLocation(d[indexTwo]);
+			dSection[indexTwo] = button.getText();
+		}
+
+		if (analysisSelect && selected[index] && !AlrInSection(aSection, button)) {
+
+			for (int i = 0; i < aSection.length; i++) {
+				if (aSection[i] == null) {
+					indexTwo = i;
+					break;
+				}
+			}
+
+			for (int i = 0; i < dSection.length; i++) {
+				if (dSection[i] == button.getText()) {
+					dSection[i] = null;
+				}
+			}
+
+			button.setLocation(a[indexTwo]);
+			aSection[indexTwo] = button.getText();
+		}
+
+		if (unorderedSelect && selected[index]) {
+
+			button.setLocation(u[index]);
+
+			for (int i = 0; i < dSection.length; i++) {
+				if (dSection[i] == button.getText()) {
+					dSection[i] = null;
+				}
+			}
+
+			for (int i = 0; i < aSection.length; i++) {
+				if (aSection[i] == button.getText()) {
+					aSection[i] = null;
+				}
+			}
+
+		}
+
 	}
 
 }
