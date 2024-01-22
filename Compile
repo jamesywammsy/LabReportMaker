@@ -127,7 +127,7 @@ public class Compile extends JFrame implements ActionListener {
 	private int r;
 	private int c;
 
-	public Compile(Menu menu, Abstract abstract_, Method method, Formula[] formulas, CreateTable table1, CreateTable table2,
+	public Compile(Menu menu, Abstract abstract_, Formula[] formulas, Method method, CreateTable table1, CreateTable table2,
 			CreateTable table3, CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7,
 			CreateTable table8, CreatePara para1, CreatePara para2, CreatePara para3, CreatePara para4,
 			CreatePara para5, CreatePara para6, CreatePara para7, CreatePara para8, SourcesOfError sourcesoferror,
@@ -463,6 +463,22 @@ public class Compile extends JFrame implements ActionListener {
 
 	}
 
+	public static void addImageToDocument(String imagePath, XWPFDocument doc) throws IOException {
+        // Read the image file into a byte array
+        FileInputStream imageStream = new FileInputStream(imagePath);
+        byte[] bytes = new byte[imageStream.available()];
+        imageStream.read(bytes);
+        imageStream.close();
+
+	XWPFParagraph para = doc.createParagraph();
+	XWPFRun run = para.createRun();
+
+        // Add the image to the document
+        int format = XWPFPictureData.PICTURE_TYPE_PNG; // Change the format based on your image type
+        String blipId = doc.addPictureData(bytes, format);
+        XWPFPicture picture = run.addPicture(blipId, XWPFPicture.DEFAULT_PICTURE_TYPE, imagePath,  Units.toEMU(300), Units.toEMU(200));
+   	 }
+
 	public void CompileTable(XWPFDocument doc, String[][] tableData, int row, int col) {
 
 		// create table
@@ -768,6 +784,17 @@ public class Compile extends JFrame implements ActionListener {
 				CompileParagraph(document, abstract_.input);
 
 				CreateHeading(document, "II. Theory");
+				int i=0;
+				while (formulas[i]!=null){
+					addImageToDocument(i+"x.png", document);
+					int j=0;
+					String index="abcde";
+					while (formulas[i].variables[j]!=null){
+						addImageToDocument(i+String.valueOf(index.charAt(j))+".png", document);
+						j++;
+					}
+					i++;
+				}
 
 				CreateHeading(document, "III. Method");
 
