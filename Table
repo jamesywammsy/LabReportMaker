@@ -269,6 +269,15 @@ public class Table extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		ie1_ = ie1.getText();
+		ie2_ = ie2.getText();
+		ie3_ = ie3.getText();
+		ie4_ = ie4.getText();
+		ie5_ = ie5.getText();
+		ie6_ = ie6.getText();
+		ie7_ = ie7.getText();
+		ie8_ = ie8.getText();
+		
 		//returns to main menu
 		if (e.getSource() == return_) {
 
