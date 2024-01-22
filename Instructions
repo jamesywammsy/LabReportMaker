@@ -1,0 +1,151 @@
+//Instructions.java
+//The instructions menu of the program
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 22
+
+//imports
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.WindowConstants;
+
+public class Instructions extends JFrame implements ActionListener {
+
+    // final variables
+    private static final int PANEL_WIDTH = 700;
+    private static final int PANEL_HEIGHT = 700;
+    private static final int BUTTON_WIDTH = 150;
+    private static final int BUTTON_HEIGHT = 50;
+
+    // button variables
+    JButton next_;
+    JButton return_;
+    JButton back_;
+
+    // object declarations
+    Start start;
+
+    String[] imageFiles = {
+            "Images/image1.png", "Images/image2.png", "Images/image3.png",
+            "Images/image4.png", "Images/image5.png", "Images/image6.png",
+            "Images/image7.png", "Images/image8.png", "Images/image9.png",
+            "Images/image10.png", "Images/image11.png", "Images/image12.png",
+            "Images/image13.png", "Images/image14.png", "Images/image15.png",
+            "Images/image16.png"
+        };
+    
+    //other variables
+    int currentIndex = 0;
+    JLabel imageLabel;
+
+    public Instructions(Start start) {
+
+        this.start = start;
+
+        // panel sizing
+        this.setTitle("GHHSB Lab Report System");
+        this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setFocusable(true); // make everything in this class appear on the screen
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(Color.WHITE);
+        ShowWindow();
+
+        Container c = getContentPane();
+        c.setLayout(null);
+
+        //button instantiations
+        next_ = new JButton("Next");
+        next_.addActionListener(this);
+        next_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        next_.setLocation(270, 610);
+
+        back_ = new JButton("Back");
+        back_.addActionListener(this);
+        back_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        back_.setLocation(55, 610);
+
+        return_ = new JButton("Return");
+        return_.addActionListener(this);
+        return_.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        return_.setLocation(485, 610);
+
+        // Create a label to display the image
+        imageLabel = new JLabel();
+        imageLabel.setBounds(150, 150, 400, 400);
+        c.add(imageLabel);
+        updateImage();
+        
+        //adds buttons to screen
+        c.add(next_);
+        c.add(back_);
+        c.add(return_);
+    }
+
+    private void updateImage() {
+    	
+    	//sets image path
+        String imagePath = imageFiles[currentIndex];
+
+        try {
+        	
+        	//prints image to screen
+            BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
+
+            if (bufferedImage != null) {
+                Image image = bufferedImage.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+                ImageIcon imageIcon = new ImageIcon(image);
+                imageLabel.setIcon(imageIcon);
+            } else {
+                System.out.println("Error loading image: " + imagePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading image: " + imagePath);
+            e.printStackTrace();
+        }
+    }
+
+    // hides current window
+    public void HideWindow() {
+        setVisible(false);
+    }
+
+    // shows current window
+    public void ShowWindow() {
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+       //opens next image
+        if (e.getSource() == next_) {
+            currentIndex = (currentIndex + 1) % imageFiles.length;
+            updateImage();
+        } 
+        
+        //returns to previous image
+        else if (e.getSource() == back_) {
+            currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+            updateImage();
+        } 
+        
+        //returns to start
+        else if (e.getSource() == return_) {
+            HideWindow();
+            start.ShowWindow();
+        }
+    }
+}
