@@ -1,7 +1,7 @@
 //Analysis.java
 //UI for the Analysis section of the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 22
 
 //imports
 import java.awt.*;
@@ -40,10 +40,13 @@ public class Analysis extends JFrame implements ActionListener {
 	CreatePara para7;
 	CreatePara para8;
 	
+	//Jlabel variables
 	JLabel title;
 
+	//objects
 	Menu menu;
 	
+	//other variables
 	public boolean anaDone = false;
 	public String[] completed = new String[8];
 
@@ -197,6 +200,8 @@ public class Analysis extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		
+		
 		if (e.getSource() == return_) {
 
 			HideWindow();
@@ -204,8 +209,9 @@ public class Analysis extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == markAsDone_) {
+			
+			//sets completion status
 			anaDone = !anaDone;
-
 			menu.RefreshCompleted(4, anaDone);
 
 			if (anaDone) {
@@ -219,6 +225,7 @@ public class Analysis extends JFrame implements ActionListener {
 		}
 		
 
+		//createPara instantiations
 		if (e.getSource() == para1_) {
 
 			if (para1 == null) {
