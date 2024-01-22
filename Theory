@@ -4,13 +4,6 @@
 //Made by James Zhang and Maggie Pang
 //Last edit: Jan 22
 
-//Theory.java
-//Allows user to select formulas with option to create custom formula 
-//Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
-
-//TO DO: add checkboxes for when formulas are clicked, add array for clicked formulas and associated variables to add to document as well, connect variables to formulas
-
 //imports
 import java.awt.*;
 import java.io.*;
