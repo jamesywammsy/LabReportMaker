@@ -64,7 +64,6 @@ public class Theory extends JFrame implements ActionListener {
 		this.setTitle("GHHSB Lab Report System - Theory");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.BLACK);
