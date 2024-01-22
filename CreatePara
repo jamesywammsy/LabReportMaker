@@ -1,8 +1,9 @@
 //CreatePara.java
 //Child of General.java, UI for paragraph creation in the analysis section of program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 22
 
+//imports
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 
 public class CreatePara extends General {
 
+	//variables
 	JTextField title_;
 	JLabel titleLabel;
 	
@@ -19,6 +21,7 @@ public class CreatePara extends General {
 		// Call the constructor of the parent class (General) using super
 		super(analysis, index);
 		
+		//creates label and textfield and adds them
 		title_ = new JTextField();
 		title_.setSize(200, 35);
 		title_.setLocation(250, 0);
@@ -37,8 +40,11 @@ public class CreatePara extends General {
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 
+		//saves inputs
 		title = title_.getText();
+		input = textBox.getText();
 
+		//sets name of table
 		if (title_.getText().equals("")) {
 			title = "Unnamed Table";
 		}
@@ -50,9 +56,58 @@ public class CreatePara extends General {
 			HideWindow();
 			analysis.ShowWindow();
 		}
+		
+		if (evt.getSource() == delete) {
+
+			HideWindow();
+			
+			//resets the title
+			if (index == 0) {
+				analysis.para1 = null;
+				analysis.para1_.setText("+");
+			}
+
+			else if (index == 1) {
+				analysis.para2 = null;
+				analysis.para2_.setText("+");
+			}
+
+			else if (index == 2) {
+				analysis.para3 = null;
+				analysis.para3_.setText("+");
+			}
+
+			else if (index == 3) {
+				analysis.para4 = null;
+				analysis.para4_.setText("+");
+			}
+
+			else if (index == 4) {
+				analysis.para5 = null;
+				analysis.para5_.setText("+");
+			}
+
+			else if (index == 5) {
+				analysis.para6 = null;
+				analysis.para6_.setText("+");
+			}
+
+			else if (index == 6) {
+				analysis.para7 = null;
+				analysis.para7_.setText("+");
+			}
+
+			else if (index == 7) {
+				analysis.para8 = null;
+				analysis.para8_.setText("+");
+			}
+
+			analysis.ShowWindow();
+		}
 
 		if (evt.getSource() == markAsDone) {
 
+			//sets status
 			genDone = !genDone;
 			
 			if (genDone) {
