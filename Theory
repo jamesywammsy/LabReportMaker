@@ -323,7 +323,7 @@ public class Theory extends JFrame implements ActionListener {
 				download(formulas[i].latex, "x");
 				
 				int j=0;
-		
+				String index="abcde";
 				while (selectedFormulas[count].variables[j]!=null) {
 					download(selectedFormulas[count].variables[j], String.valueOf(index.charAt(j)));
 					j++;
