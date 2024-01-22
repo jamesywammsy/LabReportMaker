@@ -1,7 +1,7 @@
 //Method.java
 //Child of General.java, UI for Method section of program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 22
 
 import java.awt.event.ActionEvent;
 
@@ -18,10 +18,12 @@ public class Method extends General{
     @Override
 	public void actionPerformed(ActionEvent evt) {
 
+    	// Call the actionPerformed of the parent class (General) using super
 		super.actionPerformed(evt);
 		
 		if (evt.getSource() == markAsDone) {
 			
+			//sets completion status
 			menu.RefreshCompleted(2, genDone);
 
 			if (genDone) {
