@@ -56,7 +56,7 @@ public class Theory extends JFrame implements ActionListener {
 	public Formula[] formulas = new Formula[100];
 	public Formula[] selectedFormulas=new Formula[100];
 
-	public Theory() {
+	public Theory(Menu menu) {
 
 		this.menu=menu;
 
