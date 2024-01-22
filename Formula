@@ -4,6 +4,7 @@
 //Last edit: Jan 22
 
 import java.awt.*;
+import javax.swing.*;
 
 public class Formula {
 
