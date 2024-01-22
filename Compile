@@ -99,6 +99,9 @@ public class Compile extends JFrame implements ActionListener {
 	Menu menu;
 	Abstract abstract_;
 	Method method;
+
+	Formula[] formulas;
+
 	CreateTable table1;
 	CreateTable table2;
 	CreateTable table3;
@@ -124,7 +127,7 @@ public class Compile extends JFrame implements ActionListener {
 	private int r;
 	private int c;
 
-	public Compile(Menu menu, Abstract abstract_, Method method, CreateTable table1, CreateTable table2,
+	public Compile(Menu menu, Abstract abstract_, Method method, Formula[] formulas, CreateTable table1, CreateTable table2,
 			CreateTable table3, CreateTable table4, CreateTable table5, CreateTable table6, CreateTable table7,
 			CreateTable table8, CreatePara para1, CreatePara para2, CreatePara para3, CreatePara para4,
 			CreatePara para5, CreatePara para6, CreatePara para7, CreatePara para8, SourcesOfError sourcesoferror,
@@ -133,6 +136,7 @@ public class Compile extends JFrame implements ActionListener {
 		this.menu = menu;
 		this.abstract_ = abstract_;
 		this.method = method;
+		this.formulas=formulas;
 		this.table1 = table1;
 		this.table2 = table2;
 		this.table3 = table3;
