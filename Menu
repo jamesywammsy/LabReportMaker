@@ -1,9 +1,7 @@
 //Menu.java
 //Runs the Main Menu GUI of the GHHSB Lab Report System
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 18
-
-//TODO: wait until all classes are completed and link each class to this class
+//Last edit: Jan 22
 
 //imports
 import java.awt.*;
@@ -39,9 +37,11 @@ public class Menu extends JFrame implements ActionListener {
 	Conclusion conclusion;
 	Citations citations;
 
+	// textfield variables
 	JTextField title_;
 	JTextField contributors_;
 
+	// jlabel variables
 	JLabel titleLabel;
 	JLabel contributorsLabel;
 
@@ -59,6 +59,7 @@ public class Menu extends JFrame implements ActionListener {
 
 	public Menu(Start start) {
 
+		// instantiates all classes
 		this.start = start;
 		abstractC = new Abstract(this);
 		table = new Table(this);
@@ -92,7 +93,6 @@ public class Menu extends JFrame implements ActionListener {
 		contributors_.setLocation(30, 120);
 
 		// jlabel instatniaons
-
 		titleLabel = new JLabel("Title:");
 		titleLabel.setSize(300, 20);
 		titleLabel.setLocation(205, 20);
@@ -138,14 +138,13 @@ public class Menu extends JFrame implements ActionListener {
 		analysis_.addActionListener(this);
 		analysis_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		analysis_.setLocation(50, 410);
-		
+
 		sourcesoferror_ = new JButton(
 				"Section 6: Sources of Error                                                                 "
 						+ completed[5]);
 		sourcesoferror_.addActionListener(this);
 		sourcesoferror_.setSize(SECTION_WIDTH, SECTION_HEIGHT);
 		sourcesoferror_.setLocation(50, 470);
-
 
 		conclusion_ = new JButton(
 				"Section 7: Conclusion                                                                       "
@@ -255,6 +254,7 @@ public class Menu extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		// saves input
 		title = title_.getText();
 		contributors = contributors_.getText();
 
@@ -287,11 +287,10 @@ public class Menu extends JFrame implements ActionListener {
 			analysis.ShowWindow();
 
 		} else if (e.getSource() == sourcesoferror_) {
-			
+
 			sourcesoferror.setTitle("Sources of Error");
 			sourcesoferror.ShowWindow();
 			HideWindow();
-			
 
 		} else if (e.getSource() == conclusion_) {
 
@@ -311,8 +310,8 @@ public class Menu extends JFrame implements ActionListener {
 
 			compile = new Compile(this, abstractC, method, table.table1, table.table2, table.table3, table.table4,
 					table.table5, table.table6, table.table7, table.table8, analysis.para1, analysis.para2,
-					analysis.para3, analysis.para4, analysis.para5, analysis.para6, analysis.para7, analysis.para8, sourcesoferror,
-					conclusion, citations);
+					analysis.para3, analysis.para4, analysis.para5, analysis.para6, analysis.para7, analysis.para8,
+					sourcesoferror, conclusion, citations);
 
 			HideWindow();
 			compile.ShowWindow();
