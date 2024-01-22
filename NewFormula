@@ -1,0 +1,207 @@
+//NewFormula.java
+//Allows user to create custom formula
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 22
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.util.*;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXIcon;
+import java.awt.image.BufferedImage;
+
+public class NewFormula extends JFrame implements ActionListener{
+
+	// private variables
+	private static final int PANEL_WIDTH = 700;
+	private static final int PANEL_HEIGHT = 700;
+	private static final int BWIDTH = 100;
+	private static final int BHEIGHT = 50;
+
+	// components
+	JButton render, addVar;
+	public JPanel panel, panel1, panel2, panel3;
+	JTextArea editor;
+	JScrollPane scrollableEditor, scroll;
+
+	// object declarations
+	public Theory theory;
+	public Formula nformula;
+
+	// parts of formula
+	public JButton button;
+	public JCheckBox checkbox;
+	public int count;
+	public String latex;
+
+	public NewFormula(Theory theory) {
+		// window sizing and attributes
+		this.setTitle("Add New Formula");
+		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setFocusable(true);
+		this.getContentPane().setBackground(Color.BLACK);
+		this.setVisible(false);
+		
+		nformula=new Formula();
+		nformula.latex=latex;
+		
+
+		// main panel
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+
+		// panels
+		panel1 = new JPanel();
+		panel1.setLayout(new GridBagLayout());
+		panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel1.setPreferredSize(new Dimension(PANEL_WIDTH, 300));
+		panel1.setBackground(Color.BLACK);
+
+		panel2 = new JPanel();
+		panel2.setLayout(null);
+		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 100));
+		panel2.setBackground(Color.BLACK);
+
+		panel3 = new JPanel();
+		panel3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panel3.setPreferredSize(new Dimension(PANEL_WIDTH, 1000));
+		panel3.setBackground(Color.BLACK);
+		
+		scroll=new JScrollPane(panel3);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setPreferredSize(new Dimension(PANEL_WIDTH, 300));
+		
+		// user inputs in text box with scroll bar
+		editor = new JTextArea("E=mc^2");
+		editor.setLineWrap(true);
+		editor.setWrapStyleWord(true);
+
+		scrollableEditor = new JScrollPane(editor);
+		scrollableEditor.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollableEditor.setPreferredSize(new Dimension(650, 200));
+
+		// buttons
+		render = new JButton("Render");
+		render.setSize(BWIDTH, BHEIGHT);
+		render.addActionListener(this);
+		render.setLocation(25, 0);
+
+		addVar = new JButton("Add variable");
+		addVar.setSize(BWIDTH + 50, BHEIGHT);
+		addVar.addActionListener(this);
+		addVar.setLocation(25, 0);
+
+		this.getContentPane().add(panel);
+
+		panel1.add(scrollableEditor);
+		panel2.add(render);
+		panel3.add(addVar);
+
+		// add components
+		panel.add(panel1);
+		panel.add(panel2);
+		panel.add(scroll);
+
+		repaint();
+	}
+
+	public void paint(Graphics g) {
+		super.paint(g);
+	}
+
+	public void render(Theory theory) {
+		try {
+			
+			// get the text
+			latex = this.editor.getText();
+
+      //this function does not work.
+			//theory.buttonLatex=latex;
+			
+			// create a formula
+			TeXFormula formula = new TeXFormula(latex);
+
+			// render formula
+			TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
+
+			// create image of the formula
+			BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g2 = image.createGraphics();
+			g2.setColor(Color.white);
+			g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+			JLabel jl = new JLabel();
+			jl.setForeground(new Color(0, 0, 0));
+			icon.paintIcon(jl, g2, 0, 0);
+			
+			Graphics g = this.panel2.getGraphics();
+			g.drawImage(image, 25, 60, null);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+		}
+
+	}
+	
+	public void setButtons(JButton b, JCheckBox c) {
+		nformula.button=b;
+		nformula.check=c;
+	}
+	
+	public void makeVar(){
+		JLabel blank=new JLabel("                                                                                                                                                                ");
+		blank.setSize(getPreferredSize());
+		
+		JLabel varName=new JLabel("Variable name in Latex: ");
+		varName.setFont(new Font("Serif", Font.PLAIN, 14));
+		varName.setSize(getPreferredSize());
+		varName.setForeground(Color.WHITE);
+		
+		//gets variable from user
+		JTextField var=new JTextField(10);
+		
+		JLabel varDef=new JLabel (" is :");
+		varDef.setFont(new Font("Serif", Font.PLAIN, 14));
+		varDef.setSize(getPreferredSize());
+		varDef.setForeground(Color.WHITE);
+		
+		//gets variable definition from user
+		JTextField def=new JTextField(200);
+		
+		panel3.add(blank);
+		panel3.add(varName);
+		panel3.add(var);
+		panel3.add(varDef);
+		panel3.add(def);
+		
+		pack();
+		
+		//add variable to formula
+		nformula.variables[nformula.index]=var.getText()+"\\text{ is "+def.getText()+"}";
+		nformula.index++;
+	}
+
+	public void HideWindow() {
+		setVisible(false);
+	}
+
+	public void ShowWindow() {
+		setVisible(true);
+	}
+
+	// @Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.render) {
+			render(theory);
+		}
+		else if (e.getSource()==this.addVar) {
+			makeVar();
+		}
+	}
+}
