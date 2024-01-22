@@ -270,6 +270,33 @@ public class Theory extends JFrame implements ActionListener {
 		}
 	}
 
+	// downloads rendered latex as jpg
+	public void download(String latex, String n) {
+		// create a formula
+		TeXFormula formula = new TeXFormula(latex);
+
+		// render the formula to an icon
+		TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 13);
+
+		// create image
+		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+		JLabel jl = new JLabel();
+		jl.setForeground(new Color(0, 0, 0));
+		icon.paintIcon(jl, g2, 0, 0);
+			
+		try{
+		File f = new File(counter+n+".png");
+		ImageIO.write(image, "PNG", f);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+			
+	}
+
 	// renders the latex into an image
 	public BufferedImage render(String latex) {
 		// create a formula
@@ -290,13 +317,21 @@ public class Theory extends JFrame implements ActionListener {
 		return image;
 	}
 	
-	//gets all selected formulas
+	//gets all selected formulas and downloads associated formulas and variables
 	public void getSelected() {
 		int count=0;
 		
 		for (int i=0; i<100; i++) {
 			if (formulas[i].checked) {
 				selectedFormulas[count]=formulas[i];
+				download(formulas[i].latex, "x");
+				
+				int j=0;
+		
+				while (selectedFormulas[count].variables[j]!=null) {
+					download(selectedFormulas[count].variables[j], String.valueOf(index.charAt(j)));
+					j++;
+				}
 				count++;
 			}
 		}
