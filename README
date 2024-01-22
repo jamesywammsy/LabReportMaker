@@ -1,5 +1,7 @@
-Please download the 3 JLatexMath .jar files, as they are needed to display the formulas. We will figure out how to put this directly into the batch file in the final submission. 
-For the batch file, please add :
+
 start javaw -jar jlatexmath-1.0.7.jar
 start javaw -jar jlatexmath-font-cyrillic-1.0.7.jar
 start javaw -jar jlatexmath-font-greek-1.0.7.jar
+
+Note: The icons on new formulas added (i.e. when you click "Add Formula" in the theory section) do not update properly, they are shown as blank.
+Please ignore that.
