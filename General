@@ -1,7 +1,7 @@
 //General.java
 //Used for abstract, method, analysis, and conclusion sections. Allows user to input paragraphs.
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 17
+//Last edit: Jan 22
 
 //imports
 import java.awt.*;
@@ -11,35 +11,36 @@ import javax.swing.*;
 import java.util.*;
 
 public class General extends JFrame implements ActionListener {
-	
-	//private variables
+
+	// private variables
 	private static final int PANEL_WIDTH = 700;
 	private static final int PANEL_HEIGHT = 700;
 	private static final int BWIDTH = 160;
 	private static final int BHEIGHT = 50;
-	
-	//variables
+
+	// variables
 	public String input = "EMPTY";
 	public String title;
 	public boolean genDone = false;
 	public int index;
-	
-	//JComponents
+
+	// JComponents
 	JButton returnToMenu;
+	JButton delete;
 	JButton markAsDone;
 	JTextArea textBox, textArea;
 	JPanel panel1, panel2;
 	JScrollPane scrollableTextArea;
-	
-	//object declaration
+
+	// object declaration
 	Menu menu;
 	Analysis analysis;
 
 	public General(Menu menu) {
 
-		this.menu=menu;
-		
-		//window sizing and attributes
+		this.menu = menu;
+
+		// window sizing and attributes
 		this.setTitle("GHHSB Lab Report System - ");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
@@ -48,26 +49,26 @@ public class General extends JFrame implements ActionListener {
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
 		this.setVisible(false);
-		
-		//main panel
+
+		// main panel
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 		c.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-		
-		//top panel 
+
+		// top panel
 		panel1 = new JPanel();
 		panel1.setLayout(new GridBagLayout());
 		panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel1.setPreferredSize(new Dimension(PANEL_WIDTH, 540));
 		panel1.setBackground(Color.WHITE);
-		
-		//bottom panel
+
+		// bottom panel
 		panel2 = new JPanel();
 		panel2.setLayout(null);
 		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 160));
 		panel2.setBackground(Color.WHITE);
-		
-		//user inputs in text box with scroll bar
+
+		// user inputs in text box with scroll bar
 		textBox = new JTextArea("Enter here");
 		textBox.setLineWrap(true);
 		textBox.setWrapStyleWord(true);
@@ -75,8 +76,8 @@ public class General extends JFrame implements ActionListener {
 		scrollableTextArea = new JScrollPane(textBox);
 		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollableTextArea.setPreferredSize(new Dimension(590, 430));
-		
-		//buttons
+
+		// buttons
 		returnToMenu = new JButton("Return to Menu");
 		returnToMenu.addActionListener(this);
 		returnToMenu.setSize(BWIDTH, BHEIGHT);
@@ -86,27 +87,27 @@ public class General extends JFrame implements ActionListener {
 		markAsDone.addActionListener(this);
 		markAsDone.setSize(BWIDTH, BHEIGHT);
 		markAsDone.setLocation(415, 55);
-		
-		//add components
+
+		// add components
 		this.getContentPane().add(c);
 
 		panel1.add(scrollableTextArea);
 
 		panel2.add(returnToMenu);
 		panel2.add(markAsDone);
-		
+
 		c.add(panel1);
 		c.add(panel2);
-		
+
 		repaint();
 	}
-	
+
 	public General(Analysis analysis, int index) {
 
 		this.analysis = analysis;
 		this.index = index;
-		
-		//window sizing and attributes
+
+		// window sizing and attributes
 		this.setTitle("GHHSB Lab Report System - ");
 		this.setSize(PANEL_WIDTH, PANEL_HEIGHT);
 		this.setLocationRelativeTo(null);
@@ -115,26 +116,26 @@ public class General extends JFrame implements ActionListener {
 		this.setFocusable(true); // make everything in this class appear on the screen
 		this.getContentPane().setBackground(Color.WHITE);
 		this.setVisible(false);
-		
-		//main panel
+
+		// main panel
 		JPanel c = new JPanel();
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 		c.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-		
-		//top panel 
+
+		// top panel
 		panel1 = new JPanel();
 		panel1.setLayout(new GridBagLayout());
 		panel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel1.setPreferredSize(new Dimension(PANEL_WIDTH, 540));
 		panel1.setBackground(Color.WHITE);
-		
-		//bottom panel
+
+		// bottom panel
 		panel2 = new JPanel();
 		panel2.setLayout(null);
 		panel2.setPreferredSize(new Dimension(PANEL_WIDTH, 160));
 		panel2.setBackground(Color.WHITE);
-		
-		//user inputs in text box with scroll bar
+
+		// user inputs in text box with scroll bar
 		textBox = new JTextArea("Enter here");
 		textBox.setLineWrap(true);
 		textBox.setWrapStyleWord(true);
@@ -142,29 +143,35 @@ public class General extends JFrame implements ActionListener {
 		scrollableTextArea = new JScrollPane(textBox);
 		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollableTextArea.setPreferredSize(new Dimension(590, 430));
-		
-		//buttons
+
+		// buttons
 		returnToMenu = new JButton("Return to Menu");
 		returnToMenu.addActionListener(this);
 		returnToMenu.setSize(BWIDTH, BHEIGHT);
-		returnToMenu.setLocation(125, 65);
+		returnToMenu.setLocation(55, 65);
+
+		delete = new JButton("Delete");
+		delete.addActionListener(this);
+		delete.setSize(BWIDTH, BHEIGHT);
+		delete.setLocation(270, 65);
 
 		markAsDone = new JButton("Mark as Done");
 		markAsDone.addActionListener(this);
 		markAsDone.setSize(BWIDTH, BHEIGHT);
-		markAsDone.setLocation(415, 65);
-		
-		//add components
+		markAsDone.setLocation(485, 65);
+
+		// add components
 		this.getContentPane().add(c);
 
 		panel1.add(scrollableTextArea);
 
 		panel2.add(returnToMenu);
 		panel2.add(markAsDone);
-		
+		panel2.add(delete);
+
 		c.add(panel1);
 		c.add(panel2);
-		
+
 		repaint();
 	}
 
@@ -172,14 +179,18 @@ public class General extends JFrame implements ActionListener {
 		super.paint(g);
 	}
 
-
 	public void actionPerformed(ActionEvent evt) {
+
+		// saves input
 		input = textBox.getText();
 
+		// returns to main menu
 		if (evt.getSource() == returnToMenu) {
 			HideWindow();
 			menu.ShowWindow();
 		}
+
+		// marks section as done
 		else if (evt.getSource() == markAsDone) {
 			genDone = !genDone;
 		}
@@ -198,17 +209,16 @@ public class General extends JFrame implements ActionListener {
 	public String getText() {
 		return input;
 	}
-	
-	
+
 	public void setTitle(String t) {
-		title=t;
+		title = t;
 		super.setTitle("GHHSB Lab Report System - " + title);
 		repaint();
 	}
 
 	public static void main(Menu menu) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			
+
 			public void run() {
 				new General(menu);
 			}
