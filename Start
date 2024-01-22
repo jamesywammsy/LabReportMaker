@@ -1,7 +1,7 @@
 //Start.java
 //The start menu of the program
 //Made by James Zhang and Maggie Pang
-//Last edit: Jan 16
+//Last edit: Jan 22
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,10 +25,12 @@ public class Start extends JFrame implements ActionListener {
 	
 	//object declarations
 	Menu menu;
+	Instructions instructions;
 
 	public Start() {
 		
 		menu = new Menu(this);
+		instructions = new Instructions(this);
 		
 		// panel sizing
 		this.setTitle("GHHSB Lab Report System");
@@ -96,6 +98,7 @@ public class Start extends JFrame implements ActionListener {
 		// opens each different class
 		if (e.getSource() == instructions_) {
 
+			instructions.ShowWindow();
 			HideWindow();
 
 		} else if (e.getSource() == create_) {
