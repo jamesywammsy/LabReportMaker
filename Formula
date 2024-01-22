@@ -1,1 +1,59 @@
+//Formula.java
+//Object, used to store information about formulas - associated button/checkbox, index, variables
+//Made by James Zhang and Maggie Pang
+//Last edit: Jan 22
+
+import java.awt.*;
+
+public class Formula {
+
+	// part of formula
+	public JButton button;
+	public JCheckBox check;
+	public boolean checked;
+	public int index;
+	public String latex;
+	public String[] variables=new String[10];
+
+	// other variables
+	public String[] variableList={"\\bar{s}\\text{ is average speed}", "d\\text{ is distance travelled", "t\\text{ is time}", "x\\text{ is position}", "v\\text{ is velocity}", "a\\text{ is acceleration}",
+		"F\\text{ is force}", "m\\text{ is mass}", "F_f\\text{ is force caused by friction}", "\\mu\\text{ is the coefficient of friction}", "F_n\\text{ is the normal force}", "F_g\\text{ is force of gravity}", "G=6.64730\\cdot10^{-11}\\frac{N\\cdot m^2}{kg^2}\\text{ is the universal graviational constant",
+		"r\\text{ is radius}", "W\\text{ is work}", "U\\text{ is the gravitational potential energy}", "g=9.8m/s^2\\text{ is the acceleration caused by gravity}", "h\\text{ is work}", "KE\\text{ is kinetic energy}", "F_s\\text{ is spring force}", "k\\text{ is the spring constant}", 
+		"W_{nc}\\text{ is work done by non-conservative forces}", "W_c\\text{ is work done by conservative forces}", "P\\text{ is power}", "\\mu\\text{ is efficiency}", "V\\text{ is voltage}", 
+		"J\\text{ is impulse}", "I\\text{ is current}", "q\\text{ is charge}", "N\\text{ is number of electrons}", "e\\text{ is the charge of an electron}", "EPE\\text{ is electric potential energy}", "R\\text{ is resistance}", "\\rho\\text{ is the resistivity}", "l\\text{ is the length of the wire}", "A\\text{ is the cross sectional area of the wire}"
+		};
+	//record of which variables are used in each formula
+	public String[] formulaVariables = { "abc", "edc", "fec", "efc", "dec", "decf", "decf", "efd", "ghf", "ijk", "lmhn",
+			"ogb", "phqr", "she", "tud", "vws", "heqr", "xoc", "yo", "xhz", "Agc", "BCc", "CDE", "zFC", "GzB", "GHIJ", 
+			"B", "z", "G", "B", "z", "G"};
+	public String indexes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJ";
+	
+	
+	//creates formula object
+	public Formula(String l, JButton b, JCheckBox c, int counter) {
+		latex = l;
+		button = b;
+		check = c;
+		checked = false;
+		index = counter;
+	}
+	
+	//creates formula object
+	public Formula() {
+		index=0;
+	}
+	
+	public void setLatex(String l) {
+		latex=l;
+	}
+
+	public void setVariables() {
+		String formulas=formulaVariables[index];
+		
+		for (int i=0; i<formulas.length(); i++) {
+			variables[i]=variableList[indexes.indexOf(formulas.charAt(i))];
+		}
+	}
+
+}
 
